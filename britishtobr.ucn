@@ -1,0 +1,1556 @@
+:       Data for character set of language for Text to Braille - Flick
+:       --------------------------------------------------------------
+:
+:       Version 0
+0
+:	Language name
+British English
+:	Language description
+British (UK) English, contracted or uncontracted, to American Computer Braille Code and back
+:
+:
+:       Input Transformation
+:       Mapping for lower to upper for output.
+:
+:       Then colon and 8 flags set for (in this case):
+:
+:           text character
+:           digits
+:           punctuation
+:           white space character
+:           possible roman letters
+:           not used
+:           wildcard character
+:           Capital signs
+:
+:       Lower case indicates option off upper case indicates option on.
+:
+:	Number of characters in language
+95
+  :ldpSrsWc
+!!:ldPsrsWc
+"":ldPsrswc
+##:ldPsrsWc
+$$:ldPsrswc
+%%:ldPsrswc
+&&:ldPsrswc
+'':ldPsrswc
+((:ldPsrswc
+)):ldPsrswc
+**:ldPsrswc
+++:ldPsrswc
+,,:ldPsrswc
+--:ldPsrswc
+..:ldPsrswc
+//:ldPsrswc
+00:lDpsrswc
+11:lDpsrswc
+22:lDpsrswc
+33:lDpsrswc
+44:lDpsrswc
+55:lDpsrswc
+66:lDpsrswc
+77:lDpsrswc
+88:lDpsrswc
+99:lDpsrswc
+:::ldPsrsWc
+;;:ldPsrsWc
+<<:ldPsrswc
+==:ldPsrswc
+>>:ldPsrswc
+??:ldPsrswc
+@@:ldPsrswc
+aA:Ldpsrswc
+bB:Ldpsrswc
+cC:LdpsRswc
+dD:LdpsRswc
+eE:Ldpsrswc
+fF:Ldpsrswc
+gG:Ldpsrswc
+hH:Ldpsrswc
+iI:LdpsRswc
+jJ:Ldpsrswc
+kK:Ldpsrswc
+lL:LdpsRswc
+mM:LdpsRswc
+nN:Ldpsrswc
+oO:Ldpsrswc
+pP:Ldpsrswc
+qQ:Ldpsrswc
+rR:Ldpsrswc
+sS:Ldpsrswc
+tT:Ldpsrswc
+uU:Ldpsrswc
+vV:Ldpsrswc
+wW:Ldpsrswc
+xX:LdpsRswc
+yY:Ldpsrswc
+zZ:Ldpsrswc
+{[:ldPsrswc
+\\:ldpsrswc
+}]:ldPsrswc
+^^:ldPsrswc
+__:ldPsrswc
+AA:LdpsrswC
+BB:LdpsrswC
+CC:LdpsRswC
+DD:LdpsRswC
+EE:LdpsrswC
+FF:LdpsrswC
+GG:LdpsrswC
+HH:LdpsrswC
+II:LdpsRswC
+JJ:LdpsrswC
+KK:LdpsrswC
+LL:LdpsRswc
+MM:LdpsrswC
+NN:LdpsrswC
+OO:LdpsrswC
+PP:LdpsrswC
+QQ:LdpsrswC
+RR:LdpsrswC
+SS:LdpsrswC
+TT:LdpsrswC
+UU:LdpsrswC
+VV:LdpsRswC
+WW:LdpsrswC
+XX:LdpsRswC
+YY:LdpsrswC
+ZZ:LdpsrswC
+||:ldPsrsWc
+~~:ldPsrsWc
+"":ldPsrswc
+íí:ldPsrswc
+úú:Ldpsrswc
+:
+: Wildcards used:
+:       ! = a letter
+:       # = a number
+:       ~ = a space or punctuation (include apostrophe)
+:         = real white space
+:       | = zero or more capital signs
+:       : = 1 or more potential roman numerals
+:       ; = zero or more letters
+:
+: Seven wildcards specified.
+7
+*!=1+ 1
+*#=1. 2
+*~=1+ 12
+* =1. 8
+*|=0+ 128
+*:=1+ 16
+*;=0+ 1
+:
+:   Tables for converting English Braille to text
+:   ---------------------------------------------
+:   Note: translation starts when a white space character is entered.
+:         (ie. a word at a time is translated)
+:
+:   States
+:   ------
+:       1 Grade 1 braille.
+:       2 Grade 2 braille.
+:       3 After Letter Sign (Grade 1).
+:       4 After Letter Sign (Grade 2).
+:       5 Computer braille.
+:
+: ie. 5 states.
+:   Description of states
+5
+1 Grade 1 braille.
+2 Grade 2 braille.
+3 After Letter Sign (Grade 1).
+4 After Letter Sign (Grade 2).
+5 Computer braille.
+:
+:
+:   Input classes
+:   -------------
+:       1 - Any braille except computer braille.
+:       2 - Grade 2 only.
+:       3 - Valid after Letter sign (Grade 1). (Used to switch back with space etc.)
+:       4 - Valid after Letter sign (Grade 2). (Used to switch back with space etc.)
+:       5 - Computer braille.
+:       6 - Always allowed.
+:
+:
+: ie. 6 input classes.
+:   Description of input classes
+6
+1 - Any braille except computer braille.
+2 - Grade 2 only.
+3 - Valid after Letter sign (Grade 1). (Used to switch back with space etc.)
+4 - Valid after Letter sign (Grade 2). (Used to switch back with space etc.)
+5 - Computer braille.
+6 - Always allowed.
+:
+: Now the decision table - n states down by  m input classes across
+:         --------------
+103456
+120006
+103006
+100406
+000056
+: a non zero value indicates that the rule should fire
+:       zero indicates that it should not.
+:
+: Actual rules
+:        -----
+: format is: Input class	rule	    new state
+: allow \xdd for hex specification of character
+: any characters not in tables go through the system and result
+: in the state being set to 1
+:
+2	[ 'EN] = 'EN	-
+4	[ - ]=-	1
+4	[ ]= 	1
+5	[ ]= 	2
+1	[ - ]=--	-
+1	[ ]= 	-
+2	[ ]= 	-
+5	[ ]= 	-
+1	[!]=6	-
+5	[!]=!	-
+1	["...]=8 '''	-
+1	["=]=8;	-
+1	["]^=8	-
+1	["]^^=8	-
+1	["](=8	-
+1	["]~=0	-
+1	["]=8	-
+5	["]="	-
+1	[#]#=#	-
+1	[#]=#	-
+5	[#]=#	-
+1	[$PY]=>>	-
+1	[$PS]=>	-
+1	[$G1]=	1
+1	[$G2]=	2
+1	[$CB]=	5
+1	[$#]=	-
+1	[$+]=;6	-
+1	[$-]=;-	-
+1	[$X]=;8	-
+1	[$D]=;4	-
+1	[$=]=;7	-
+1	[$/]=/	-
+1	[$$]=$$	-
+1	[$]#=4	-
+5	[$]#=$	-
+1	[%]=3P	-
+5	[%]=%	-
+2	[&ING]=&+	-
+1	[&]=,&	-
+5	[&]=&	-
+2	['CAUSE]='CAUSE	-
+2	['DO]='DO	-
+1	!['D]~='D	-
+2	['FLU]='FLU	-
+2	['GO]='GO	-
+2	['OUT]='\T	-
+2	['AS]='AS	-
+2	['ER]=']	-
+2	['EN]='5	-
+2	['IN]='IN	-
+2	['YOU]='Y\	-
+1	!['C]~='C	-
+1	!['M]~='M	-
+2	['NEATH]='N1?	-
+1	!['N]~='N	-
+2	['TIS]='TIS	-
+2	['TWAS]='TWAS	-
+1	!['T]~='T	-
+1	!['S]='S	-
+1	!['']=0'	-
+1	[']#='	-
+1	![']~=0'	-
+1	~[']=,8	-
+1	[']='	-
+5	[']='	-
+1	[(]=7	-
+5	[(]=(	-
+1	[)]=7	-
+5	[)]=)	-
+1	[* ]#=;8	-
+1	[*]#=;8	-
+1	[*]=99	-
+5	[*]=*	-
+1	[+ ]#=;6	-
+1	[+]#=;6	-
+5	[+]=;6	-
+1	[,]#='	-
+1	[,]=1	-
+5	[,]=,	-
+2	[-T]O~=-T	-
+2	[-ING]~=-+	-
+2	[-IN]~=-9	-
+2	[-C]OM=-C	-
+2	[-BY]=-BY	-
+2	[--INTO|]=-}96	-
+2	[--IN]=--9	-
+2	[--C]OM=--C	-
+2	![----]=----	-
+2	[--]#=--#	-
+2	[--]~=--	-
+2	[--]=-	-
+1	[- ]#=;3	-
+1	[-]#=;3	-
+2	[-]=-	-
+5	[-]=-	-
+1	[.] =4	-
+1	.#[.]#=#	-
+1	.##[.]#=#	-
+1	#[.]#.=#	-
+1	#[.]##.=#	-
+1	[....]='''4	-
+1	[...']='''0'	-
+1	[..."]='''0	-
+1	[...]='''	-
+1	#[.]#=1	-
+1	[.]#=#1	-
+1	[.]~=4	-
+1	[.]=4	-
+5	[.]=.	-
+2	[/SUB ]=*	-
+2	[/SUP ]=+	-
+1	/#[/]#=	-
+1	/##[/]#=	-
+1	#[/]#/=	-
+1	#[/]##/=	-
+1	[/ ]#=;4	-
+1	[/]#=;4	-
+1	[/]=/	-
+5	[/]=/	-
+1	.[0]=J	-
+2	#[0]!=J;	4
+2	[0]!=#J;	4
+1	#[0]!=J;	3
+1	[0]!=#J;	3
+1	#[0]=J	-
+1	[0]=#J	-
+5	[0]=0	-
+1	.[1]=A	-
+2	#[1ST]=#A/	-
+2	[1ST]=A/	-
+2	#[1]!=A;	4
+2	[1]!=#A;	4
+1	#[1]!=A;	3
+1	[1]!=#A;	3
+1	#[1]=A	-
+1	[1]=#A	-
+5	#[1]=1	-
+1	.[2]=B	-
+2	#[2]!=B;	4
+2	[2]!=#B;	4
+1	#[2]!=B;	3
+1	[2]!=#B;	3
+1	#[2]=B	-
+1	[2]=#B	-
+5	#[2]=2	-
+1	.[3]=C	-
+2	#[3]!=C;	4
+2	[3]!=#C;	4
+1	#[3]!=C;	3
+1	[3]!=#C;	3
+1	#[3]=C	-
+1	[3]=#C	-
+5	#[3]=3	-
+1	.[4]=D	-
+2	#[4]!=D;	4
+2	[4]!=#D;	4
+1	#[4]!=D;	3
+1	[4]!=#D;	3
+1	#[4]=D	-
+1	[4]=#D	-
+5	#[4]=4	-
+1	.[5]=E	-
+2	#[5]!=E;	4
+2	[5]!=#E;	4
+1	#[5]!=E;	3
+1	[5]!=#E;	3
+1	#[5]=E	-
+1	[5]=#E	-
+5	#[5]=5	-
+1	.[6]=F	-
+2	#[6]!=F;	4
+2	[6]!=#F;	4
+1	#[6]!=F;	3
+1	[6]!=#F;	3
+1	#[6]=F	-
+1	[6]=#F	-
+5	#[6]=6	-
+1	.[7]=G	-
+2	#[7]!=G;	4
+2	[7]!=#G;	4
+1	#[7]!=G;	3
+1	[7]!=#G;	3
+1	#[7]=G	-
+1	[7]=#G	-
+5	#[7]=7	-
+1	.[8]=H	-
+2	#[8]!=H;	4
+2	[8]!=#H;	4
+1	#[8]!=H;	3
+1	[8]!=#H;	3
+1	#[8]=H	-
+1	[8]=#H	-
+5	#[8]=8	-
+1	.[9]=I	-
+2	#[9]!=I;	4
+2	[9]!=#J;	4
+1	#[9]!=J;	3
+1	[9]!=#J;	3
+1	#[9]=I	-
+1	[9]=#I	-
+5	#[9]=9	-
+1	[:]#=#	-
+1	[:]=3	-
+5	[:]=:	-
+1	[;]=2	-
+5	[;]=5	-
+1	[<]=8	-
+5	[<]=<	-
+2	~[=T-SH]IRT=;T-SHI	-
+1	[=]=;	-
+5	[=]==	-
+1	[>]=0	-
+1	[>]=>	-
+1	[?]=8	-
+5	[?]=?	-
+2	[@EN]=@EN	-
+2	[@ER]=@ER	-
+2	[@ED]!=@ED	-
+2	[@O]NG=@O	-
+2	[@AR]=@AR	-
+1	[@]=@	-
+5	[@]=@	-
+2	[ARBOREAL]=ARBOR1L	-
+2	[ARIGHT]=A"R	-
+2	[AREAWAY]=>1WAY	-
+2	~[ARELIGIOUS]=ARELIGI\S	-
+2	[AR]=>	-
+2	~[AND ]THE~=&	-
+2	~[AND ]A =&	-
+2	~[AND ]OF~=&	-
+2	~[AND ]WITH~=&	-
+2	~[AND ]FOR~=&	-
+2	[ANDREAS]=&REAS	-
+2	[AND]=&	-
+2	~[ANTEA]TER=ANT1	-
+2	[ANTHEAP]=ANTH1P	-
+2	[ANTEN]NA=ANT5	-
+2	[ANTER]IOR=ANT]	-
+2	~[ANTE]=ANTE	-
+2	[ANTIN]OM=ANT9	-
+2	[ANTINOUS]=ANT9OUS	-
+2	[ANTIGONE]=ANTIGONE	-
+2	~[ANTI]=ANTI	-
+2	![ANCE]=.E	-
+2	[ANEMONE]=ANEMONE	-
+2	[ANNANDALE]=ANNANDALE	-
+2	![ATION]=,N	-
+2	~[AS]~=Z	-
+2	[ABALONE]=ABALONE	-
+2	[ABOUT]=AB	-
+2	[ABOVE]=ABV	-
+2	[AGAIN]=AG	-
+2	[AGRE]AE=AGRE	-
+2	[AFTERNOON]=AFN	-
+2	[AFTERWARD]=AFW	-
+2	~[AFTER]E=AFT]	-
+2	~[AFTER]I=AFT]	-
+2	[AFTER]=AF	-
+2	![ALLY]=,Y	-
+2	~[ALWAYS]~=ALW	-
+2	~[ALSO]~=AL	-
+2	~[ALMOST]~=ALM	-
+2	~[ALREADY]~=ALR	-
+2	~[ALTHOUGH]~=AL?	-
+2	~[ALTOGETHER]=ALT	-
+2	[ALEATORY]=ALEATORY	-
+2	[APPLEDORE]=APPLEDORE	-
+2	~[ACROSS]~=ACR	-
+2	~[ACCORDING]=AC	-
+2	[AUND]ER=AUND	-
+2	[AINES]S=A9ES	-
+2	![AED]~=A$	-
+2	[AE]D=AE	-
+2	[AE]A=AE	-
+2	[AERO]=A]O	-
+2	![AER]=AER	-
+2	~[AENE]AS=AENE	-
+2	[AE]N=AE	-
+1	[A]=A	-
+5	[A]=A	-
+2	[BAGRATION]=BAGRATION	-
+2	[BANDOG]=BANDOG	-
+2	[BARGOED]=B>GOED	-
+2	[BASEDOW]=BASED[	-
+2	~[BATTISHILL]=BATTI%ILL	-
+2	~[BUT]~=B	-
+2	[BBLE]=B#	-
+2	![BB]!=2	-
+2	 |[BE] =2	-
+2	~[BEBE]~=2BE	-
+2	~[BEATI]F=2ATI	-
+2	~[BEATI]T=2ATI	-
+2	~[B]EA=B	-
+2	~[BECAUSE]=2C	-
+2	~[BECK]=BECK	-
+2	~[BEC]=2C	-
+2	~[BED]A=2D	-
+2	~[BED]E=2D	-
+2	~[BED]I=2D	-
+2	~[BEDRA]G=2DRA	-
+2	~[BED]=B$	-
+2	~[BEET]HOVEN=BEET	-
+2	~[BEEVERS]=BEEV]S	-
+2	~[BE]E=BE	-
+2	~[BEFORE]=2F	-
+2	~[BE]F=2	-
+2	~[BEG]A=2G	-
+2	~[BEG]E=2G	-
+2	~[BEG]I=2G	-
+2	~[BEG]O=2G	-
+2	~[BEG]R=2G	-
+2	~[BEG]U=2G	-
+2	~[BE]G=BE	-
+2	~[BEHAN]~=BEHAN	-
+2	~[BEHIND]=2H	-
+2	~[BEH]=2H	-
+2	~[BEING]=2+	-
+2	~[BEIN']=2IN'	-
+2	~[BE]I=BE	-
+2	~[BEJ]=2J	-
+2	~[BEL]A=2L	-
+2	~[BEL]E=2L	-
+2	~[BELINGTON]=BEL+TON	-
+2	~[BE]LI=2	-
+2	~[BELOW]=2L	-
+2	~[BELOFF]=BEL(F	-
+2	~[BELORUSSIA]=BELORUSSIA	-
+2	~[BEL]O=2L	-
+2	~[BEL]Y=2L	-
+2	~[BE]L=BE	-
+2	~[BE]M=2	-
+2	~[BENEATH]=2N	-
+2	~[BEN]IGN=B5	-
+2	~[BENTHALL]=B5?ALL	-
+2	~[BEN]I=2N	-
+2	~[BEN]U=2N	-
+2	~[BEN]=B5	-
+2	~[BEOWULF]=BEOWULF	-
+2	~[BEQU]=2QU	-
+2	~[BERIA]~=B]IA	-
+2	~[BERINGAR]=B]+>	-
+2	~[BERET]=B]ET	-
+2	~[BERG]=B]G	-
+2	~[BERK]=B]K	-
+2	~[BERL]=B]L	-
+2	~[BERM]=B]M	-
+2	~[BERN]=B]N	-
+2	~[BERR]=B]R	-
+2	~[BERS]=B]S	-
+2	~[BER]T=B]	-
+2	~[BER]W=B]	-
+2	~[BERYL]=B]YL	-
+2	~[BER]BECK=B]	-
+2	~[BE]R=2	-
+2	~[BE'ST]=BE'/	-
+2	~[BESIDE]=2S	-
+2	~[BESS]=BESS	-
+2	~[BESANT]=BESANT	-
+2	~[BESTEA]D=BE/1	-
+2	~[BESTI]A=BE/I	-
+2	~[BESTING]=BE/+	-
+2	~[BESTI]=2/I	-
+2	~[BEST]O=2/	-
+2	~[BESTR]=2/R	-
+2	~[BEST]=BE/	-
+2	~[BE]S=2	-
+2	~[BET]A=2T	-
+2	~[BETEL]=2TEL	-
+2	~[BETSHANGER]=BETSHANG]	-
+2	[BETWS-Y-COED]=BETWS-;Y-COED	-
+2	~[BETH]I=2?	-
+2	~[BETH]O=2?	-
+2	~[BET]I=2T	-
+2	~[BET]O=2T	-
+2	~[BETR]=2TR	-
+2	~[BETWEEN]=2T	-
+2	~[BETW]=2TW	-
+2	~[BEW]=2W	-
+2	~[BEYOND]=2Y	-
+2	[BEZEL]=BEZEL	-
+2	~[BEZ]=2Z	-
+2	~[BEELZEBUB]=2ELZEBUB	-
+2	~[BE']=2'	-
+2	[BINODAL]=BINODAL	-
+2	[BINORMAL]=BINORMAL	-
+2	[BIOFEEDBACK]=BIOFE$BACK	-
+2	[BISCUITY]=BISCUITY	-
+2	[BLEDDYN]=BLE4YN	-
+2	[BLESS]=B.S	-
+2	[BLEN]D=BL5	-
+2	[BLEED]=BLE$	-
+2	![BLEAU]=BL1U	-
+2	![BLE]=#	-
+2	[BLIN]DAG=BL9	-
+2	[BLIN]DE=BL9	-
+2	[BLIN]DI=BL9	-
+2	[BLIN]DOC=BL9	-
+2	[BLIND]=BL	-
+2	[BLUMENTHAL]=BLUM5?AL	-
+2	~[BLUE]=BLUE	-
+2	[BOREALIS]=BOREALIS	-
+2	[BOREAS]=BOREAS	-
+2	[BOSHAM]=BOSHAM	-
+2	[BOWATER]=BO[AT]	-
+2	~[BY AND BY]~=BY & BY	-
+2	~[BY AND] =BY &	-
+2	~[BY] AT =BY	-
+2	~[BY BUT] =BY B	-
+2	~[BY IN] =BY 9	-
+2	~[BY ]ON =BY	-
+2	~[BY THE B]Y=0! B	-
+2	~[BY] TO =BY	-
+2	~[BY] WAS =BY	-
+2	~[BY] WITH =BY	-
+2	~[BY] WITHOUT=BY	-
+2	~[BY HIS] =0HIS	-
+2	~[BY ENOUGH]=05\<	-
+2	~[BY ]==0	-
+2	~[BY ]!=0	-
+2	[BRAILLE]=BRL	-
+1	 [B].~=;B	-
+1	[B]=B	-
+5	[B]=B	-
+2	[CHILDREN]=*N	-
+2	[CHARACTER]="*	-
+2	~[CHILD]~=*	-
+2	[CH]RISTO=*	-
+2	[CHRIST]="C	-
+2	[CHISHOLM]=*ISHOLM	-
+2	[CHLORDANE]=*LORDANE	-
+2	[CHARLEROI]=*>LEROI	-
+2	[CH]=*	-
+2	[COMINGLE]=COM+LE	-
+2	~[COMIN']=-IN'	-
+2	~[COMMON]EST=-MON	-
+2	[COMATES]=COMATES	-
+2	~[COMEDIENNE]=-EDI5NE	-
+2	[COM'ST]=COM'\	-
+2	~[COM]!=-	-
+2	~[C]ONE=C	-
+2	~[CONOR]=3OR	-
+2	~[CONO]=CONO	-
+2	~[CON]NED=CON	-
+2	~[CO]NA=CO	-
+2	[CONY]=CONY	-
+2	~[CONKER]=3K]	-
+2	[CONKLIN]=3KL9	-
+2	[CONK]=CONK	-
+2	~[CONCEIVING]=3CVG	-
+2	~[CONCEIVE]=3CV	-
+2	~[CONCH]~=CON*	-
+2	~[CONS]~=CONS	-
+2	[CONG]=C;G	-
+2	~[CON]!=3	-
+2	[COULD]=CD	-
+2	[COEN]ZYME=CO5	-
+2	[COBBLEI]GH=CO2LEI	-
+2	[COBLENZ]=COBL5Z	-
+2	[COFOUNDER]=COF.D]	-
+2	[COHERENT]=COH]5T	-
+2	[COLERAINE]=COLERA9E	-
+2	[COTONEASTER]=COTONEA/]	-
+2	[CREATININE]=CREAT55E	-
+2	[CUNNYNGHAM]=CUNNYNGHAM	-
+2	[CANNOT]=_C	-
+2	~[CAN]~=C	-
+2	[CANNONGATE]=CANNONGATE	-
+2	~[CASTLEREAGH]=CA/LER1<	-
+2	[CAIRSTION]A=CAIR/ION	-
+2	[CALINGAER]T=CAL5GA]	-
+2	[CAMOENS]=CAMO5S	-
+2	[CAVEAT]=CAVEAT	-
+2	~[CATI]ON=CATI	-
+2	~[CENT]=C5T	-
+2	[CICERONE]=CIC]ONE	-
+2	[CINEAST]=C5EA/	-
+2	[CINERADIO]G=C5ERADIO	-
+2	~[CIRENCESTER]=CIR5CEST]	-
+2	[CITIZEN]=CITIZ5	-
+2	[CITROEN]=CITRO5	-
+2	[CLEANTH]=CLEAN?	-
+2	[CLEONE]=CLEONE	-
+2	[CLIVEDEN]=CLIVED5	-
+2	[CCH]=C*	-
+2	[CC]OSINE=CC	-
+2	![CC]!=3	-
+1	 [C].~=;C	-
+1	[C]=C	-
+5	[C]=C	-
+2	~[DAFT]ER=DAFT	-
+2	[DAYAN]=DAYAN	-
+2	[DAY]="D	-
+2	[DAREDEVIL]=D>EDEVIL	-
+2	[DOLITTLE]=DOLITTLE	-
+2	[DOOLITTLE]=DOOLITTLE	-
+2	[DONEGAL]=DONEGAL	-
+2	~[DO']=DO@	-
+2	~[DO]~=D	-
+2	~[DIS]HEA=4	-
+2	~[DIS]HA=4	-
+2	~[DIS]HO=4	-
+2	~[DISH]=DI%	-
+2	~[DISK]S=DISK	-
+2	~[DISK]~=DISK	-
+2	~[DISC]S~=DISC	-
+2	~[DISC]~=DISC	-
+2	[DISPIRIT]=DI_S	-
+2	[DISINGEN]=49G5	-
+2	~[DI]SULPH=DI	-
+2	~[DISS]~=DISS	-
+2	~[DISYLLABIC]=DISYLLABIC	-
+2	~[DIS]!=4	-
+2	[DITHERER]=DITHERER	-
+2	~[DINGHY]=D+HY	-
+2	~[DINGH]=D9<	-
+2	![DDAU]GHTER=DDAU	-
+2	[DDAY]=D"D	-
+2	![DD]!=4	-
+2	[DECEIVE]=DCV	-
+2	[DECEIVING]=DCVG	-
+2	[DECLARING]=DCLG	-
+2	[DECLARE]=DCL	-
+2	~[DE]NAT=DE	-
+2	~[DESH]ABILLE=DESH	-
+2	[DEAW]=DEAW	-
+2	~[DEAC]T=DEAC	-
+2	[DEANNA]=DEANNA	-
+2	[DENICOTINIZED]=DENICOT9IZ$	-
+2	[DENUMERABLE]=DENU]A#	-
+2	[DEREGULATE]=DEREGULATE	-
+2	[DEROUTING]=DER\T+	-
+2	[DESTOUCHES]=DEST\*ES	-
+2	[DEWHURST]=DEWHUR/	-
+2	[DUERER]=DUER]	-
+2	[DUMBBELL]=DUMBBELL	-
+2	[DUPONT]=DUPONT	-
+2	[DWORKIN]=D"W5	-
+2	[DYNARIBBO]N=DYNARI2O	-
+1	 [D].~=;D	-
+1	[D]=D	-
+5	[D]=D	-
+2	![EDISH]=EDI%	-
+2	![ED]OOM=ED	-
+2	![ED]OVE=ED	-
+2	![ED]OWN=ED	-
+2	![ED]EEP=ED	-
+2	![ED]REAM=ED	-
+2	![ED]ROP=ED	-
+2	![ED]RUM=ED	-
+2	![EDD]FO=E4	-
+2	![EDAL]E=EDAL	-
+2	[ED]=$	-
+2	[EDREAG]H=ER1<	-
+2	[EROO]M=EROO	-
+2	[ER]=]	-
+2	~[EXEAT]=EXEAT	-
+2	[EXTRAMENTA]L=EXTRAM5TA	-
+2	[ELEATIC]=ELEATIC	-
+2	[ELEAZAR]=ELEAZ>	-
+2	[EFFACEABLE]=EFFACE1#	-
+2	[ELECTROEN]=ELECTRO5	-
+2	[ELECTRO]=ELECTRO	-
+2	[EMMENTH]=EMM5?]	-
+2	 |[ENOUGH] =5	-
+2	[ENAMEL]=5AMEL	-
+2	[ENAME]=E"N	-
+2	[ENCED]=5C$	-
+2	[ENCEA]=5C1	-
+2	[ENCER]=5C]	-
+2	![ENCE]=;E	-
+2	[ENESS]=E;S	-
+2	![ENOO]K=ENOO	-
+2	~[ENOUGH'S]=5'S	-
+2	~[EN]~=EN	-
+2	[EN]=5	-
+2	[EPINEURAL]=EPINEURAL	-
+2	~[EN]~=EN	-
+2	![EAR]=E>	-
+2	![EALLY]=E,Y	-
+2	![EALO]GY=EALO	-
+2	![EADE]~=EADE	-
+2	![EADD]=1DD	-
+2	![EAX]=EAX	-
+2	![EAPP]=EAPP	-
+2	![EANCE]=E.E	-
+2	![EAND]=E&	-
+2	![EATION]=E,N	-
+2	![E]AWAY=E	-
+2	![EA]!=1	-
+2	[EEVER]=EEV]	-
+2	~[EVERY]~=E	-
+2	~[EVERTO]N="ETO	-
+2	~[EVERT]=EV]T	-
+2	[EVERD]I~=EV]D	-
+2	[EVER]="E	-
+2	[EITHER]=EI	-
+2	[ETHER]E=E!R	-
+2	 [E].~=;E	-
+1	[E]=E	-
+1	[E]=E	-
+2	~[FOR ]THE ==	-
+2	~[FOR ]A ==	-
+2	~[FOREVER]=="E	-
+2	~[FOR]ENS==	-
+2	~[FORE]==E	-
+2	[FOR]==	-
+2	[FRUI]T=FRUI	-
+2	[FRIEN]DE=FRI5	-
+2	[FRIEN]DI=FRI5	-
+2	[FRIEND]=FR	-
+2	[FREDERIKSHAVN]=FR$]IKSHAVN	-
+2	~[FROM]~=F	-
+2	[FIRST]=F/	-
+2	~[FIAN]C!=FIAN	-
+2	[FIRE]DRAKE=FIRE	-
+2	[FLATHOLM] =FLATHOLM	-
+2	[FLEAR]IDD=FL1R	-
+2	![FULLE]=;LLE	-
+2	![FULLY]=;LLY	-
+2	![FULL]=FULL	-
+2	![FUL]=;L	-
+2	[FFOR]=F=	-
+2	![FF]!=6	-
+2	[FATHER]="F	-
+2	~[FAERY]=FA]Y	-
+1	 [F].~=;F	-
+1	[F]=F	-
+5	[F]=F	-
+2	[GARDE]ROBE=G>DE	-
+2	[GEANTI]CLINE=GEANTI	-
+2	[GERONTION]=G]ONTION	-
+2	[GIBEAH]=GIBEAH	-
+2	[GILEAD]=GILEAD	-
+2	![GHAI]=GHAI	-
+2	![GHEAD]=GH1D	-
+2	![GHEAP]=GH1P	-
+2	![GHILEV]=<ILEV	-
+2	![GHIL]=GHIL	-
+2	![GHOL]E=GHOL	-
+2	![GHOR]N=GHOR	-
+2	![GHOUS]E=GH\S	-
+2	![GHUN]T=GHUN	-
+2	[GH]=<	-
+2	[GOODGE]=GOODGE	-
+2	[GOOD]=GD	-
+2	[GOVERN]ESS=GOV]N	-
+2	[GODDAM]=GO4AM	-
+2	[GODDAUGH]T=GODDAU<	-
+2	[GOD]="G	-
+2	[GOERING]=GOER+	-
+2	~[GORDONSTOU]=GORDONST\	-
+2	[GOTTHARD]=GOTTH>D	-
+2	~[GO]~=G	-
+2	![GG]!=7	-
+2	[GREAT]=GRT	-
+2	[GRAVE]D=GRAVE	-
+2	[GRIMSHOLM]=GRIMSHOLM	-
+2	[GRUENFELD]=GRUENFELD	-
+2	[GUINEVERE]=GU9EV]E	-
+2	[GWYNEDD]=GWYNEDD	-
+1	 [G].~=;G	-
+1	[G]=G	-
+5	[G]=G	-
+2	 |[HIS] =8	-
+2	~[HADAD]=HADAD	-
+2	~[HADAL]=HADAL	-
+2	~[HADID]=HADID	-
+2	~[HADJI]=HADJI	-
+2	~[HADOW]=HAD[	-
+2	[HANSEATIC]=HANSEATIC	-
+2	~[HAVIGHURST]=HAVIGHUR/	-
+2	[HADD]!=HA4	-
+2	~[HADE]=HADE	-
+2	~[HADR]IAN=HADR	-
+2	~[HAD]=_H	-
+2	~[HAVE]~=H	-
+2	~[HIMSELF]=HMF	-
+2	~[HIM]~=HM	-
+2	[HEPHAESTION]=HEPHAE/ION	-
+2	[HEDGE]ROW=H$GE	-
+2	[HER]ESY=H]	-
+2	[HERI]SI=H]E	-
+2	[HERE]TI=H]E	-
+2	[HERE]R=H]]	-
+2	[HER]EWARD=H]	-
+2	[HER]EN=H]	-
+2	[HEREDO]F=H]$O	-
+2	[HER]ED=H]	-
+2	[HER]EF=H]	-
+2	[HERE]="H	-
+2	~[HERSELF]=H]F	-
+2	[HILDESHEI]=HILDESHEI	-
+2	[HONEGGER]=HONE7]	-
+2	[HOUSEDRES]=H\SEDRES	-
+2	[HOUSEAGEN]=H\SEAG5	-
+2	[HYDRO]=HYDRO	-
+2	[HWANGHO]=HWANGHO	-
+2	~[HM]~=H'M	-
+1	 [H].~=;H	-
+1	[H]=H	-
+5	[H]=H	-
+2	 |[IN]'=9	-
+2	 |[IN] =9	-
+2	[IBLEAM]=IBLEAM	-
+2	[ICERINK]=ICER5K	-
+2	~[INTO] AND =9TO	-
+2	~[INTO] AT =9TO	-
+2	~[INTO] BUT =9TO	-
+2	~[INTO] IF =9TO	-
+2	~[INTO] IN =9TO	-
+2	~[INTO] IS =9TO	-
+2	~[INTO] WAS =9TO	-
+2	~[INTO] WHEN =9TO	-
+2	~[INTO] FOR =9TO	-
+2	~[INTO] OF =9TO	-
+2	~[INTO] OR =9TO	-
+2	~[INTO] TO =9TO	-
+2	~[INTO HI]S =96HI	-
+2	~[INTO ENOU]GH=965\	-
+2	~[INTO ]_=96	-
+2	~[INTO ]!=96	-
+2	[INDIA]RUB=9DIA	-
+2	[INDFULA]=9FULA	-
+2	![INGRA]=9GRA	-
+2	[INGLEDEW]=9GLEDEW	-
+2	![ING]=+	-
+2	![INESS]=I;S	-
+2	~[IN]-=9	-
+2	~[IN] =IN	-
+2	~[IN]~=IN	-
+2	![IN]=9	-
+2	[IN]!=9	-
+2	![ITY]=;Y	-
+2	~[ITSELF]~=XF	-
+2	~[ITS]~=XS	-
+2	~[IT]~=X	-
+2	[IRRE]VERS=IRRE	-
+2	[IEVER]=IEV]	-
+2	[IETN]AMESE=IETN	-
+2	~[IMMEDIATE]=IMM	-
+2	[IO]NE=IO	-
+2	~[ISOM]ER=ISOM	-
+2	[ISONEPH]=ISONEPH	-
+1	[I]=I	-
+5	[I]=I	-
+2	[JEHAD]=JE_H	-
+2	[JESUS'']="J0'	-
+2	[JESUS']="J'	-
+2	[JESUS]="J	-
+2	~[JUST]~=J	-
+1	 [J].~=;J	-
+1	[J]=J	-
+5	[J]=J	-
+2	~[KNOWLEDGE]~=K	-
+2	[KNOW]="K	-
+2	[KNUCKLEDUSTER]=KNUCKLEDU/]	-
+2	[KINGUSSIE]=K5GUSSIE	-
+2	~[KILO]=KILO	-
+2	[KRONER]=KRON]	-
+2	[KRONE]=KRONE	-
+1	 [K].~=;K	-
+1	[K]=K	-
+5	[K]=K	-
+2	~[LATI]MER=LATE	-
+2	[LAERT]ES=LA]T	-
+2	[LANGUEDOC]=LANGUEDOC	-
+2	[LAHAD]=LA_H	-
+2	![LESS]=.S	-
+2	[LETTER]=LR	-
+2	~[LEAH]~=LEAH	-
+2	~[LEARIG]=L1RIG	-
+2	~[LEGHORN]=LE<ORN	-
+2	~[LIKE]~=L	-
+2	[LITTLE]=LL	-
+2	[LIEBESTOD]=LIEBESTOD	-
+2	[LILIACEAE]=LILIACEAE	-
+2	[LINGAARD]=L9GA>D	-
+2	~[LIONESS]=LIONESS	-
+2	~[LIVINGOOD]=LIV5GD	-
+2	[LORD]="L	-
+2	~[LONGHI]=LON<I	-
+2	~[LLAN]D=LLAN	-
+2	[LUCKNOW]=LUCKN[	-
+2	[LUFTHANSA]=LUFTHANSA	-
+2	[LYONESSE]=LYO;SE	-
+1	 [L].~=;L	-
+1	[L]=L	-
+5	[L]=L	-
+2	[MEN]TIONED=M5	-
+2	![MENT]=;T	-
+2	~[MEATUS]=MEATUS	-
+2	[MEEAN]=MEEAN	-
+2	[MELEANGER]=MELEANG]	-
+2	[MENTONE]=M5TONE	-
+2	[MESSIAEN]=MESSIA5	-
+2	[MERSTHAM]=M]/HAM	-
+2	[MANYATA]=MANYATA	-
+2	[MANYON]=MANYON	-
+2	[MANY]=_M	-
+2	[MACCARTHY]=MACC>?Y	-
+2	[MACHARDIE]=MACH>DIE	-
+2	[MAHARAJAH]=MAH>AJAH	-
+2	~[MAHA]=MAHA	-
+2	[MAINGAARD]=MA9GA>D	-
+2	[MALESHERBES]=MALESH]BES	-
+2	[MANCETTER]=MANCETT]	-
+2	[MANSHOLT]=MANSHOLT	-
+2	[MARABOUT]=M>AB\T	-
+2	[MARCHIONESS]=M>*IONESS	-
+2	[MBABONE]=MBABONE	-
+2	[MONTRE]AL=MONTRE	-
+2	~[MORE]'N=MORE	-
+2	~[MORE]~=M	-
+2	~[MORT]IMER=MORT	-
+2	[MOTHEA]TEN=MO?1	-
+2	[MOTHER]APY=MO!R	-
+2	[MOTHER]="M	-
+2	[MOERICKE]=MOERICKE	-
+2	[MONOWHEEL]=MONO:EEL	-
+2	[MOONGOD]=MOONGOD	-
+2	~[MIS]TI=MIS	-
+2	~[MIST]RIAL=MIST	-
+2	~[MIST]REA=MIST	-
+2	~[MIST]RU=MIST	-
+2	~[MIST]RANS=MIST	-
+2	~[MIS]TH=MIS	-
+2	[MISTERMED]=MIST]M$	-
+2	[MIST]=MI/	-
+2	[MISALLY]=MISALLY	-
+2	[MISSOLONGHI]=MISSOLON<I	-
+2	~[MIS]=MIS	-
+2	[MINESTRON]=M9E/RON	-
+2	[MINNEAPOL]=M9NEAPOL	-
+2	[MICRO]=MICRO	-
+2	[MUCH]=M*	-
+2	[MUST]AFA=MU/	-
+2	~[MUSTA]NG=MU/A	-
+2	~[MUSTAR]D=MU/>	-
+2	~[MUSTER]=MU/]	-
+2	[MUST]=M/	-
+2	~[MULTI]=MULTI	-
+2	[MUSTACHE]=MU/A*E	-
+2	[MUSTAFA]=MUSTAFA	-
+2	~[MYSELF]~=MYF	-
+2	[MYMMSHALL]=MYMMSHALL	-
+2	~[MC]=MC	-
+1	 [M].~=;M	-
+1	[M]=M	-
+5	[M]=M	-
+2	~[NIGHT]=NI<T	-
+2	~[NOBLES]SE=NO#S	-
+2	~[NOT]~=N	-
+2	~[NONE]~=N"O	-
+2	~[NONES]~=N"OS	-
+2	~[NON]ESS=NON	-
+2	~[N]ONES=N	-
+2	~[NONE]THE=N"O	-
+2	~[NON]=NON	-
+2	[NOWI]SE=NOWI	-
+2	[NOWA]Y=NOWA	-
+2	[NO]WHERE=NO	-
+2	[NORTHEDGE]=NOR?$GE	-
+2	[NORTHESK]=NOR?ESK	-
+2	[NAUSEAM]=NAUSEAM	-
+2	[NA]MENT=NA	-
+2	[NAME]="N	-
+2	![NESS]=;S	-
+2	[NECESSARY]=NEC	-
+2	~[NEAERA]=NEAERA	-
+2	[NEAPOLITA]=NEAPOLITA	-
+2	[NEURASTHENIA]=NEURASTHENIA	-
+2	[NEVERS]=NEV]S	-
+2	[NEWHAM]=NEWHAM	-
+2	[NCRE]A=NCRE	-
+2	[NUERNBERG]=NUERNB]G	-
+2	[NUTHATCH]=NUTHAT*	-
+1	 [N].~=;N	-
+1	[N].=N	-
+1	[N]=N	-
+2	~[OBEAH]=OBEAH	-
+2	~[OF ]THE =(	-
+2	~[OF ]A =(	-
+2	[OFOR]=O=	-
+2	[OF]=(	-
+2	~[OUT]HELD=\T	-
+2	~[OUT]~=\	-
+2	![OUND]=.D	-
+2	![OUNT]=.T	-
+2	[OUGHT]="\	-
+2	~[OURSELVES]~=\RVS	-
+2	[OU]=\	-
+2	[OWORK]=O"W	-
+2	[OW]=[	-
+2	![ONG]=;G	-
+2	[ONEGIN]=ONEG9	-
+2	[ONEA]=ON1	-
+2	[ONEC]K=ONEC	-
+2	[ONENESS]="O;S	-
+2	[ON]EN=ON	-
+2	[ONER]=ON]	-
+2	[ONED]=ON$	-
+2	[ONES]IA=ONES	-
+2	[ONES]IM=ONES	-
+2	[ONES]S~=ONES	-
+2	~[ONESELF]~="OF	-
+2	[ONES]E~=ONES	-
+2	[ONEST]="O/	-
+2	[ONE]E=ONE	-
+2	[ONEOU]S=ONE\	-
+2	[ONEO]=ONEO	-
+2	[ONEY]~="OY	-
+2	[ONEU]M=ONEU	-
+2	[ONE]UR=ONE	-
+2	[ONET]ED=ONET	-
+2	[ONET]S=ONET	-
+2	[ONET]CY=ONET	-
+2	[ONET]~=ONET	-
+2	[ONET]TE=ONET	-
+2	[ONEL]S=ONEL	-
+2	![O]NEL~=O	-
+2	[ONE]="O	-
+2	[O]IN=O	-
+2	[OI]=OI	-
+2	[OENONE]=OENONE	-
+2	[OEN]=OEN	-
+2	[OED]!=OED	-
+2	~[OVEREA]T=OV]1	-
+2	~[OVER]=OV]	-
+2	~[O'CLOCK]~=O'C	-
+2	~[O'CONNOR]=O'CONNOR	-
+2	[ORSE]RADISH=ORSE	-
+2	[OREAD]=OREAD	-
+2	[ORGEAT]=ORGEAT	-
+2	[OON]E=OON	-
+2	~[OLE]A=OLE	-
+2	~[OAST]=OA/	-
+1	[O]=O	-
+5	[O]=O	-
+2	~[PH]ONEY=PH	-
+2	[PHERES]=PH]ES	-
+2	[PHINEAS]=PH9EAS	-
+2	[PHONE]S=PH"O	-
+2	[PHONETI]=PHONETI	-
+2	[PHONEME]=PHONEME	-
+2	[PHONE]~=PH"O	-
+2	[PHREATIC]=PHREATIC	-
+2	~[PAR]TH=P>	-
+2	[PART]="P	-
+2	[PARARHYNA]=P>ARHYNA	-
+2	[PAID]=PD	-
+2	[PAINS]TAK=PA9S	-
+2	[PAGODA]=PAGODA	-
+2	[PADRONE]=PADRONE	-
+2	[PALINGENESIS]=PAL9G5ESIS	-
+2	[PANCEV]=PAANCEV	-
+2	[PASSE-PARTOUT]=PASSE-P>T\T	-
+2	~[PEOPLE]~=P	-
+2	~[PERHAPS]~=P]H	-
+2	[PERCEIVE]=P]CV	-
+2	[PERCEIVIN]G=P]CV	-
+2	[PERSE]VER=P]SE	-
+2	[PERINATAL]=P]INATAL	-
+2	[PERSEPHON]=P]SEPHON	-
+2	[PEAKESHOL]=P1KESHOL	-
+2	[PEEBLESSHIRE]=PEE#S%IRE	-
+2	[PENSIONE]=P5SIONE	-
+2	[PEPPONE]=PEPPONE	-
+2	[PREACH]=PR1*	-
+2	[PRED]AC=PR$A	-
+2	[PREDA]TOR=PR$A	-
+2	[PRED]ECES=PR$	-
+2	[PREDI]L=PR$I	-
+2	[PREDI]C=PR$I	-
+2	[PRENT]IC=PR5T	-
+2	[PRERO]G=PR]O	-
+2	[PRECEIVE]=PRCV	-
+2	~[PRE]=PRE	-
+2	[PRIEDIEU]=PRIEDIEU	-
+2	[PROUNION]=PROUNION	-
+2	[POST]H=PO/	-
+2	[POINGIANT]=PO9GIANT	-
+2	[PORTOFINO]=PORTOFINO	-
+2	[PORT SAID]=PORT SAID	-
+2	[POTHERB]=POTH]B	-
+2	~[PICO]=PICO	-
+2	[PITYARD]=PITY>D	-
+2	[PYONEPHROSIS]=PYONEPHROSIS	-
+1	 [P].~=;P	-
+1	[P]=P	-
+5	[P]=P	-
+2	[QUICK]=QK	-
+2	~[QUITE]~=Q	-
+2	[QUESTION]="Q	-
+1	 [Q].~=;Q	-
+1	[Q]=Q	-
+5	[Q]=Q	-
+2	[RIGHT]="R	-
+2	[RIBOFLAV]=RIBOFLAV	-
+2	[RICHTHOF]=RI*TH(	-
+2	~[RATHER]~=R	-
+2	[RAFT]ER=RAFT	-
+2	[RARED]~=RAR$	-
+2	~[RANS]OME=RANS	-
+2	[RAR]ENAL=RAR	-
+2	[RABBITY]=RA2ITY	-
+2	~[REA]B=REA	-
+2	[REACHING]=R1*+	-
+2	~[REACH]I=REA*	-
+2	~[REACH]=R1*	-
+2	~[RE]AC=RE	-
+2	~[READ]AP=READ	-
+2	~[REA]DD=REA	-
+2	~[READ]J=READ	-
+2	~[READ]M=READ	-
+2	~[READ]O=READ	-
+2	~[READ]V=READ	-
+2	~[REA]F=REA	-
+2	~[REAGAN]=R1GAN	-
+2	~[REA]G=REA	-
+2	~[REALGAR]=REALG>	-
+2	~[REAL]IG=REAL	-
+2	~[REAL]IN=REAL	-
+2	[REAL MADRID]=REAL MADRID	-
+2	~[RE]ALL=RE	-
+2	~[REAN]=REAN	-
+2	~[REAP]P=REAP	-
+2	~[REAS]C=REAS	-
+2	~[REAS]S=REAS	-
+2	~[REAT]T=REAT	-
+2	[REAW]AKE=REAW	-
+2	~[REDEE]M=R$EE	-
+2	~[RED]EMPT=R$	-
+2	~[RED]E=RED	-
+2	~[REDINGOT]=R$+OT	-
+2	~[RED]I=RED	-
+2	~[REDOUB]T=R$\B	-
+2	~[REDOUND]=R$.D	-
+2	~[RE]DO=RE	-
+2	~[REDR]AW=REDR	-
+2	~[REDU]C=R$U	-
+2	~[REDU]ND=R$U	-
+2	~[REDU]=REDU	-
+2	[REFULGENT]=REFULG5T	-
+2	~[RE]NAM=RE	-
+2	~[RENA]V=RENA	-
+2	~[RENO]M=RENO	-
+2	~[RENU]M=RENU	-
+2	~[REREDO]S=R]$O	-
+2	~[RE]R=RE	-
+2	[REVER]EN=R"E	-
+2	[REVER]IE=R"E	-
+2	~[REVER]=REV]	-
+2	[REJOICE]=RJC	-
+2	[REJOICING]=RJCG	-
+2	[RECEIVE]=RCV	-
+2	[RECEIVING]=RCVG	-
+2	[ROMERSHOL]=ROM]SHOL	-
+2	[ROSTHERNE]=RO/H]NE	-
+2	[ROTHENST]=RO!N/	-
+1	 [R].~=;R	-
+1	[R]=R	-
+5	[R]=R	-
+2	~[STILL]~=/	-
+2	![STID]E=STID	-
+2	![STION]=S;N	-
+2	![STIME]=S"T	-
+2	[STHENIC]=S?ENIC	-
+2	[STRANRAER]=/RANRA]	-
+2	[STRATHEARN]=/RA?E>N	-
+2	[STYROFOAM]=/YROFOAM	-
+2	![STHEAD]=/H1D	-
+2	![ST]HOOD=/	-
+2	![S]TH=S	-
+2	![ST]OWN=ST	-
+2	[STAUBBACH]=/AUBBA*	-
+2	[STEATITE]=/EATITE	-
+2	~[ST].~=ST	-
+2	[ST]=/	-
+2	[SHAKEDOWN]=%AKED/N	-
+2	[SHOREDITCH]=%OREDIT*	-
+2	~[SHALL]~=%	-
+2	![SHART]=SH>T	-
+2	![SHAW]K=SHAW	-
+2	[SHOULD]ER=%\LD	-
+2	[SHOULD]=%D	-
+2	![SHOUS]E=SH\S	-
+2	![SHOO]D=SHOO	-
+2	![SHOR]N=SHOR	-
+2	![SHOR]SE=SHOR	-
+2	![SHOUND]=SH.D	-
+2	![SHIL]L=SHIL	-
+2	![SHEAR]T=SHE>	-
+2	![SHEAD]=SH1D	-
+2	![SHUN]D~=SHUN	-
+2	~[SH]'=%	-
+2	~[SH]~=SH	-
+2	[SH]=%	-
+2	![SION]=.N	-
+2	~[SINGH]~=S+H	-
+2	~[SINGH]=S9<	-
+2	[SIDEREAL]=SIDEREAL	-
+2	[SAID]=SD	-
+2	[SAFFLOWER]=SAFFL[]	-
+2	[SALMONELLA]=SALMONELLA	-
+2	[SANCERRE]=SANC]RE	-
+2	[SCHIEDAM]=S*IEDAM	-
+2	![SOFAR]=SOF>	-
+2	![SOMED]~=SOM$	-
+2	![SOME]TRY=SOME	-
+2	![SOME]TRIC=SOME	-
+2	![SOME]TER=SOME	-
+2	[SOMER]!=SOM]	-
+2	[SOME]="S	-
+2	~[SO]~=S	-
+2	[SONGHAI]=SON<AI	-
+2	[SOUTHESK]=S\?ESK	-
+2	[SEVERED]=S"E$	-
+2	[SEVERUS]=SEV]US	-
+2	[SEVER]E=SEV]	-
+2	[SEVER]ITY=SEV]	-
+2	[SED]ATIV=S$	-
+2	~[SEAMUS]=S1MUS	-
+2	~[SEAN]~=S1N	-
+2	[SEATTLE]=SEATTLE	-
+2	[SEINGLIND]=SE9GL9D	-
+2	[SERONEGATIVE]=S]ONEGATIVE	-
+2	[SPHER]=SPH]	-
+2	[SPIRIT]=_S	-
+2	[SPIKENARD]=SPIKEN>D	-
+2	[SUBLESSEE]=SUBLESSEE	-
+2	~[SUB]=SUB	-
+2	[SUCH]=S*	-
+2	[SULTANESS]=SULTANESS	-
+2	[SUNBLEACH]=SUNBL1*	-
+2	~[SSH]~=S%	-
+2	[SS]H=SS	-
+2	[SWED]ISH=SW$	-
+2	~[SWOR]D=SWOR	-
+2	~[SQUALLY]=SQU,Y	-
+2	[SQUA]LLY=SQUA	-
+1	[S'']~=S0'	-
+1	[S']~=S'	-
+1	 [S].~=;S	-
+1	[S]=S	-
+5	[S]=S	-
+2	~[TARSO]M=T>SO	-
+2	[TRANSHUMANCE]=TRANSHUM.E	-
+2	![THAND]=TH&	-
+2	![THART]=TH>T	-
+2	~[THAT]~=T	-
+2	[THERER]=!R]	-
+2	[THERED]=!R$	-
+2	[THERE]SA=!RE	-
+2	[THERE]TT=!RE	-
+2	[THEREEN]=!RE5	-
+2	[THERE]="!	-
+2	![THERD]=TH]D	-
+2	~[THEIR]=_!	-
+2	[THESE]~=^!	-
+2	~[THEMSELVES]=!MVS	-
+2	[THENCE]=?;E	-
+2	[THEND]=?5D	-
+2	![THEAST]=?1/	-
+2	![THEAD]=TH1D	-
+2	![THEAR]T=THE>	-
+2	[THE]=!	-
+2	~[THIS]~=?	-
+2	![THIL]L=THIL	-
+2	[THRO']=?RO'	-
+2	[THROUGH]="?	-
+2	~[THOSE]=^?	-
+2	![THOO]K=THOO	-
+2	![THOO]D=THOO	-
+2	![THOR]SE=THOR	-
+2	![THOUS]E=TH\S	-
+2	![THOL]E=THOL	-
+2	![THOL]D=THOL	-
+2	~[THYSELF]=?YF	-
+2	[THOSEBY]=?OSEBY	-
+2	[TH]=?	-
+2	~[TO] AND~=TO	-
+2	~[TO] AT =TO	-
+2	~[TO BE]~=6BE	-
+2	~[TO] BUT =TO	-
+2	~[TO BY ]!=TO 0	-
+2	~[TO] IF =TO	-
+2	~[TO] IN =TO	-
+2	~[TO] IS =TO	-
+2	~[TO] WAS~=TO	-
+2	~[TO] WERE =TO	-
+2	~[TO] WHERE =TO	-
+2	~[TO] WITH =TO	-
+2	~[TO] FOR =TO	-
+2	~[TO] OF =TO	-
+2	~[TO] OR =TO	-
+2	~[TO] TO =TO	-
+2	~[TO HIS]=6HIS	-
+2	~[TO ENOUGH] =65\<	-
+2	~[TO _BE]=6.BE	-
+2	~[TO _]=6.	-
+2	~[TO ]=6	-
+2	~[TO ]!=6	-
+2	~[TOGETHER]=TGR	-
+2	~[TODAY]=TD	-
+2	~[TOMORROW]=TM	-
+2	~[TONIGHT]=TN	-
+2	~[TO-DAY]=TD	-
+2	~[TO-MORROW]=TM	-
+2	~[TO-NIGHT]=TN	-
+2	~[TORE]ADOR=TORE	-
+2	[TOWNSHEND]=T[NSH5D	-
+2	![TION]=;N	-
+2	![TI]MEN=TI	-
+2	![TIME]TER=TIME	-
+2	[TIME]="T	-
+2	~[TITANESS]=TITANESS	-
+2	[TEAROOM]=T1ROOM	-
+2	~[TEATRO]=TEATRO	-
+2	[TUONELA]=TUONELA	-
+2	[TWOULD]=TWD	-
+2	[TWEEDLEDE]=TWE$LEDE	-
+2	~[TWO]=TWO	-
+2	[TLDE]DG=TLED	-
+2	![TLE]D!=TLE	-
+2	![TTLE]N=TTLE	-
+1	 [T].~=;T	-
+1	[T]=T	-
+5	[T]=T	-
+2	~[UNDER]I=UND]	-
+2	~[UNDER]O=UND]	-
+2	[UNDERLESS]EE="ULESS	-
+2	[UNDER]="U	-
+2	~[UNFUL]F=UNFUL	-
+2	~[UNEAS]=UN1S	-
+2	~[UNEAR]=UNE>	-
+2	~[UNLESS]~=UN.S	-
+2	[UNINUCLE]AR=UNINUCLE	-
+2	[UNLESSON]ED=UNLESSON	-
+2	[UNMENTIONED]=UNM5;N$	-
+2	~[UNITY]=UN;Y	-
+2	~[UNBL]E=UNBL	-
+2	~[UN]=UN	-
+2	[USEA]GE=USEA	-
+2	~[US]~=U	-
+2	[UPON]=^U	-
+1	 [U].~=;U	-
+1	[U]=U	-
+5	[U]=U	-
+2	[VANDERBILT]=V&]BILT	-
+2	[VAINGLORIOUS]=VA9GLORI\S	-
+2	~[VEBLEN]=VEBL5	-
+2	[VERITYP]ER=V]ITYP	-
+2	~[VERY]~=V	-
+2	~[VICEN]=VIC5	-
+2	~[VICE]=VICE	-
+2	[VILLENEU]=VILLENEU	-
+2	[VOLPONE]=VOLPONE	-
+2	[VURTHEIM]=VURTHEIM	-
+1	 [V].~=;V	-
+1	[V]=V	-
+5	[V]=V	-
+2	 |[WAS ]-=WAS	-
+2	 |[WAS] =0	-
+2	[WA]F=WA	-
+2	[WAHROONGA]=WAHROONGA	-
+2	[WARTHOG]=W>THOG	-
+2	 |[WERE ]-=WERE	-
+2	 |[WERE] =7	-
+2	[WEINGARTN]ER=WE5G>TN	-
+2	~[WITH ]THE =)	-
+2	~[WITH ]A =)	-
+2	[WITH]=)	-
+2	[WILLAERT]=WILLA]T	-
+2	~[WILL]~=W	-
+2	[WISEACRE]=WISEACRE	-
+2	[WISHART]=WI&>T	-
+2	~[WHICH']=:I*'	-
+2	~[WHICH]~=:	-
+2	![WHID]E=WHID	-
+2	![WHERE]D=WH]D	-
+2	[WHEREVER]=:]"E	-
+2	[WHERE']ER=:]E'	-
+2	[WHERE]=":	-
+2	[WHITHORN]=:ITHORN	-
+2	~[WHOSE]~=^:	-
+2	![WHOUS]E=WH\S	-
+2	[WH]=:	-
+2	[WOULD]=WD	-
+2	[WORK]="W	-
+2	[WORD]=^W	-
+2	[WORLD]=_W	-
+2	~[WOFUL]=WO;L	-
+1	 [W].~=;W	-
+1	[W]=W	-
+5	[W]=W	-
+1	[X].=X	-
+1	[X]=X	-
+5	[X]=X	-
+2	[YEANDEL]=Y1NDEL	-
+2	[YOUNG]="Y	-
+2	[YOURCENAR]=Y\RC5>	-
+2	~[YOURSELF]=YRF	-
+2	~[YOURSELVES]=YRVS	-
+2	[YOUR]=YR	-
+2	[YOUNDE]=YA\UNDE	-
+2	~[YOU']M=Y\'	-
+2	~[YOU]~=Y	-
+1	 [Y].~=;Y	-
+1	[Y]=Y	-
+5	[Y]=Y	-
+2	[ZOOFUL]=ZOO;L	-
+1	 [Z].~=;Z	-
+1	[Z]=Z	-
+5	[Z]=Z	-
+1	[[]=,7	-
+5	[[]=[	-
+1	[\]=/	-
+5	[\]=\	-
+1	[]]=7'	-
+5	[]]=]	-
+1	[^]=,	-
+5	[^]=^	-
+1	[__]#=--#	-
+1	[__]=..	-
+2	~[_EN]~=.EN	-
+2	[_ENOUGH]=.5	-
+2	[_TO ]_=.6	-
+2	[_IN] =.9	-
+2	[_INTO ]_=.96	-
+2	[_WAS] =.0	-
+2	[_WERE] =.7	-
+2	[_HIS] =.8	-
+2	[_BE] =.2	-
+2	[_BY ]_=.0	-
+1	[_/]=	-
+5	[_]=_	-
+1	[`]=^<xx	-
+5	[`]=`	-
+1	[{]=,7	-
+5	[{]={	-
+1	[|]=^	-
+5	[|]=|	-
+1	[}]=7'	-
+5	[}]=}	-
+1	[~]=^	-
+5	[~]=~	-
+1	[µ]='	-
+1	[ã]='	-
+1	[¶]="<	-
+1	[÷]=">	-
+#                       End of tables indicated by a hash

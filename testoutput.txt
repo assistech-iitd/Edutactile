@@ -1,0 +1,3 @@
+This file shows what the results of translating test.txt with tester should look like. If they do, it is working
+
+@X  A C E G H K   5 4 3 2 1   A@ A1@ A11@ @A @1A @11A   AX 2@ 3@ @2 @3 XA   AX A4@ A3X A44@ XA @4A X3A @44A   T @ U V   X@

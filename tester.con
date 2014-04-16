@@ -1,0 +1,351 @@
+:       Data for character set of language for Text to Braille - Flick
+:       --------------------------------------------------------------
+:
+:       Version 0
+0
+:       Format of each line (256 of them) is:
+:
+:       ASCII value: Input Transformation
+:                    Mapping for lower to upper for output.
+:
+:       Then space and 8 flags set for (in this case):
+:
+:           text character
+:           digits
+:           punctuation
+:           white space character
+:           possible roman letters
+:           not used
+:           wildcard character
+:           Capital signs
+:
+:       Lower case indicates option off upper case indicates option on.
+:
+000:  :lpqSrswt
+001:  :lpqSrswt
+002:  :lpqSrswt
+003:  :lpqSrswt
+004:  :lpqSrswt
+005:  :lpqSrswt
+006:  :lpqSrswt
+007:  :lpqSrswt
+008:  :lpqSrswt
+009:  :lpqSrswt
+010:  :lpqSrswt
+011:  :lpqSrswt
+012:  :lpqSrswt
+013:  :lpqSrswt
+014:  :lpqSrswt
+015:  :lpqSrswt
+016:  :lpqSrswt
+017:  :lpqSrswt
+018:  :lpqSrswt
+019:  :lpqSrswt
+020:  :lpqSrswt
+021:  :lpqSrswt
+022:  :lpqSrswt
+023:  :lpqSrswt
+024:  :lpqSrswt
+025:  :lpqSrswt
+026:  :lpqSrswt
+027:  :lpqSrswt
+028:  :lpqSrswt
+029:  :lpqSrswt
+030:  :lpqSrswt
+031:  :lpqSrswt
+032:  :lpqSrsWt
+033:!!:lpqsrsWt
+034:  :lpqSrswt
+035:##:lpqsrsWt
+036:  :lpqSrswt
+037:  :lpqSrswt
+038:  :lpqSrswt
+039:  :lpqSrswt
+040:  :lpqSrswt
+041:  :lpqSrswt
+042:  :lpqSrswt
+043:  :lpqSrswt
+044:  :lpqSrswt
+045:  :lpqSrswt
+046:  :lpqSrswt
+047:  :lpqSrswt
+048:  :lpqSrswt
+049:11:lPqsrswt
+050:22:lpQsrswt
+051:33:lpQSrswt
+052:44:lpqSRswt
+053:  :lpqSrswt
+054:  :lpqSrswt
+055:  :lpqSrswt
+056:  :lpqSrswt
+057:  :lpqSrswt
+058:  :lpqSrswt
+059:  :lpqSrswt
+060:  :lpqSrswt
+061:  :lpqSrswt
+062:  :lpqSrswt
+063:  :lpqSrswt
+064:  :lpqSrswt
+065:AA:Lpqsrswt
+066:CC:Lpqsrswt
+067:CC:Lpqsrswt
+068:DD:Lpqsrswt
+069:FF:Lpqsrswt
+070:FF:Lpqsrswt
+071:GG:Lpqsrswt
+072:HH:Lpqsrswt
+073:  :lpqSrswt
+074:KK:Lpqsrswt
+075:KK:Lpqsrswt
+076:LL:Lpqsrswt
+077:MM:Lpqsrswt
+078:NN:Lpqsrswt
+079:  :lpqSrswt
+080:  :lpqSrswt
+081:QQ:Lpqsrswt
+082:RR:Lpqsrswt
+083:SS:Lpqsrswt
+084:TT:Lpqsrswt
+085:UU:Lpqsrswt
+086:VV:Lpqsrswt
+087:WW:Lpqsrswt
+088:XX:Lpqsrswt
+089:YY:Lpqsrswt
+090:ZZ:Lpqsrswt
+091:  :lpqSrswt
+092:  :lpqSrswt
+093:  :lpqSrswt
+094:  :lpqSrswt
+095:  :lpqSrswt
+096:  :lpqSrswt
+097:AA:Lpqsrswt
+098:CC:Lpqsrswt
+099:CC:Lpqsrswt
+100:DD:Lpqsrswt
+101:FF:Lpqsrswt
+102:FF:Lpqsrswt
+103:GG:Lpqsrswt
+104:HH:Lpqsrswt
+105:  :lpqsrswt
+106:KK:Lpqsrswt
+107:KK:Lpqsrswt
+108:LL:Lpqsrswt
+109:MM:Lpqsrswt
+110:NN:Lpqsrswt
+111:  :lpqSrswt
+112:  :lpqSrswt
+113:QQ:Lpqsrswt
+114:RR:Lpqsrswt
+115:SS:Lpqsrswt
+116:TT:Lpqsrswt
+117:UU:Lpqsrswt
+118:VV:Lpqsrswt
+119:WW:Lpqsrswt
+120:XX:Lpqsrswt
+121:YY:Lpqsrswt
+122:ZZ:Lpqsrswt
+123:  :lpqSrswt
+124:  :lpqSrswt
+125:  :lpqSrswt
+126:~~:lpqsrsWt
+127:  :lpqSrswt
+128:  :lpqSrswt
+129:  :lpqSrswt
+130:  :lpqSrswt
+131:  :lpqSrswt
+132:  :lpqSrswt
+133:  :lpqSrswt
+134:  :lpqSrswt
+135:  :lpqSrswt
+136:  :lpqSrswt
+137:  :lpqSrswt
+138:  :lpqSrswt
+139:  :lpqSrswt
+140:  :lpqSrswt
+141:  :lpqSrswt
+142:  :lpqSrswt
+143:  :lpqSrswt
+144:  :lpqSrswt
+145:  :lpqSrswt
+146:  :lpqSrswt
+147:  :lpqSrswt
+148:  :lpqSrswt
+149:  :lpqSrswt
+150:  :lpqSrswt
+151:  :lpqSrswt
+152:  :lpqSrswt
+153:  :lpqSrswt
+154:  :lpqSrswt
+155:  :lpqSrswt
+156:  :lpqSrswt
+157:  :lpqSrswt
+158:  :lpqSrswt
+159:  :lpqSrswt
+160:  :lpqSrswt
+161:  :lpqSrswt
+162:  :lpqSrswt
+163:  :lpqSrswt
+164:  :lpqSrswt
+165:  :lpqSrswt
+166:  :lpqSrswt
+167:  :lpqSrswt
+168:  :lpqSrswt
+169:  :lpqSrswt
+170:  :lpqSrswt
+171:  :lpqSrswt
+172:  :lpqSrswt
+173:  :lpqSrswt
+174:  :lpqSrswt
+175:  :lpqSrswt
+176:  :lpqSrswt
+177:  :lpqSrswt
+178:  :lpqSrswt
+179:  :lpqSrswt
+180:  :lpqSrswt
+180:  :lpqSrswt
+182:  :lpqSrswt
+183:  :lpqSrswt
+184:  :lpqSrswt
+185:  :lpqSrswt
+186:  :lpqSrswt
+187:  :lpqSrswt
+188:  :lpqSrswt
+189:  :lpqSrswt
+190:  :lpqSrswt
+191:  :lpqSrswt
+192:  :lpqSrswt
+193:  :lpqSrswt
+194:  :lpqSrswt
+195:  :lpqSrswt
+196:  :lpqSrswt
+197:  :lpqSrswt
+198:  :lpqSrswt
+199:  :lpqSrswt
+200:  :lpqSrswt
+201:  :lpqSrswt
+202:  :lpqSrswt
+203:  :lpqSrswt
+204:  :lpqSrswt
+205:  :lpqSrswt
+206:  :lpqSrswt
+207:  :lpqSrswt
+208:  :lpqSrswt
+209:  :lpqSrswt
+210:  :lpqSrswt
+211:  :lpqSrswt
+212:  :lpqSrswt
+213:  :lpqSrswt
+214:  :lpqSrswt
+215:  :lpqSrswt
+216:  :lpqSrswt
+217:  :lpqSrswt
+218:  :lpqSrswt
+219:  :lpqSrswt
+220:  :lpqSrswt
+221:  :lpqSrswt
+222:  :lpqSrswt
+223:  :lpqSrswt
+224:  :lpqSrswt
+225:  :lpqSrswt
+226:  :lpqSrswt
+227:  :lpqSrswt
+228:  :lpqSrswt
+229:  :lpqSrswt
+230:  :lpqSrswt
+231:  :lpqSrswt
+232:  :lpqSrswt
+233:  :lpqSrswt
+234:  :lpqSrswt
+235:  :lpqSrswt
+236:  :lpqSrswt
+237:  :lpqSrswt
+238:  :lpqSrswt
+239:  :lpqSrswt
+240:  :lpqSrswt
+241:  :lpqSrswt
+242:  :lpqSrswt
+243:  :lpqSrswt
+244:  :lpqSrswt
+245:  :lpqSrswt
+246:  :lpqSrswt
+247:  :lpqSrswt
+248:  :lpqSrswt
+249:  :lpqSrswt
+250:  :lpqSrswt
+251:  :lpqSrswt
+252:  :lpqSrswt
+253:  :lpqSrswt
+254:  :lpqSrswt
+255:  :lpqSrswt
+:
+: Wildcards 
+:       ! = 0 or more type Ps
+:       # = 1 type Qs
+:       ~ = 1 or more type Rs
+:         = white space
+:
+: 
+4
+*!=0+ 2
+*#=1. 4
+*~=1+ 16
+* =1+ 8
+:
+: number states.
+2
+:
+:
+:
+:number input classes.
+2
+:
+: Now the decision table - n states down by  m input classes across
+:         --------------
+10
+11
+: a non zero value indicates that the rule should fire
+:       zero indicates that it should not.
+:
+: Actual rules
+:        -----
+: format is: Input class	rule	    new state
+: allow \xdd for hex specification of character
+: any characters not in tables go through the system and result
+: in the state being set to 1
+:
+1	[ ]= 	-
+1	[1]=1	-
+1	[2]=2	-
+1	[3]=3	-
+1	[4]=4	-
+1	[A]=A	-
+1	[C]=C	-
+1	[D]=E	-
+1	[F]=G	-
+1	[GG]=H	-
+1	[L]!A=@	-
+1	[L]=X	-
+1	[M]#=@	-
+1	[M]=X	-
+1	[N]~=@	-
+1	[N]=X	-
+1	A![Q]=@	-
+1	[Q]=X	-
+1	#[R]=@	-
+1	[R]=X	-
+1	~[S]=@	-
+1	[S]=X	-
+2	[T]=U	-
+1	[T]=T	-
+1	[V]=@	2
+1	[W]=V	1
+1	[XXXXX]=5	-
+1	[XXXX]=4	-
+1	[XXX]=3	-
+1	[XX]=2	-
+1	[X]=1	-
+1	 [Y]=@	-
+1	[Y]=X	-
+1	[Z] =@	-
+1	[Z]=X	-
+#  End of tables
