@@ -54,6 +54,7 @@ import javax.swing.JToggleButton;
 
 class MyCustomFilter extends javax.swing.filechooser.FileFilter {
 
+    //this is a test
     @Override
     public boolean accept(File file) {
         return file.isDirectory() || file.getAbsolutePath().endsWith(".svg");
@@ -4344,7 +4345,7 @@ public class MainClass extends javax.swing.JFrame {
                 .addComponent(txtbutton)
                 .addGap(0, 80, Short.MAX_VALUE))
                 .addComponent(txtbx, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, (height - taskBarHeight) - 1037, Short.MAX_VALUE)));
+                .addGap(0, (height - taskBarHeight) - 500, Short.MAX_VALUE)));
 
         // </editor-fold>
 
