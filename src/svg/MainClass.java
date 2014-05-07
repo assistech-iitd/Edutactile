@@ -9,7 +9,6 @@ import com.kitfox.svg.SVGException;
 import com.kitfox.svg.SVGUniverse;
 import com.kitfox.svg.Tspan;
 import com.kitfox.svg.app.beans.SVGIcon;
-import com.kitfox.svg.xml.StyleAttribute;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -54,7 +53,6 @@ import javax.swing.JToggleButton;
 
 class MyCustomFilter extends javax.swing.filechooser.FileFilter {
 
-    //this is a test
     @Override
     public boolean accept(File file) {
         return file.isDirectory() || file.getAbsolutePath().endsWith(".svg");
@@ -858,7 +856,7 @@ class IconPanel extends JPanel {
             double x = root.getPresAbsolute("x").getDoubleValue();
             double y = root.getPresAbsolute("y").getDoubleValue();
 
-            double value = root.getParent().getStyleAbsolute("font-size").getDoubleValue();
+            double valuea = 25.0;
 
             Shape aalo = new Shape();
             aalo.type = "Text";
@@ -866,16 +864,16 @@ class IconPanel extends JPanel {
             aalo.texty = y;
             aalo.text = s;
 
-            aalo.font = value;
-            aalo.font2 = value;
+            aalo.font = valuea;
+            aalo.font2 = valuea;
 
             aalo.textx2 = x;
             aalo.texty2 = y;
 
             aalo.minx = x;
             aalo.miny = y;
-            aalo.maxx = x + ((s.length()) * value);
-            aalo.maxy = y + (value);
+            aalo.maxx = x + ((s.length()) * valuea);
+            aalo.maxy = y + (valuea);
 
             converted.add(aalo);
 
@@ -892,6 +890,8 @@ class IconPanel extends JPanel {
             PathType reserve = null;
             Coordinate r1 = null;
             String first = null, second = null;
+
+            //<editor-fold defaultstate="collapsed" desc="State Machine">
 
             while (love.length() != 0) {
 
@@ -914,6 +914,12 @@ class IconPanel extends JPanel {
                             char chor = love.charAt(0);
                             love = love.substring(1, love.length());
                             state = 1;
+                            reserve = new PathType();
+                            reserve.Type = chor;
+                        } else if (love.charAt(0) == ('c') || love.charAt(0) == ('C')) {
+                            char chor = love.charAt(0);
+                            love = love.substring(1, love.length());
+                            state = 5;
                             reserve = new PathType();
                             reserve.Type = chor;
                         }
@@ -962,16 +968,319 @@ class IconPanel extends JPanel {
                             r1.y = Double.parseDouble(second);
                             reserve.single = r1;
                             aalo.path.add(reserve);
-                        } else if (love.charAt(0) == ('0') || love.charAt(0) == ('1') || love.charAt(0) == ('2') || love.charAt(0) == ('.') || love.charAt(0) == ('3') || love.charAt(0) == ('4') || love.charAt(0) == ('5') || love.charAt(0) == ('6') || love.charAt(0) == ('7') || love.charAt(0) == ('8') || love.charAt(0) == ('9')) {
+                        } else if (love.charAt(0) == ('z') || love.charAt(0) == ('Z')) {
+
+                            char chor = love.charAt(0);
+
+                            love = love.substring(1, love.length());
+                            state = 0;
+                            r1.y = Double.parseDouble(second);
+                            reserve.single = r1;
+                            aalo.path.add(reserve);
+
+                            reserve = new PathType();
+                            reserve.Type = chor;
+                            aalo.path.add(reserve);
+
+                        } else if (love.charAt(0) == ('c') || love.charAt(0) == ('C')) {
+
                             char chor = love.charAt(0);
                             love = love.substring(1, love.length());
+                            state = 5;
+
+                            r1.y = Double.parseDouble(second);
+                            reserve.single = r1;
+                            aalo.path.add(reserve);
+
+                            reserve = new PathType();
+                            reserve.Type = chor;
+
+                        } else if (love.charAt(0) == ('0') || love.charAt(0) == ('1') || love.charAt(0) == ('2') || love.charAt(0) == ('.') || love.charAt(0) == ('3') || love.charAt(0) == ('4') || love.charAt(0) == ('5') || love.charAt(0) == ('6') || love.charAt(0) == ('7') || love.charAt(0) == ('8') || love.charAt(0) == ('9')) {
+                            char chor = love.charAt(0);
                             second = second + chor;
+                            if (love.length() == 1) {
+                                r1.y = Double.parseDouble(second);
+                                reserve.single = r1;
+                                aalo.path.add(reserve);
+                            }
+                            love = love.substring(1, love.length());
                         }
                         break;
 
+                    case 5:
+                        if (love.charAt(0) == (' ')) {
+                            love = love.substring(1, love.length());
+                        } else if (love.charAt(0) == ('0') || love.charAt(0) == ('1') || love.charAt(0) == ('-') || love.charAt(0) == ('2') || love.charAt(0) == ('3') || love.charAt(0) == ('4') || love.charAt(0) == ('5') || love.charAt(0) == ('6') || love.charAt(0) == ('7') || love.charAt(0) == ('8') || love.charAt(0) == ('9')) {
+                            char chor = love.charAt(0);
+                            love = love.substring(1, love.length());
+                            state = 6;
+                            first = "";
+                            first = first + chor;
+                        }
+                        break;
+
+                    case 6:
+                        if (love.charAt(0) == (' ') || love.charAt(0) == (',')) {
+                            love = love.substring(1, love.length());
+                            state = 7;
+                            r1.x = (Double.parseDouble(first));
+                        } else if (love.charAt(0) == ('0') || love.charAt(0) == ('1') || love.charAt(0) == ('2') || love.charAt(0) == ('3') || love.charAt(0) == ('.') || love.charAt(0) == ('4') || love.charAt(0) == ('5') || love.charAt(0) == ('6') || love.charAt(0) == ('7') || love.charAt(0) == ('8') || love.charAt(0) == ('9')) {
+                            char chor = love.charAt(0);
+                            love = love.substring(1, love.length());
+                            first = first + chor;
+                        }
+                        break;
+
+                    case 7:
+                        if (love.charAt(0) == (' ')) {
+                            love = love.substring(1, love.length());
+                        } else if (love.charAt(0) == ('0') || love.charAt(0) == ('1') || love.charAt(0) == ('-') || love.charAt(0) == ('2') || love.charAt(0) == ('3') || love.charAt(0) == ('4') || love.charAt(0) == ('5') || love.charAt(0) == ('6') || love.charAt(0) == ('7') || love.charAt(0) == ('8') || love.charAt(0) == ('9')) {
+                            char chor = love.charAt(0);
+                            state = 8;
+                            second = "";
+                            second = second + chor;
+
+                            if (love.length() == 1) {
+                                r1.y = Double.parseDouble(second);
+                                reserve.multi.add(r1);
+                                aalo.path.add(reserve);
+                            }
+
+                            love = love.substring(1, love.length());
+                        }
+                        break;
+
+                    case 8:
+                        if (love.charAt(0) == (' ')) {
+                            love = love.substring(1, love.length());
+                            state = 9;
+                            r1.y = Double.parseDouble(second);
+                            reserve.multi.add(r1);
+                        } else if (love.charAt(0) == ('z') || love.charAt(0) == ('Z')) {
+
+                            char chor = love.charAt(0);
+                            love = love.substring(1, love.length());
+                            state = 0;
+                            
+                            r1.y = Double.parseDouble(second);
+                            reserve.multi.add(r1);
+                            aalo.path.add(reserve);
+
+                            reserve = new PathType();
+                            reserve.Type = chor;
+                            aalo.path.add(reserve);
+
+                        } else if (love.charAt(0) == ('0') || love.charAt(0) == ('1') || love.charAt(0) == ('2') || love.charAt(0) == ('.') || love.charAt(0) == ('3') || love.charAt(0) == ('4') || love.charAt(0) == ('5') || love.charAt(0) == ('6') || love.charAt(0) == ('7') || love.charAt(0) == ('8') || love.charAt(0) == ('9')) {
+                            char chor = love.charAt(0);
+                            second = second + chor;
+                            if (love.length() == 1) {
+                                r1.y = Double.parseDouble(second);
+                                reserve.multi.add(r1);
+                                aalo.path.add(reserve);
+                            }
+                            love = love.substring(1, love.length());
+                        }
+                        break;
+
+                    case 9:
+                        r1 = new Coordinate();
+                        if (love.charAt(0) == (' ')) {
+                            if (love.length() == 1) {
+                                aalo.path.add(reserve);
+                            }
+                            love = love.substring(1, love.length());
+                        } else if (love.charAt(0) == ('z') || love.charAt(0) == ('Z')) {
+                            char chor = love.charAt(0);
+                            love = love.substring(1, love.length());
+                            state = 0;
+                            aalo.path.add(reserve);
+                            reserve = new PathType();
+                            reserve.Type = chor;
+                            aalo.path.add(reserve);
+                        } else if (love.charAt(0) == ('m') || love.charAt(0) == ('M') || love.charAt(0) == ('L') || love.charAt(0) == ('l')) {
+                            char chor = love.charAt(0);
+                            love = love.substring(1, love.length());
+                            state = 1;
+                            aalo.path.add(reserve);
+                            reserve = new PathType();
+                            reserve.Type = chor;
+                        } else if (love.charAt(0) == ('c') || love.charAt(0) == ('C')) {
+                            char chor = love.charAt(0);
+                            love = love.substring(1, love.length());
+                            state = 5;
+                            aalo.path.add(reserve);
+                            reserve = new PathType();
+                            reserve.Type = chor;
+                        } else if (love.charAt(0) == ('0') || love.charAt(0) == ('1') || love.charAt(0) == ('-') || love.charAt(0) == ('2') || love.charAt(0) == ('3') || love.charAt(0) == ('4') || love.charAt(0) == ('5') || love.charAt(0) == ('6') || love.charAt(0) == ('7') || love.charAt(0) == ('8') || love.charAt(0) == ('9')) {
+                            char chor = love.charAt(0);
+                            love = love.substring(1, love.length());
+                            state = 6;
+                            first = "";
+                            first = first + chor;
+                        }
+                        break;
 
                 }
             }
+            //</editor-fold>
+
+            // <editor-fold defaultstate="collapsed" desc="Bounding the path">
+            Coordinate current = new Coordinate();
+            current.x = 0;
+            current.y = 0;
+            aalo.minx = Double.POSITIVE_INFINITY;
+            aalo.miny = Double.POSITIVE_INFINITY;
+            aalo.maxx = 0;
+            aalo.maxy = 0;
+
+            for (int i = 0; i < aalo.path.size(); i++) {
+
+                if (i == 0) {
+
+                    if (aalo.minx > aalo.path.get(i).single.x) {
+                        aalo.minx = aalo.path.get(i).single.x;
+                    }
+                    if (aalo.miny > aalo.path.get(i).single.y) {
+                        aalo.miny = aalo.path.get(i).single.y;
+                    }
+                    if (aalo.maxx < aalo.path.get(i).single.x) {
+                        aalo.maxx = aalo.path.get(i).single.x;
+                    }
+                    if (aalo.maxy < aalo.path.get(i).single.y) {
+                        aalo.maxy = aalo.path.get(i).single.y;
+                    }
+
+                    current.x = aalo.path.get(i).single.x;
+                    current.y = aalo.path.get(i).single.y;
+
+                } else {
+
+                    if (aalo.path.get(i).Type == 'm') {
+
+                        if (aalo.minx > current.x + aalo.path.get(i).single.x) {
+                            aalo.minx = current.x + aalo.path.get(i).single.x;
+                        }
+                        if (aalo.miny > current.y + aalo.path.get(i).single.y) {
+                            aalo.miny = current.y + aalo.path.get(i).single.y;
+                        }
+                        if (aalo.maxx < current.x + aalo.path.get(i).single.x) {
+                            aalo.maxx = current.x + aalo.path.get(i).single.x;
+                        }
+                        if (aalo.maxy < current.y + aalo.path.get(i).single.y) {
+                            aalo.maxy = current.y + aalo.path.get(i).single.y;
+                        }
+
+                        current.x = aalo.path.get(i).single.x;
+                        current.y = aalo.path.get(i).single.y;
+
+                    } else if (aalo.path.get(i).Type == 'M') {
+
+                        if (aalo.minx > aalo.path.get(i).single.x) {
+                            aalo.minx = aalo.path.get(i).single.x;
+                        }
+                        if (aalo.miny > aalo.path.get(i).single.y) {
+                            aalo.miny = aalo.path.get(i).single.y;
+                        }
+                        if (aalo.maxx < aalo.path.get(i).single.x) {
+                            aalo.maxx = aalo.path.get(i).single.x;
+                        }
+                        if (aalo.maxy < aalo.path.get(i).single.y) {
+                            aalo.maxy = aalo.path.get(i).single.y;
+                        }
+
+                        current.x = aalo.path.get(i).single.x;
+                        current.y = aalo.path.get(i).single.y;
+
+                    } else if (aalo.path.get(i).Type == 'l') {
+
+                        if (aalo.minx > current.x + aalo.path.get(i).single.x) {
+                            aalo.minx = current.x + aalo.path.get(i).single.x;
+                        }
+                        if (aalo.miny > current.y + aalo.path.get(i).single.y) {
+                            aalo.miny = current.y + aalo.path.get(i).single.y;
+                        }
+                        if (aalo.maxx < current.x + aalo.path.get(i).single.x) {
+                            aalo.maxx = current.x + aalo.path.get(i).single.x;
+                        }
+                        if (aalo.maxy < current.y + aalo.path.get(i).single.y) {
+                            aalo.maxy = current.y + aalo.path.get(i).single.y;
+                        }
+
+                        current.x = aalo.path.get(i).single.x;
+                        current.y = aalo.path.get(i).single.y;
+
+                    } else if (aalo.path.get(i).Type == 'L') {
+
+                        if (aalo.minx > aalo.path.get(i).single.x) {
+                            aalo.minx = aalo.path.get(i).single.x;
+                        }
+                        if (aalo.miny > aalo.path.get(i).single.y) {
+                            aalo.miny = aalo.path.get(i).single.y;
+                        }
+                        if (aalo.maxx < aalo.path.get(i).single.x) {
+                            aalo.maxx = aalo.path.get(i).single.x;
+                        }
+                        if (aalo.maxy < aalo.path.get(i).single.y) {
+                            aalo.maxy = aalo.path.get(i).single.y;
+                        }
+
+                        current.x = aalo.path.get(i).single.x;
+                        current.y = aalo.path.get(i).single.y;
+
+                    } else if (aalo.path.get(i).Type == 'c') {
+
+                        for (int a = 0; a < aalo.path.get(i).multi.size(); a++) {
+
+                            if (aalo.minx > current.x + aalo.path.get(i).multi.get(a).x) {
+                                aalo.minx = current.x + aalo.path.get(i).multi.get(a).x;
+                            }
+                            if (aalo.miny > current.y + aalo.path.get(i).multi.get(a).y) {
+                                aalo.miny = current.y + aalo.path.get(i).multi.get(a).y;
+                            }
+                            if (aalo.maxx < current.x + aalo.path.get(i).multi.get(a).x) {
+                                aalo.maxx = current.x + aalo.path.get(i).multi.get(a).x;
+                            }
+                            if (aalo.maxy < current.y + aalo.path.get(i).multi.get(a).y) {
+                                aalo.maxy = current.y + aalo.path.get(i).multi.get(a).y;
+                            }
+
+                            if (a % 3 == 2) {
+                                current.x = current.x + aalo.path.get(i).multi.get(a).x;
+                                current.y = current.y + aalo.path.get(i).multi.get(a).y;
+                            }
+
+                        }
+
+                    } else if (aalo.path.get(i).Type == 'C') {
+
+                        for (int a = 0; a < aalo.path.get(i).multi.size(); a++) {
+
+                            if (aalo.minx > aalo.path.get(i).multi.get(a).x) {
+                                aalo.minx = aalo.path.get(i).multi.get(a).x;
+                            }
+                            if (aalo.miny > aalo.path.get(i).multi.get(a).y) {
+                                aalo.miny = aalo.path.get(i).multi.get(a).y;
+                            }
+                            if (aalo.maxx < aalo.path.get(i).multi.get(a).x) {
+                                aalo.maxx = aalo.path.get(i).multi.get(a).x;
+                            }
+                            if (aalo.maxy < aalo.path.get(i).multi.get(a).y) {
+                                aalo.maxy = aalo.path.get(i).multi.get(a).y;
+                            }
+
+                            if (a % 3 == 2) {
+                                current.x = aalo.path.get(i).multi.get(a).x;
+                                current.y = aalo.path.get(i).multi.get(a).y;
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+            // </editor-fold>
 
             converted.add(aalo);
 
@@ -1078,55 +1387,61 @@ class IconPanel extends JPanel {
 
         // <editor-fold defaultstate="collapsed" desc="Applying the Scaling">
 
-        System.out.println(is);
-
         for (int iki = 0; iki < is; iki++) {
 
             Shape l = converted.get(iki);
 
             if (l.type.equals("Rect")) {
 
+                //Parameters for displaying a rectangle
                 l.recheight = l.recheight * scaling;
                 l.recwidth = l.recwidth * scaling;
-                l.recx = l.recx * scaling + xshift;
-                l.recy = l.recy * scaling + yshift;
+                l.recx = (l.recx - (minx - 10)) * scaling + xshift;
+                l.recy = (l.recy - (miny - 10)) * scaling + yshift;
 
+                //Parameters for printing a rectangle
                 l.recheight2 = l.recheight2 * scaling2;
                 l.recwidth2 = l.recwidth2 * scaling2;
-                l.recx2 = l.recx2 * scaling2 + xshift2;
-                l.recy2 = l.recy2 * scaling2 + yshift2;
+                l.recx2 = (l.recx2 - (minx - 10)) * scaling2 + xshift2;
+                l.recy2 = (l.recy2 - (miny - 10)) * scaling2 + yshift2;
+
             } else if (l.type.equals("Circ")) {
 
+                //Parameters for displaying a circle
                 l.circr = l.circr * scaling;
-                l.circx = l.circx * scaling + xshift;
-                l.circy = l.circy * scaling + yshift;
+                l.circx = (l.circx - (minx - 10)) * scaling + xshift;
+                l.circy = (l.circy - (miny - 10)) * scaling + yshift;
 
+                //Parameters for printing a circle
                 l.circr2 = l.circr2 * scaling2;
-                l.circx2 = l.circx2 * scaling2 + xshift2;
-                l.circy2 = l.circy2 * scaling2 + yshift2;
+                l.circx2 = (l.circx2 - (minx - 10)) * scaling2 + xshift2;
+                l.circy2 = (l.circy2 - (miny - 10)) * scaling2 + yshift2;
 
             } else if (l.type.equals("Text")) {
 
-                l.textx = l.textx * scaling + xshift;
-                l.texty = l.texty * scaling + yshift;
+                //Parameters for displaying text
+                l.textx = (l.textx - (minx - 10)) * scaling + xshift;
+                l.texty = (l.texty - (miny - 10)) * scaling + yshift;
+                l.font = l.font;
 
-                l.font = l.font * scaling;
-                l.font2 = l.font2 * scaling2;
-
-                l.textx2 = l.textx2 * scaling2 + xshift2;
-                l.texty2 = l.texty2 * scaling2 + yshift2;
+                //Parameters for printing text
+                l.textx2 = (l.textx2 - (minx - 10)) * scaling2 + xshift2;
+                l.texty2 = (l.texty2 - (miny - 10)) * scaling2 + yshift2;
+                l.font2 = l.font2;
 
             } else if (l.type.equals("Line")) {
 
-                l.linx = l.linx * scaling + xshift;
-                l.liny = l.liny * scaling + yshift;
-                l.linxa = l.linxa * scaling + xshift;
-                l.linya = l.linya * scaling + yshift;
+                //Parameters for displaying a line
+                l.linx = (l.linx - (minx - 10)) * scaling + xshift;
+                l.liny = (l.liny - (miny - 10)) * scaling + yshift;
+                l.linxa = (l.linxa - (minx - 10)) * scaling + xshift;
+                l.linya = (l.linya - (miny - 10)) * scaling + yshift;
 
-                l.linx2 = l.linx2 * scaling2 + xshift2;
-                l.liny2 = l.liny2 * scaling2 + yshift2;
-                l.linxa2 = l.linxa2 * scaling2 + xshift2;
-                l.linya2 = l.linya2 * scaling2 + yshift2;
+                //Parameters for printing a line
+                l.linx2 = (l.linx2 - (minx - 10)) * scaling2 + xshift2;
+                l.liny2 = (l.liny2 - (miny - 10)) * scaling2 + yshift2;
+                l.linxa2 = (l.linxa2 - (minx - 10)) * scaling2 + xshift2;
+                l.linya2 = (l.linya2 - (miny - 10)) * scaling2 + yshift2;
 
             } else if (l.type.equals("Path")) {
 
@@ -1134,17 +1449,32 @@ class IconPanel extends JPanel {
 
                 for (int i = 0; i < okok; i++) {
 
+                    /* System.out.println(l.path.get(i).Type + " " + l.path.get(i).single.x + " " + l.path.get(i).single.y);
+                    
+                     for(int a = 0; a<l.path.get(i).multi.size();a++){
+                     System.out.println("X "+l.path.get(i).multi.get(a).x);
+                     System.out.println("Y "+l.path.get(i).multi.get(a).y);
+                     }*/
+
                     if ((l.path.get(i).Type) == ('m') || (l.path.get(i).Type) == ('l')) {
 
 
                         if (i == 0) {
-                            l.path.get(i).single2.x = l.path.get(i).single.x * scaling2 + xshift2;
-                            l.path.get(i).single2.y = l.path.get(i).single.y * scaling2 + yshift2;
-                            l.path.get(i).single.x = l.path.get(i).single.x * scaling + xshift;
-                            l.path.get(i).single.y = l.path.get(i).single.y * scaling + yshift;
+
+                            //For printing a path
+                            l.path.get(i).single2.x = (l.path.get(i).single2.x - (minx - 10)) * scaling2 + xshift2;
+                            l.path.get(i).single2.y = (l.path.get(i).single2.y - (miny - 10)) * scaling2 + yshift2;
+
+                            //For displaying a path
+                            l.path.get(i).single.x = (l.path.get(i).single.x - (minx - 10)) * scaling + xshift;
+                            l.path.get(i).single.y = (l.path.get(i).single.y - (miny - 10)) * scaling + yshift;
                         } else {
-                            l.path.get(i).single2.x = l.path.get(i).single.x * scaling2;
-                            l.path.get(i).single2.y = l.path.get(i).single.y * scaling2;
+
+                            //For printing a path
+                            l.path.get(i).single2.x = l.path.get(i).single2.x * scaling2;
+                            l.path.get(i).single2.y = l.path.get(i).single2.y * scaling2;
+
+                            //For displaying a path
                             l.path.get(i).single.x = l.path.get(i).single.x * scaling;
                             l.path.get(i).single.y = l.path.get(i).single.y * scaling;
                         }
@@ -1154,10 +1484,37 @@ class IconPanel extends JPanel {
 
                     if ((l.path.get(i).Type) == ('M') || (l.path.get(i).Type) == ('L')) {
 
-                        l.path.get(i).single2.x = l.path.get(i).single.x * scaling2 + xshift2;
-                        l.path.get(i).single2.y = l.path.get(i).single.y * scaling2 + yshift2;
-                        l.path.get(i).single.x = l.path.get(i).single.x * scaling + xshift;
-                        l.path.get(i).single.y = l.path.get(i).single.y * scaling + yshift;
+                        //For printing a path
+                        l.path.get(i).single2.x = (l.path.get(i).single2.x - (minx - 10)) * scaling2 + xshift2;
+                        l.path.get(i).single2.y = (l.path.get(i).single2.y - (miny - 10)) * scaling2 + yshift2;
+
+                        //For displaying a path
+                        l.path.get(i).single.x = (l.path.get(i).single.x - (minx - 10)) * scaling + xshift;
+                        l.path.get(i).single.y = (l.path.get(i).single.y - (miny - 10)) * scaling + yshift;
+
+                    };
+
+                    if ((l.path.get(i).Type) == 'C') {
+
+                        for (int a = 0; a < l.path.get(i).multi.size(); a++) {
+
+                            //For displaying a path
+                            l.path.get(i).multi.get(a).x = (l.path.get(i).multi.get(a).x - (minx - 10)) * scaling + xshift;
+                            l.path.get(i).multi.get(a).y = (l.path.get(i).multi.get(a).y - (miny - 10)) * scaling + yshift;
+
+                        }
+
+                    };
+
+                    if ((l.path.get(i).Type) == 'c') {
+
+                        for (int a = 0; a < l.path.get(i).multi.size(); a++) {
+
+                            //For displaying a path
+                            l.path.get(i).multi.get(a).x = (l.path.get(i).multi.get(a).x) * scaling;
+                            l.path.get(i).multi.get(a).y = (l.path.get(i).multi.get(a).y) * scaling;
+
+                        }
 
                     };
                 }
@@ -1240,6 +1597,39 @@ class IconPanel extends JPanel {
                             current.x = l.path.get(i).single.x;
                             current.y = l.path.get(i).single.y;
 
+                        } else if (l.path.get(i).Type == 'c') {
+
+                            for (int a = 0; a < l.path.get(i).multi.size(); a = a + 3) {
+
+                                double x1 = current.x + l.path.get(i).multi.get(a).x;
+                                double y1 = current.y + l.path.get(i).multi.get(a).y;
+                                double x2 = current.x + l.path.get(i).multi.get(a + 1).x;
+                                double y2 = current.y + l.path.get(i).multi.get(a + 1).y;
+                                double x3 = current.x + l.path.get(i).multi.get(a + 2).x;
+                                double y3 = current.y + l.path.get(i).multi.get(a + 2).y;
+
+                                polyline.curveTo(x1, y1, x2, y2, x3, y3);
+                                current.x = x3;
+                                current.y = y3;
+                            }
+
+                        } else if (l.path.get(i).Type == 'C') {
+
+                            for (int a = 0; a < l.path.get(i).multi.size(); a = a + 3) {
+
+                                double x1 = l.path.get(i).multi.get(a).x;
+                                double y1 = l.path.get(i).multi.get(a).y;
+                                double x2 = l.path.get(i).multi.get(a + 1).x;
+                                double y2 = l.path.get(i).multi.get(a + 1).y;
+                                double x3 = l.path.get(i).multi.get(a + 2).x;
+                                double y3 = l.path.get(i).multi.get(a + 2).y;
+
+                                polyline.curveTo(x1, y1, x2, y2, x3, y3);
+                                current.x = x3;
+                                current.y = y3;
+
+                            }
+
                         } else if (l.path.get(i).Type == 'z') {
 
                             polyline.closePath();
@@ -1247,7 +1637,6 @@ class IconPanel extends JPanel {
                         } else if (l.path.get(i).Type == 'Z') {
 
                             polyline.closePath();
-                            System.out.println("Z");
                         }
 
 
@@ -1259,7 +1648,7 @@ class IconPanel extends JPanel {
                 g2d.draw(polyline);
 
 
-               
+
             }
         }
 
@@ -1292,109 +1681,109 @@ public class MainClass extends javax.swing.JFrame {
         SaveAs = new javax.swing.JMenuItem();
 
         fileChooser.setControlButtonsAreShown(false);
-        fileChooser.setCurrentDirectory(new java.io.File("C:\\Users\\Mrinal\\Downloads"));
+        fileChooser.setCurrentDirectory(new java.io.File("C:\\Users\\Mrinal\\Documents\\Academics\\MTP"));
         fileChooser.setFileFilter(abc);
 
         fileChooser2.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
-        fileChooser2.setCurrentDirectory(new java.io.File("C:\\"));
-            fileChooser2.setFileFilter(abc);
+        fileChooser2.setCurrentDirectory(new java.io.File("C:\\Users\\Mrinal\\Documents\\Academics\\MTP"));
+        fileChooser2.setFileFilter(abc);
 
-            setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-            setTitle("MrinalMTP");
-            setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("MrinalMTP");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-            toolbar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-            toolbar.setFloatable(false);
-            toolbar.setRollover(true);
+        toolbar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        toolbar.setFloatable(false);
+        toolbar.setRollover(true);
 
-            Grp.add(diag);
-            diag.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svg/resources/rsz_square-dashed-512.png"))); // NOI18N
-            diag.setText("Diagram Conversion");
-            diag.setBorder(null);
-            diag.setFocusable(false);
-            diag.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-            diag.setMaximumSize(new java.awt.Dimension(140, 80));
-            diag.setMinimumSize(new java.awt.Dimension(140, 80));
-            diag.setPreferredSize(new java.awt.Dimension(140, 80));
-            diag.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-            diag.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    diagActionPerformed(evt);
-                }
-            });
-            toolbar.add(diag);
+        Grp.add(diag);
+        diag.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svg/resources/rsz_square-dashed-512.png"))); // NOI18N
+        diag.setText("Diagram Conversion");
+        diag.setBorder(null);
+        diag.setFocusable(false);
+        diag.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        diag.setMaximumSize(new java.awt.Dimension(140, 80));
+        diag.setMinimumSize(new java.awt.Dimension(140, 80));
+        diag.setPreferredSize(new java.awt.Dimension(140, 80));
+        diag.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        diag.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                diagActionPerformed(evt);
+            }
+        });
+        toolbar.add(diag);
 
-            Grp.add(chem);
-            chem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svg/resources/rsz_1tumblr_m4c9wrrklq1rw1p5qo1_1280.png"))); // NOI18N
-            chem.setText("Chemical Equation");
-            chem.setBorder(null);
-            chem.setFocusable(false);
-            chem.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-            chem.setMaximumSize(new java.awt.Dimension(140, 80));
-            chem.setMinimumSize(new java.awt.Dimension(140, 80));
-            chem.setPreferredSize(new java.awt.Dimension(140, 80));
-            chem.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-            chem.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    chemActionPerformed(evt);
-                }
-            });
-            toolbar.add(chem);
+        Grp.add(chem);
+        chem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svg/resources/rsz_1tumblr_m4c9wrrklq1rw1p5qo1_1280.png"))); // NOI18N
+        chem.setText("Chemical Equation");
+        chem.setBorder(null);
+        chem.setFocusable(false);
+        chem.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        chem.setMaximumSize(new java.awt.Dimension(140, 80));
+        chem.setMinimumSize(new java.awt.Dimension(140, 80));
+        chem.setPreferredSize(new java.awt.Dimension(140, 80));
+        chem.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        chem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chemActionPerformed(evt);
+            }
+        });
+        toolbar.add(chem);
 
-            Grp.add(function);
-            function.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svg/resources/rsz_1picture1.png"))); // NOI18N
-            function.setText("Function");
-            function.setBorder(null);
-            function.setFocusable(false);
-            function.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-            function.setMaximumSize(new java.awt.Dimension(140, 80));
-            function.setMinimumSize(new java.awt.Dimension(140, 80));
-            function.setPreferredSize(new java.awt.Dimension(140, 80));
-            function.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-            function.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    functionActionPerformed(evt);
-                }
-            });
-            toolbar.add(function);
+        Grp.add(function);
+        function.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svg/resources/rsz_1picture1.png"))); // NOI18N
+        function.setText("Function");
+        function.setBorder(null);
+        function.setFocusable(false);
+        function.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        function.setMaximumSize(new java.awt.Dimension(140, 80));
+        function.setMinimumSize(new java.awt.Dimension(140, 80));
+        function.setPreferredSize(new java.awt.Dimension(140, 80));
+        function.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        function.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                functionActionPerformed(evt);
+            }
+        });
+        toolbar.add(function);
 
-            jMenu1.setText("File");
+        jMenu1.setText("File");
 
-            Save.setText("Save");
-            Save.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    SaveActionPerformed(evt);
-                }
-            });
-            jMenu1.add(Save);
+        Save.setText("Save");
+        Save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveActionPerformed(evt);
+            }
+        });
+        jMenu1.add(Save);
 
-            SaveAs.setText("Save As...");
-            SaveAs.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    SaveAsActionPerformed(evt);
-                }
-            });
-            jMenu1.add(SaveAs);
+        SaveAs.setText("Save As...");
+        SaveAs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveAsActionPerformed(evt);
+            }
+        });
+        jMenu1.add(SaveAs);
 
-            menu.add(jMenu1);
+        menu.add(jMenu1);
 
-            setJMenuBar(menu);
+        setJMenuBar(menu);
 
-            javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-            getContentPane().setLayout(layout);
-            layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(toolbar, javax.swing.GroupLayout.DEFAULT_SIZE, 1019, Short.MAX_VALUE)
-            );
-            layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(toolbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 359, Short.MAX_VALUE))
-            );
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(toolbar, javax.swing.GroupLayout.DEFAULT_SIZE, 1019, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(toolbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 359, Short.MAX_VALUE))
+        );
 
-            pack();
-        }// </editor-fold>//GEN-END:initComponents
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
     // <editor-fold defaultstate="collapsed" desc="Actions Performed">
     // <editor-fold defaultstate="collapsed" desc="Menu Actions Performed">
@@ -1851,22 +2240,17 @@ public class MainClass extends javax.swing.JFrame {
                 else if (panel.value == 1) {
 
                     int is = panel.converted.size();
-                    System.out.println(is);
                     for (int iki = 0; iki < is; iki++) {
 
                         Shape l = panel.converted.get(iki);
-                        System.out.println(l.type);
 
                         if (l.type.equals("Rect")) {
-                            System.out.println(l.recx2 + " " + l.recy2);
                             outf.write("    <polyline points=\"" + l.recx2 + " " + l.recy2 + " " + (l.recx2 + l.recwidth2) + " " + l.recy2 + " " + (l.recx2 + l.recwidth2) + " " + (l.recy2 + l.recheight2) + " " + l.recx2 + " " + (l.recy2 + l.recheight2) + " " + l.recx2 + " " + l.recy2 + "\" style=\"stroke:black\"/>\n");
 
                         } else if (l.type.equals("Line")) {
-                            System.out.println(l.linx2 + " " + l.liny2);
                             outf.write("    <polyline points=\"" + l.linx2 + " " + l.liny2 + " " + l.linxa2 + " " + l.linya2 + "\" style=\"stroke:black\"/>\n");
 
                         } else if (l.type.equals("Circ")) {
-                            System.out.println(l.circx2);
 
                             outf.write("    <circle cx=\"" + l.circx2 + "\" cy=\"" + l.circy2 + "\" r=\"" + l.circr2 + "\" style=\"stroke:black\"/>\n");
 
@@ -4345,7 +4729,7 @@ public class MainClass extends javax.swing.JFrame {
                 .addComponent(txtbutton)
                 .addGap(0, 80, Short.MAX_VALUE))
                 .addComponent(txtbx, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, (height - taskBarHeight) - 500, Short.MAX_VALUE)));
+                .addGap(0, (height - taskBarHeight) - 1037, Short.MAX_VALUE)));
 
         // </editor-fold>
 
