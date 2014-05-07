@@ -66,7 +66,6 @@ class MyCustomFilter extends javax.swing.filechooser.FileFilter {
 
 class IconPanel extends JPanel {
 
-    SVGIcon icon, icon2, icon3, icon4;
     File f = null;
     int value = 0;
     int mode = 0;
@@ -112,10 +111,6 @@ class IconPanel extends JPanel {
         fnam = name;
     }
 
-    public void setVal(int val) {
-        value = val;
-    }
-
     @Override
     public void paintComponent(Graphics g) {
 
@@ -153,85 +148,18 @@ class IconPanel extends JPanel {
 
             }
         }
-
-        if (value == 1) {
-            StringReader reader2 = new StringReader(makeOpenSVG());
-            URI uri;
-
-            if (f != null) {
-                uri = SVGCache.getSVGUniverse().loadSVG(reader2, "myIma" + f.getName() + txt);
-            } else {
-                uri = SVGCache.getSVGUniverse().loadSVG(reader2, "myIma" + txt);
-            }
-            icon3 = new SVGIcon();
-            icon3.setSvgURI(uri);
-            icon3.paintIcon(this, g, 0, 0);
-
-            if (f != null) {
-
-                try {
-                    SVGUniverse svgUniverse = new SVGUniverse();
-                    SVGDiagram diagram = svgUniverse.getDiagram(svgUniverse.loadSVG(f.toURI().toURL()));
-                    SVGElement root = diagram.getRoot();
-
-
-                    converter(root);
-                    scaling();
-                    aslipaint(g2d);
-
-
-                } catch (MalformedURLException ex) {
-                    Logger.getLogger(IconPanel.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SVGElementException ex) {
-                    Logger.getLogger(IconPanel.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SVGException ex) {
-                    Logger.getLogger(IconPanel.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            }
-
-
-        }
-
-
-        if (value == 2) {
-
-
-            if (orientation == 1) {
-                StringReader reader2 = new StringReader(makeDynamicSVG());
-                String uuid = UUID.randomUUID().toString();
-                URI uri = SVGCache.getSVGUniverse().loadSVG(reader2, "myIma" + uuid);
-                icon3 = new SVGIcon();
-                icon3.setSvgURI(uri);
-                icon3.paintIcon(this, g, 0, 0);
-            } else if (orientation == 2) {
-                StringReader reader2 = new StringReader(makeDynamicSVG2());
-                URI uri = SVGCache.getSVGUniverse().loadSVG(reader2, "myIman");
-                icon3 = new SVGIcon();
-                icon3.setSvgURI(uri);
-                icon3.paintIcon(this, g, 0, 0);
-            }
-
-        }
-
-
-        if (value == 3) {
-
-
-            if (orientation == 1) {
-                StringReader reader2 = new StringReader(makeGraphSVG());
-                String uuid = UUID.randomUUID().toString();
-                URI uri = SVGCache.getSVGUniverse().loadSVG(reader2, "myIma" + uuid);
-                icon3 = new SVGIcon();
-                icon3.setSvgURI(uri);
-                icon3.paintIcon(this, g, 0, 0);
-            } else if (orientation == 2) {
-            }
-
+        
+        switch(value){
+            case 1: ImageConverter(g2d, f);
+                break;
+            case 2: ChemicalEquation(g2d);
+                break;
+            case 3: MathFunction(g2d);
+                break;
         }
     }
 
-    private String makeGraphSVG() {
+    private void MathFunction(Graphics2D g2d) {
 
         /* try {
          translator = new LanguageUnicode("britishtobr");
@@ -240,8 +168,6 @@ class IconPanel extends JPanel {
          Logger.getLogger(IconPanel.class.getName()).log(Level.SEVERE, null, ex);
          }*/
 
-        StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw);
         double h2 = 0;
         double w1 = 0, w2 = 0, wmid = 0, wq1 = 0, wq2 = 0, we1 = 0, we2 = 0, we3 = 0, we4 = 0;
         double ratio = 0;
@@ -286,47 +212,39 @@ class IconPanel extends JPanel {
 
         }
 
-        pw.println("<svg width=\"810\" height=\"1055\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" style=\"fill:none;stroke-width:2\">\n");
-
         //Boundary + Top Right Corner Circle
 
-        pw.println("    <polyline points=\"" + w1 + " " + h1 + " " + w2 + " " + h1 + " " + w2 + " " + h2 + " " + w1 + " " + h2 + " " + w1 + " " + h1 + "\" style=\"stroke:black\"/>\n");
-        pw.println("    <circle cx=\"" + w3 + "\" cy=\"" + (h1 + 30) + "\" r=\"20\" style=\"stroke:black\"/>\n");
+        g2d.draw(new Rectangle2D.Double(w1, h1, w2 - w1, h2 - h1));
+        g2d.draw(new Ellipse2D.Double(w1 + 10, h1 + 10, 40, 40));
 
         // Text box
 
-        pw.println(" <text x=\"" + (w1 + 20) + "\" y=\"" + (h1 + 100) + "\" font-family=\"Braille\" font-size=\"25\" fill=\"black\">\n");
-        pw.println(txt1 + "\n");
-        pw.println("</text>\n");
-        pw.println(" <text x=\"" + (w1 + 20) + "\" y=\"" + (h1 + 135) + "\" font-family=\"Braille\" font-size=\"25\" fill=\"black\">\n");
-        pw.println(txt2 + "\n");
-        pw.println("</text>\n");
+        g2d.setFont(new Font("Braille", Font.PLAIN, 25));
+        g2d.drawString(txt1, (float) w1 + 20, (float) h1 + 100);
+        g2d.drawString(txt1, (float) w1 + 20, (float) h1 + 135);
 
         //Coordinate axes
-
-        pw.println("    <polyline points=\"" + (wmid) + " " + (h1 + 300) + " " + (wmid) + " " + (h1 + 800) + "\" style=\"stroke:black;stroke-width:1\"/>");
-        pw.println("    <polyline points=\"" + (wmid - 250) + " " + (h1 + 550) + " " + (wmid + 250) + " " + (h1 + 550) + "\" style=\"stroke:black;stroke-width:1\"/>");
-
-        pw.println(" <text x=\"" + (wmid + 260) + "\" y=\"" + (h1 + 560) + "\" font-family=\"Braille\" font-size=\"25\" fill=\"black\">\n");
-        pw.println("X" + "\n");
-        pw.println("</text>\n");
-
-        pw.println(" <text x=\"" + (wmid - 290) + "\" y=\"" + (h1 + 560) + "\" font-family=\"Braille\" font-size=\"25\" fill=\"black\">\n");
-        pw.println("X'" + "\n");
-        pw.println("</text>\n");
-
-        pw.println(" <text x=\"" + (wmid - 10) + "\" y=\"" + (h1 + 290) + "\" font-family=\"Braille\" font-size=\"25\" fill=\"black\">\n");
-        pw.println("Y" + "\n");
-        pw.println("</text>\n");
-
-        pw.println(" <text x=\"" + (wmid - 10) + "\" y=\"" + (h1 + 830) + "\" font-family=\"Braille\" font-size=\"25\" fill=\"black\">\n");
-        pw.println("Y'" + "\n");
-        pw.println("</text>\n");
-
-
-
+        g2d.setStroke(new BasicStroke(1));
+        g2d.draw(new Line2D.Double(wmid, h1 + 300, wmid, h1 + 800));
+        g2d.draw(new Line2D.Double(wmid - 250, h1 + 550, wmid + 250, h1 + 550));
+        g2d.drawString("X", (float) wmid + 260, (float) h1 + 560);
+        g2d.drawString("X'", (float) wmid - 290, (float) h1 + 560);
+        g2d.drawString("Y", (float) wmid - 10, (float) h1 + 290);
+        g2d.drawString("Y'", (float) wmid - 10, (float) h1 + 830);
 
         if (fun != null) {
+
+            switch (flinethickness) {
+                case 0:
+                    g2d.setStroke(new BasicStroke(1));
+                    break;
+                case 1:
+                    g2d.setStroke(new BasicStroke(2));
+                    break;
+                case 2:
+                    g2d.setStroke(new BasicStroke(3));
+                    break;
+            }
 
             if (flinetype == 0) {
                 for (double m = -250; m < 250; m = m + 1) {
@@ -335,39 +253,15 @@ class IconPanel extends JPanel {
                     vm.setValue("x", 0.04 * (m + 1));
                     double b = 25 * fun.eval(vm, fm);
 
-                    if (flinethickness == 0) {
-                        if ((a <= 250) && (b <= 250) && (a >= -250) && (b >= -250)) {
-                            pw.println("    <polyline points=\"" + (wmid + m) + " " + (h1 + 550 - a) + " " + (wmid + m + 1) + " " + (h1 + 550 - b) + "\" style=\"stroke:black;stroke-width:1\"/>");
-                        } else if ((a <= 250) && (a >= -250) && (b >= 250)) {
-                            pw.println("    <polyline points=\"" + (wmid + m) + " " + (h1 + 550 - a) + " " + (wmid + m + 1) + " " + (h1 + 300) + "\" style=\"stroke:black;stroke-width:1\"/>");
-                        } else if ((a <= -250) && (b <= 250) && (b >= -250)) {
-                            pw.println("    <polyline points=\"" + (wmid + m) + " " + (h1 + 800) + " " + (wmid + m + 1) + " " + (h1 + 550 - b) + "\" style=\"stroke:black;stroke-width:1\"/>");
-                        }
+                    if ((a <= 250) && (b <= 250) && (a >= -250) && (b >= -250)) {
+                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 - a, wmid + m + 1, h1 + 550 - b));
+                    } else if ((a <= 250) && (a >= -250) && (b >= 250)) {
+                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 - a, wmid + m + 1, h1 + 300));
+                    } else if ((a <= -250) && (b <= 250) && (b >= -250)) {
+                        g2d.draw(new Line2D.Double(wmid + m, h1 + 800, wmid + m + 1, h1 + 550 - b));
                     }
-
-                    if (flinethickness == 1) {
-                        if ((a <= 250) && (b <= 250) && (a >= -250) && (b >= -250)) {
-                            pw.println("    <polyline points=\"" + (wmid + m) + " " + (h1 + 550 - a) + " " + (wmid + m + 1) + " " + (h1 + 550 - b) + "\" style=\"stroke:black;stroke-width:2\"/>");
-                        } else if ((a <= 250) && (a >= -250) && (b >= 250)) {
-                            pw.println("    <polyline points=\"" + (wmid + m) + " " + (h1 + 550 - a) + " " + (wmid + m + 1) + " " + (h1 + 300) + "\" style=\"stroke:black;stroke-width:2\"/>");
-                        } else if ((a <= -250) && (b <= 250) && (b >= -250)) {
-                            pw.println("    <polyline points=\"" + (wmid + m) + " " + (h1 + 800) + " " + (wmid + m + 1) + " " + (h1 + 550 - b) + "\" style=\"stroke:black;stroke-width:2\"/>");
-                        }
-                    }
-
-                    if (flinethickness == 2) {
-                        if ((a <= 250) && (b <= 250) && (a >= -250) && (b >= -250)) {
-                            pw.println("    <polyline points=\"" + (wmid + m) + " " + (h1 + 550 - a) + " " + (wmid + m + 1) + " " + (h1 + 550 - b) + "\" style=\"stroke:black;stroke-width:3\"/>");
-                        } else if ((a <= 250) && (a >= -250) && (b >= 250)) {
-                            pw.println("    <polyline points=\"" + (wmid + m) + " " + (h1 + 550 - a) + " " + (wmid + m + 1) + " " + (h1 + 300) + "\" style=\"stroke:black;stroke-width:3\"/>");
-                        } else if ((a <= -250) && (b <= 250) && (b >= -250)) {
-                            pw.println("    <polyline points=\"" + (wmid + m) + " " + (h1 + 800) + " " + (wmid + m + 1) + " " + (h1 + 550 - b) + "\" style=\"stroke:black;stroke-width:3\"/>");
-                        }
-                    }
-
                 }
             }
-
 
             if (flinetype == 1) {
                 for (double m = -250; m < 250; m = m + 4) {
@@ -376,34 +270,12 @@ class IconPanel extends JPanel {
                     vm.setValue("x", 0.04 * (m + 1));
                     double b = 25 * fun.eval(vm, fm);
 
-                    if (flinethickness == 0) {
-                        if ((a <= 250) && (b <= 250) && (a >= -250) && (b >= -250)) {
-                            pw.println("    <polyline points=\"" + (wmid + m) + " " + (h1 + 550 - a) + " " + (wmid + m + 1) + " " + (h1 + 550 - b) + "\" style=\"stroke:black;stroke-width:3\"/>");
-                        } else if ((a <= 250) && (a >= -250) && (b >= 250)) {
-                            pw.println("    <polyline points=\"" + (wmid + m) + " " + (h1 + 550 - a) + " " + (wmid + m + 1) + " " + (h1 + 300) + "\" style=\"stroke:black;stroke-width:3\"/>");
-                        } else if ((a <= -250) && (b <= 250) && (b >= -250)) {
-                            pw.println("    <polyline points=\"" + (wmid + m) + " " + (h1 + 800) + " " + (wmid + m + 1) + " " + (h1 + 550 - b) + "\" style=\"stroke:black;stroke-width:3\"/>");
-                        }
-                    }
-
-                    if (flinethickness == 1) {
-                        if ((a <= 250) && (b <= 250) && (a >= -250) && (b >= -250)) {
-                            pw.println("    <polyline points=\"" + (wmid + m) + " " + (h1 + 550 - a) + " " + (wmid + m + 1) + " " + (h1 + 550 - b) + "\" style=\"stroke:black;stroke-width:4\"/>");
-                        } else if ((a <= 250) && (a >= -250) && (b >= 250)) {
-                            pw.println("    <polyline points=\"" + (wmid + m) + " " + (h1 + 550 - a) + " " + (wmid + m + 1) + " " + (h1 + 300) + "\" style=\"stroke:black;stroke-width:4\"/>");
-                        } else if ((a <= -250) && (b <= 250) && (b >= -250)) {
-                            pw.println("    <polyline points=\"" + (wmid + m) + " " + (h1 + 800) + " " + (wmid + m + 1) + " " + (h1 + 550 - b) + "\" style=\"stroke:black;stroke-width:4\"/>");
-                        }
-                    }
-
-                    if (flinethickness == 2) {
-                        if ((a <= 250) && (b <= 250) && (a >= -250) && (b >= -250)) {
-                            pw.println("    <polyline points=\"" + (wmid + m) + " " + (h1 + 550 - a) + " " + (wmid + m + 1) + " " + (h1 + 550 - b) + "\" style=\"stroke:black;stroke-width:5\"/>");
-                        } else if ((a <= 250) && (a >= -250) && (b >= 250)) {
-                            pw.println("    <polyline points=\"" + (wmid + m) + " " + (h1 + 550 - a) + " " + (wmid + m + 1) + " " + (h1 + 300) + "\" style=\"stroke:black;stroke-width:5\"/>");
-                        } else if ((a <= -250) && (b <= 250) && (b >= -250)) {
-                            pw.println("    <polyline points=\"" + (wmid + m) + " " + (h1 + 800) + " " + (wmid + m + 1) + " " + (h1 + 550 - b) + "\" style=\"stroke:black;stroke-width:5\"/>");
-                        }
+                    if ((a <= 250) && (b <= 250) && (a >= -250) && (b >= -250)) {
+                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 - a, wmid + m + 1, h1 + 550 - b));
+                    } else if ((a <= 250) && (a >= -250) && (b >= 250)) {
+                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 - a, wmid + m + 1, h1 + 300));
+                    } else if ((a <= -250) && (b <= 250) && (b >= -250)) {
+                        g2d.draw(new Line2D.Double(wmid + m, h1 + 800, wmid + m + 1, h1 + 550 - b));
                     }
 
                 }
@@ -411,12 +283,9 @@ class IconPanel extends JPanel {
 
         }
 
-        pw.println("</svg>\n");
-        pw.close();
-        return sw.toString();
     }
 
-    private String makeDynamicSVG() {
+    private String ChemicalEquation(Graphics2D g2d) {
 
         /* try {
          translator = new LanguageUnicode("britishtobr");
@@ -600,37 +469,8 @@ class IconPanel extends JPanel {
         return sw.toString();
     }
 
-    private String makeDynamicSVG2() {
-        StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw);
-        double h2 = 0;
-        double w1 = 0, w2 = 0;
-        double ratio = 0;
-        double newwidth = 0;
-        double w3 = 0;
-        double h1 = 0;
+    private void ImageConverter(Graphics2D g2d, File f) {
 
-        ratio = ((double) this.getWidth()) / 297;
-        newwidth = ratio * 210;
-
-        w1 = 10;
-        w2 = this.getWidth() - 10;
-        w3 = w2 - 30;
-        h1 = ((this.getHeight() - newwidth) / 2) + 10;
-        h2 = ((this.getHeight() + newwidth) / 2) - 10;
-
-        pw.println("<svg width=\"400\" height=\"400\" style=\"fill:none;stroke-width:2\">");
-        pw.println("    <polyline points=\"" + w1 + " " + h1 + " " + w2 + " " + h1 + " " + w2 + " " + h2 + " " + w1 + " " + h2 + " " + w1 + " " + h1 + "\" style=\"stroke:black\"/>");
-        pw.println("    <circle cx=\"" + w3 + "\" cy=\"" + (h1 + 30) + "\" r=\"20\" style=\"stroke:black\"/>");
-        pw.println("</svg>");
-        pw.close();
-        return sw.toString();
-    }
-
-    private String makeOpenSVG() {
-
-        StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw);
         double h2 = 0;
         double w1 = 0, w2 = 0, wmid = 0, wq1 = 0, wq2 = 0, we1 = 0, we2 = 0, we3 = 0, we4 = 0;
         double ratio = 0;
@@ -644,7 +484,6 @@ class IconPanel extends JPanel {
         h2 = this.getHeight() - 10;
         w1 = ((this.getWidth() - newwidth) / 2) + 10;
         w2 = ((this.getWidth() + newwidth) / 2) - 10;
-        w3 = w2 - 30;
         h1 = 10;
 
         wmid = (w1 + w2) / 2;
@@ -676,27 +515,39 @@ class IconPanel extends JPanel {
 
         }
 
-        pw.println("<svg width=\"810\" height=\"1055\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" style=\"fill:none;stroke-width:2\">\n");
-
         //Boundary + Top Right Corner Circle
 
-        pw.println("    <polyline points=\"" + w1 + " " + h1 + " " + w2 + " " + h1 + " " + w2 + " " + h2 + " " + w1 + " " + h2 + " " + w1 + " " + h1 + "\" style=\"stroke:black\"/>\n");
-        pw.println("    <circle cx=\"" + w3 + "\" cy=\"" + (h1 + 30) + "\" r=\"20\" style=\"stroke:black\"/>\n");
+        g2d.draw(new Rectangle2D.Double(w1, h1, w2 - w1, h2 - h1));
+        g2d.draw(new Ellipse2D.Double(w1 + 10, h1 + 10, 40, 40));
 
         // Text box
 
+        g2d.setFont(new Font("Braille", Font.PLAIN, 25));
+        g2d.drawString(txt1, (float) w1 + 20, (float) h1 + 100);
+        g2d.drawString(txt1, (float) w1 + 20, (float) h1 + 135);
 
-        pw.println(" <text x=\"" + (w1 + 20) + "\" y=\"" + (h1 + 100) + "\" font-family=\"Braille\" font-size=\"25\" fill=\"black\">\n");
-        pw.println(txt1 + "\n");
-        pw.println("</text>\n");
-        pw.println(" <text x=\"" + (w1 + 20) + "\" y=\"" + (h1 + 135) + "\" font-family=\"Braille\" font-size=\"25\" fill=\"black\">\n");
-        pw.println(txt2 + "\n");
-        pw.println("</text>\n");
+        if (f != null) {
 
-        pw.println("</svg>\n");
-        pw.close();
-        return sw.toString();
+            try {
+                SVGUniverse svgUniverse = new SVGUniverse();
+                SVGDiagram diagram = svgUniverse.getDiagram(svgUniverse.loadSVG(f.toURI().toURL()));
+                SVGElement root = diagram.getRoot();
 
+
+                converter(root);
+                scaling();
+                aslipaint(g2d);
+
+
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(IconPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SVGElementException ex) {
+                Logger.getLogger(IconPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SVGException ex) {
+                Logger.getLogger(IconPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
     }
 
     public void rmaker(PrintWriter p, double cord, double h1, String chemical) {
@@ -1061,7 +912,7 @@ class IconPanel extends JPanel {
                             char chor = love.charAt(0);
                             love = love.substring(1, love.length());
                             state = 0;
-                            
+
                             r1.y = Double.parseDouble(second);
                             reserve.multi.add(r1);
                             aalo.path.add(reserve);
@@ -4729,7 +4580,7 @@ public class MainClass extends javax.swing.JFrame {
                 .addComponent(txtbutton)
                 .addGap(0, 80, Short.MAX_VALUE))
                 .addComponent(txtbx, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, (height - taskBarHeight) - 1037, Short.MAX_VALUE)));
+                .addGap(0, (height - taskBarHeight) - 300, Short.MAX_VALUE)));
 
         // </editor-fold>
 
