@@ -68,9 +68,6 @@ class IconPanel extends JPanel {
 
     File f = null;
     int value = 0;
-    int mode = 0;
-    int pagesize = 6;
-    int orientation = 1;
     int nor = 0, nop = 0, noc = 0;
     ArrayList<Shape> converted = new ArrayList<Shape>();
     String txt = "", r1nam = "", r2nam = "", r3nam = "", r4nam = "", p1nam = "", p2nam = "", p3nam = "", p4nam = "", fnam = "", c1nam = "", c2nam = "", c3nam = "", c4nam = "", pressure = "", temp = "", chemical = "";
@@ -85,11 +82,8 @@ class IconPanel extends JPanel {
         f = null;
         fun = null;
         value = 0;
-        pagesize = 6;
-        orientation = 1;
         nor = 0;
         nop = 0;
-        mode = 0;
         flinethickness = 0;
         flinetype = 0;
         txt = "";
@@ -148,13 +142,16 @@ class IconPanel extends JPanel {
 
             }
         }
-        
-        switch(value){
-            case 1: ImageConverter(g2d, f);
+
+        switch (value) {
+            case 1:
+                ImageConverter(g2d, f);
                 break;
-            case 2: ChemicalEquation(g2d);
+            case 2:
+                ChemicalEquation(g2d);
                 break;
-            case 3: MathFunction(g2d);
+            case 3:
+                MathFunction(g2d);
                 break;
         }
     }
@@ -221,7 +218,7 @@ class IconPanel extends JPanel {
 
         g2d.setFont(new Font("Braille", Font.PLAIN, 25));
         g2d.drawString(txt1, (float) w1 + 20, (float) h1 + 100);
-        g2d.drawString(txt1, (float) w1 + 20, (float) h1 + 135);
+        g2d.drawString(txt2, (float) w1 + 20, (float) h1 + 135);
 
         //Coordinate axes
         g2d.setStroke(new BasicStroke(1));
@@ -285,7 +282,7 @@ class IconPanel extends JPanel {
 
     }
 
-    private String ChemicalEquation(Graphics2D g2d) {
+    private void ChemicalEquation(Graphics2D g2d) {
 
         /* try {
          translator = new LanguageUnicode("britishtobr");
@@ -293,8 +290,7 @@ class IconPanel extends JPanel {
          } catch (IOException | ClassNotFoundException ex) {
          Logger.getLogger(IconPanel.class.getName()).log(Level.SEVERE, null, ex);
          }*/
-        StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw);
+
         double h2 = 0;
         double w1 = 0, w2 = 0, wmid = 0, wq1 = 0, wq2 = 0, we1 = 0, we2 = 0, we3 = 0, we4 = 0;
         double ratio = 0;
@@ -339,134 +335,133 @@ class IconPanel extends JPanel {
 
         }
 
-        pw.println("<svg width=\"810\" height=\"1055\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" style=\"fill:none;stroke-width:2\">\n");
-
         //Boundary + Top Right Corner Circle
 
-        pw.println("    <polyline points=\"" + w1 + " " + h1 + " " + w2 + " " + h1 + " " + w2 + " " + h2 + " " + w1 + " " + h2 + " " + w1 + " " + h1 + "\" style=\"stroke:black\"/>\n");
-        pw.println("    <circle cx=\"" + w3 + "\" cy=\"" + (h1 + 30) + "\" r=\"20\" style=\"stroke:black\"/>\n");
+        g2d.draw(new Rectangle2D.Double(w1, h1, w2 - w1, h2 - h1));
+        g2d.draw(new Ellipse2D.Double(w1 + 10, h1 + 10, 40, 40));
 
         // Text box
 
+        g2d.setFont(new Font("Braille", Font.PLAIN, 25));
+        g2d.drawString(txt1, (float) w1 + 20, (float) h1 + 100);
+        g2d.drawString(txt2, (float) w1 + 20, (float) h1 + 135);
 
-        pw.println(" <text x=\"" + (w1 + 20) + "\" y=\"" + (h1 + 100) + "\" font-family=\"Braille\" font-size=\"25\" fill=\"black\">\n");
-        pw.println(txt1 + "\n");
-        pw.println("</text>\n");
-        pw.println(" <text x=\"" + (w1 + 20) + "\" y=\"" + (h1 + 135) + "\" font-family=\"Braille\" font-size=\"25\" fill=\"black\">\n");
-        pw.println(txt2 + "\n");
-        pw.println("</text>\n");
 
         //Reactants
 
         if ((nor == 2) || (nor == 4)) {
-            pw.println("    <polyline points=\"" + (wmid) + " " + (h1 + 369.5 / 1.1674) + " " + (wmid) + " " + (h1 + 385.5 / 1.1674) + "\" style=\"stroke:black\"/>");
-            pw.println("    <polyline points=\"" + (wmid - 8 / 1.1674) + " " + (h1 + 377.5 / 1.1674) + " " + (wmid + 8 / 1.1674) + " " + (h1 + 377.5 / 1.1674) + "\" style=\"stroke:black\"/>");
+            g2d.draw(new Line2D.Double(wmid, h1 + 369.5 / 1.1674, wmid, h1 + 385.5 / 1.1674));
+            g2d.draw(new Line2D.Double(wmid - 8 / 1.1674, h1 + 377.5 / 1.1674, wmid + 8 / 1.1674, h1 + 377.5 / 1.1674));
         }
 
         if (nor == 4) {
-            pw.println("    <polyline points=\"" + (wq1) + " " + (h1 + 369.5 / 1.1674) + " " + (wq1) + " " + (h1 + 385.5 / 1.1674) + "\" style=\"stroke:black\"/>");
-            pw.println("    <polyline points=\"" + (wq1 - 8 / 1.1674) + " " + (h1 + 377.5 / 1.1674) + " " + (wq1 + 8 / 1.1674) + " " + (h1 + 377.5 / 1.1674) + "\" style=\"stroke:black\"/>");
+            g2d.draw(new Line2D.Double(wq1, h1 + 369.5 / 1.1674, wq1, h1 + 385.5 / 1.1674));
+            g2d.draw(new Line2D.Double(wq1 - 8 / 1.1674, h1 + 377.5 / 1.1674, wq1 + 8 / 1.1674, h1 + 377.5 / 1.1674));
 
-            pw.println("    <polyline points=\"" + (wq2) + " " + (h1 + 369.5 / 1.1674) + " " + (wq2) + " " + (h1 + 385.5 / 1.1674) + "\" style=\"stroke:black\"/>");
-            pw.println("    <polyline points=\"" + (wq2 - 8 / 1.1674) + " " + (h1 + 377.5 / 1.1674) + " " + (wq2 + 8 / 1.1674) + " " + (h1 + 377.5 / 1.1674) + "\" style=\"stroke:black\"/>");
+            g2d.draw(new Line2D.Double(wq2, h1 + 369.5 / 1.1674, wq2, h1 + 385.5 / 1.1674));
+            g2d.draw(new Line2D.Double(wq2 - 8 / 1.1674, h1 + 377.5 / 1.1674, wq2 + 8 / 1.1674, h1 + 377.5 / 1.1674));
         }
 
         if (nor == 3) {
-            pw.println("    <polyline points=\"" + (we2) + " " + (h1 + 369.5 / 1.1674) + " " + (we2) + " " + (h1 + 385.5 / 1.1674) + "\" style=\"stroke:black\"/>");
-            pw.println("    <polyline points=\"" + (we2 - 8 / 1.1674) + " " + (h1 + 377.5 / 1.1674) + " " + (we2 + 8 / 1.1674) + " " + (h1 + 377.5 / 1.1674) + "\" style=\"stroke:black\"/>");
+            g2d.draw(new Line2D.Double(we2, h1 + 369.5 / 1.1674, we2, h1 + 385.5 / 1.1674));
+            g2d.draw(new Line2D.Double(we2 - 8 / 1.1674, h1 + 377.5 / 1.1674, we2 + 8 / 1.1674, h1 + 377.5 / 1.1674));
 
-            pw.println("    <polyline points=\"" + (we3) + " " + (h1 + 369.5 / 1.1674) + " " + (we3) + " " + (h1 + 385.5 / 1.1674) + "\" style=\"stroke:black\"/>");
-            pw.println("    <polyline points=\"" + (we3 - 8 / 1.1674) + " " + (h1 + 377.5 / 1.1674) + " " + (we3 + 8 / 1.1674) + " " + (h1 + 377.5 / 1.1674) + "\" style=\"stroke:black\"/>");
+            g2d.draw(new Line2D.Double(we3, h1 + 369.5 / 1.1674, we3, h1 + 385.5 / 1.1674));
+            g2d.draw(new Line2D.Double(we3 - 8 / 1.1674, h1 + 377.5 / 1.1674, we3 + 8 / 1.1674, h1 + 377.5 / 1.1674));
         }
 
-        if (nor == 2) {
-            rmaker(pw, we2, h1 + 145.6227, r1nam);
-            rmaker(pw, we3, h1 + 145.6227, r2nam);
-        }
+        
+         if (nor == 2) {
+         rmaker(g2d, we2, h1 + 145.6227, r1nam);
+         rmaker(g2d, we3, h1 + 145.6227, r2nam);
+         }
 
-        if (nor == 4) {
-            rmaker(pw, we1, h1 + 145.6227, r1nam);
-            rmaker(pw, we2, h1 + 145.6227, r2nam);
-            rmaker(pw, we3, h1 + 145.6227, r3nam);
-            rmaker(pw, we4, h1 + 145.6227, r4nam);
-        }
+         if (nor == 4) {
+         rmaker(g2d, we1, h1 + 145.6227, r1nam);
+         rmaker(g2d, we2, h1 + 145.6227, r2nam);
+         rmaker(g2d, we3, h1 + 145.6227, r3nam);
+         rmaker(g2d, we4, h1 + 145.6227, r4nam);
+         }
 
-        if (nor == 1) {
-            rmaker(pw, wmid, h1 + 145.6227, r1nam);
-        }
+         if (nor == 1) {
+         rmaker(g2d, wmid, h1 + 145.6227, r1nam);
+         }
 
-        if (nor == 3) {
-            rmaker(pw, wq1, h1 + 145.6227, r1nam);
-            rmaker(pw, wmid, h1 + 145.6227, r2nam);
-            rmaker(pw, wq2, h1 + 145.6227, r3nam);
-        }
+         if (nor == 3) {
+         rmaker(g2d, wq1, h1 + 145.6227, r1nam);
+         rmaker(g2d, wmid, h1 + 145.6227, r2nam);
+         rmaker(g2d, wq2, h1 + 145.6227, r3nam);
+         }
+         
 
         //Arrow
         if ((nop != 0) && (nor != 0)) {
 
-            pw.println("    <polyline points=\"" + (wmid) + " " + (h1 + 450 / 1.1674) + " " + (wmid) + " " + (h1 + 700 / 1.1674) + " " + (wmid + 24 / 1.1674) + " " + (h1 + 680 / 1.1674) + "\" style=\"stroke:black\"/>");
-            pw.println("    <polyline points=\"" + (wmid) + " " + (h1 + 700 / 1.1674) + " " + (wmid - 24 / 1.1674) + " " + (h1 + 680 / 1.1674) + "\" style=\"stroke:black\"/>");
+            double x2Points[] = {wmid, wmid, wmid + 24 / 1.1674};
+            double y2Points[] = {h1 + 450 / 1.1674, h1 + 700 / 1.1674, h1 + 680 / 1.1674};
+            GeneralPath polyline =
+                    new GeneralPath(GeneralPath.WIND_EVEN_ODD, x2Points.length);
 
+            polyline.moveTo(x2Points[0], y2Points[0]);
+
+            for (int index = 1; index < x2Points.length; index++) {
+                polyline.lineTo(x2Points[index], y2Points[index]);
+            };
+
+            g2d.draw(polyline);
+
+            g2d.draw(new Line2D.Double(wmid, h1 + 700 / 1.1674, wmid - 24 / 1.1674, h1 + 680 / 1.1674));
         }
 
         //Conditions
-        pw.println(" <text x=\"" + (wmid - (pressure.length() * 20)) + "\" y=\"" + (h1 + 550 / 1.1674) + "\" font-family=\"Braille\" font-size=\"25\" fill=\"black\">\n");
-        pw.println(pressure + "\n");
-        pw.println("</text>\n");
-        pw.println(" <text x=\"" + (wmid - (temp.length() * 20)) + "\" y=\"" + (h1 + 600 / 1.1674) + "\" font-family=\"Braille\" font-size=\"25\" fill=\"black\">\n");
-        pw.println(temp + "\n");
-        pw.println("</text>\n");
-
+        g2d.drawString(pressure, (float) (wmid - (pressure.length() * 20)), (float) (h1 + 550 / 1.1674));
+        g2d.drawString(temp, (float) (wmid - (temp.length() * 20)), (float) (h1 + 600 / 1.1674));
 
         //Products
 
         if ((nop == 2) || (nop == 4)) {
-            pw.println("    <polyline points=\"" + (wmid) + " " + (h1 + 807.5 / 1.1674) + " " + (wmid) + " " + (h1 + 823.5 / 1.1674) + "\" style=\"stroke:black\"/>");
-            pw.println("    <polyline points=\"" + (wmid - 8 / 1.1674) + " " + (h1 + 815.5 / 1.1674) + " " + (wmid + 8 / 1.1674) + " " + (h1 + 815.5 / 1.1674) + "\" style=\"stroke:black\"/>");
+            g2d.draw(new Line2D.Double(wmid, h1 + 807.5 / 1.1674, wmid, h1 + 823.5 / 1.1674));
+            g2d.draw(new Line2D.Double(wmid - 8 / 1.1674, h1 + 815.5 / 1.1674, wmid + 8 / 1.1674, h1 + 815.5 / 1.1674));
         }
 
         if (nop == 4) {
-            pw.println("    <polyline points=\"" + (wq1) + " " + (h1 + 807.5 / 1.1674) + " " + (wq1) + " " + (h1 + 823.5 / 1.1674) + "\" style=\"stroke:black\"/>");
-            pw.println("    <polyline points=\"" + (wq1 - 8 / 1.1674) + " " + (h1 + 815.5 / 1.1674) + " " + (wq1 + 8 / 1.1674) + " " + (h1 + 815.5 / 1.1674) + "\" style=\"stroke:black\"/>");
+            g2d.draw(new Line2D.Double(wq1, h1 + 807.5 / 1.1674, wq1, h1 + 823.5 / 1.1674));
+            g2d.draw(new Line2D.Double(wq1 - 8 / 1.1674, h1 + 815.5 / 1.1674, wq1 + 8 / 1.1674, h1 + 815.5 / 1.1674));
 
-            pw.println("    <polyline points=\"" + (wq2) + " " + (h1 + 807.5 / 1.1674) + " " + (wq2) + " " + (h1 + 823.5 / 1.1674) + "\" style=\"stroke:black\"/>");
-            pw.println("    <polyline points=\"" + (wq2 - 8 / 1.1674) + " " + (h1 + 815.5 / 1.1674) + " " + (wq2 + 8 / 1.1674) + " " + (h1 + 815.5 / 1.1674) + "\" style=\"stroke:black\"/>");
+            g2d.draw(new Line2D.Double(wq2, h1 + 807.5 / 1.1674, wq2, h1 + 823.5 / 1.1674));
+            g2d.draw(new Line2D.Double(wq2 - 8 / 1.1674, h1 + 815.5 / 1.1674, wq2 + 8 / 1.1674, h1 + 815.5 / 1.1674));
         }
 
         if (nop == 3) {
-            pw.println("    <polyline points=\"" + (we2) + " " + (h1 + 807.5 / 1.1674) + " " + (we2) + " " + (h1 + 823.5 / 1.1674) + "\" style=\"stroke:black\"/>");
-            pw.println("    <polyline points=\"" + (we2 - 8 / 1.1674) + " " + (h1 + 815.5 / 1.1674) + " " + (we2 + 8 / 1.1674) + " " + (h1 + 815.5 / 1.1674) + "\" style=\"stroke:black\"/>");
+            g2d.draw(new Line2D.Double(we2, h1 + 807.5 / 1.1674, we2, h1 + 823.5 / 1.1674));
+            g2d.draw(new Line2D.Double(we2 - 8 / 1.1674, h1 + 815.5 / 1.1674, we2 + 8 / 1.1674, h1 + 815.5 / 1.1674));
 
-            pw.println("    <polyline points=\"" + (we3) + " " + (h1 + 807.5 / 1.1674) + " " + (we3) + " " + (h1 + 823.5 / 1.1674) + "\" style=\"stroke:black\"/>");
-            pw.println("    <polyline points=\"" + (we3 - 8 / 1.1674) + " " + (h1 + 815.5 / 1.1674) + " " + (we3 + 8 / 1.1674) + " " + (h1 + 815.5 / 1.1674) + "\" style=\"stroke:black\"/>");
+            g2d.draw(new Line2D.Double(we3, h1 + 807.5 / 1.1674, we3, h1 + 823.5 / 1.1674));
+            g2d.draw(new Line2D.Double(we3 - 8 / 1.1674, h1 + 815.5 / 1.1674, we3 + 8 / 1.1674, h1 + 815.5 / 1.1674));
         }
+        
+         if (nop == 2) {
+         rmaker(g2d, we2, h1 + 608 / 1.1674, p1nam);
+         rmaker(g2d, we3, h1 + 608 / 1.1674, p2nam);
+         }
 
-        if (nop == 2) {
-            rmaker(pw, we2, h1 + 608 / 1.1674, p1nam);
-            rmaker(pw, we3, h1 + 608 / 1.1674, p2nam);
-        }
+         if (nop == 4) {
+         rmaker(g2d, we1, h1 + 608 / 1.1674, p1nam);
+         rmaker(g2d, we2, h1 + 608 / 1.1674, p2nam);
+         rmaker(g2d, we3, h1 + 608 / 1.1674, p3nam);
+         rmaker(g2d, we4, h1 + 608 / 1.1674, p4nam);
+         }
 
-        if (nop == 4) {
-            rmaker(pw, we1, h1 + 608 / 1.1674, p1nam);
-            rmaker(pw, we2, h1 + 608 / 1.1674, p2nam);
-            rmaker(pw, we3, h1 + 608 / 1.1674, p3nam);
-            rmaker(pw, we4, h1 + 608 / 1.1674, p4nam);
-        }
+         if (nop == 1) {
+         rmaker(g2d, wmid, h1 + 608 / 1.1674, p1nam);
+         }
 
-        if (nop == 1) {
-            rmaker(pw, wmid, h1 + 608 / 1.1674, p1nam);
-        }
-
-        if (nop == 3) {
-            rmaker(pw, wq1, h1 + 608 / 1.1674, p1nam);
-            rmaker(pw, wmid, h1 + 608 / 1.1674, p2nam);
-            rmaker(pw, wq2, h1 + 608 / 1.1674, p3nam);
-        }
-
-
-        pw.println("</svg>\n");
-        pw.close();
-        return sw.toString();
+         if (nop == 3) {
+         rmaker(g2d, wq1, h1 + 608 / 1.1674, p1nam);
+         rmaker(g2d, wmid, h1 + 608 / 1.1674, p2nam);
+         rmaker(g2d, wq2, h1 + 608 / 1.1674, p3nam);
+         }
+         
     }
 
     private void ImageConverter(Graphics2D g2d, File f) {
@@ -524,7 +519,7 @@ class IconPanel extends JPanel {
 
         g2d.setFont(new Font("Braille", Font.PLAIN, 25));
         g2d.drawString(txt1, (float) w1 + 20, (float) h1 + 100);
-        g2d.drawString(txt1, (float) w1 + 20, (float) h1 + 135);
+        g2d.drawString(txt2, (float) w1 + 20, (float) h1 + 135);
 
         if (f != null) {
 
@@ -550,74 +545,65 @@ class IconPanel extends JPanel {
         }
     }
 
-    public void rmaker(PrintWriter p, double cord, double h1, String chemical) {
+    public void rmaker(Graphics2D g2d, double cord, double h1, String chemical) {
+
+        g2d.setFont(new Font("Braille", Font.PLAIN, 27));
 
         if ((chemical.equals("Phenol")) || (chemical.equals("Benzene")) || (chemical.equals("Benzoic Acid")) || (chemical.equals("Aniline")) || (chemical.equals("O-Bromoaniline")) || (chemical.equals("M-Bromoaniline")) || (chemical.equals("P-Bromoaniline")) || (chemical.equals("Bromobenzene"))) {
 
             if (chemical.equals("Phenol")) {
-                p.println(" <text x=\"" + (cord - 20.63 / 1.1674) + "\" y=\"" + (h1 + 145 / 1.1674) + "\" font-family=\"Braille\" font-size=\"27.41\" fill=\"black\">\n");
-                p.println("OH \n");
-                p.println("</text>\n");
+                g2d.drawString("OH", (float) (cord - 20.63 / 1.1674), (float) (h1 + 145 / 1.1674));
             }
 
             if (chemical.equals("Bromobenzene")) {
-                p.println(" <text x=\"" + (cord - 20.63 / 1.1674) + "\" y=\"" + (h1 + 145 / 1.1674) + "\" font-family=\"Braille\" font-size=\"27.41\" fill=\"black\">\n");
-                p.println("Br \n");
-                p.println("</text>\n");
+                g2d.drawString("Br", (float) (cord - 20.63 / 1.1674), (float) (h1 + 145 / 1.1674));
             }
 
             if (chemical.equals("Benzoic Acid")) {
-                p.println(" <text x=\"" + (cord - 42.63 / 1.1674) + "\" y=\"" + (h1 + 145 / 1.1674) + "\" font-family=\"Braille\" font-size=\"27.41\" fill=\"black\">\n");
-                p.println("COOH \n");
-                p.println("</text>\n");
+                g2d.drawString("COOH", (float) (cord - 42.63 / 1.1674), (float) (h1 + 145 / 1.1674));
             }
 
-            p.println("    <polyline points=\"" + (cord - 43.30 / 1.1674) + " " + (h1 + 182.5 / 1.1674) + " " + (cord) + " " + (h1 + 157.5 / 1.1674) + " " + (cord + 43.30 / 1.1674) + " " + (h1 + 182.5 / 1.1674) + " " + (cord + 43.30 / 1.1674) + " " + (h1 + 232.5 / 1.1674) + " " + (cord) + " " + (h1 + 257.5 / 1.1674) + " " + (cord - 43.30 / 1.1674) + " " + (h1 + 232.5 / 1.1674) + " " + (cord - 43.30 / 1.1674) + " " + (h1 + 182.5 / 1.1674) + "\" style=\"stroke:black\"/>");
-            p.println("    <circle cx=\"" + (cord) + "\" cy=\"" + (h1 + 207.5 / 1.1674) + "\" r=\"30\" style=\"stroke:black\"/>");
+            double x2Points[] = {cord - 43.30 / 1.1674, cord, cord + 43.30 / 1.1674, cord + 43.30 / 1.1674, cord, cord - 43.30 / 1.1674, cord - 43.30 / 1.1674};
+            double y2Points[] = {h1 + 182.5 / 1.1674, h1 + 157.5 / 1.1674, h1 + 182.5 / 1.1674, h1 + 232.5 / 1.1674, h1 + 257.5 / 1.1674, h1 + 232.5 / 1.1674, h1 + 182.5 / 1.1674};
+            GeneralPath polyline =
+                    new GeneralPath(GeneralPath.WIND_EVEN_ODD, x2Points.length);
 
+            polyline.moveTo(x2Points[0], y2Points[0]);
+
+            for (int index = 1; index < x2Points.length; index++) {
+                polyline.lineTo(x2Points[index], y2Points[index]);
+            };
+
+            g2d.draw(polyline);
+            g2d.draw(new Ellipse2D.Double(cord - 30, (h1 + 207.5 / 1.1674) - 30, 60, 60));
         }
 
         if ((chemical.equals("Aniline")) || (chemical.equals("O-Bromoaniline")) || (chemical.equals("M-Bromoaniline")) || (chemical.equals("P-Bromoaniline"))) {
 
             if (chemical.equals("O-Bromoaniline")) {
-                p.println(" <text x=\"" + (cord + 43.63 / 1.1674) + "\" y=\"" + (h1 + 185 / 1.1674) + "\" font-family=\"Braille\" font-size=\"27.41\" fill=\"black\">\n");
-                p.println("Br \n");
-                p.println("</text>\n");
+                g2d.drawString("Br", (float) (cord + 43.63 / 1.1674), (float) (h1 + 185 / 1.1674));
             }
 
             if (chemical.equals("M-Bromoaniline")) {
-                p.println(" <text x=\"" + (cord + 43.63 / 1.1674) + "\" y=\"" + (h1 + 250 / 1.1674) + "\" font-family=\"Braille\" font-size=\"27.41\" fill=\"black\">\n");
-                p.println("Br \n");
-                p.println("</text>\n");
+                g2d.drawString("Br", (float) (cord + 43.63 / 1.1674), (float) (h1 + 250 / 1.1674));
             }
 
             if (chemical.equals("P-Bromoaniline")) {
-                p.println(" <text x=\"" + (cord - 20.63 / 1.1674) + "\" y=\"" + (h1 + 290 / 1.1674) + "\" font-family=\"Braille\" font-size=\"27.41\" fill=\"black\">\n");
-                p.println("Br \n");
-                p.println("</text>\n");
+                g2d.drawString("Br", (float) (cord - 20.63 / 1.1674), (float) (h1 + 290 / 1.1674));
             }
 
-
-            p.println(" <text x=\"" + (cord - 20.63 / 1.1674) + "\" y=\"" + (h1 + 145 / 1.1674) + "\" font-family=\"Braille\" font-size=\"27.41\" fill=\"black\">\n");
-            p.println("NH\n");
-            p.println("</text>\n");
-            p.println(" <text x=\"" + (cord + 20.63 / 1.1674) + "\" y=\"" + (h1 + 155 / 1.1674) + "\" font-family=\"Braille\" font-size=\"23.128\" fill=\"black\">\n");
-            p.println("2\n");
-            p.println("</text>\n");
+            
+            g2d.drawString("NH", (float) (cord - 20.63 / 1.1674), (float) (h1 + 145/ 1.1674));
+            g2d.setFont(new Font("Braille", Font.PLAIN, 23));
+            g2d.drawString("2", (float) (cord + 20.63 / 1.1674), (float) (h1 + 155 / 1.1674));
 
         }
 
         if (chemical.equals("Bromine")) {
-
-
-            p.println(" <text x=\"" + (cord - 20.63 / 1.1674) + "\" y=\"" + (h1 + 222.5 / 1.1674) + "\" font-family=\"Braille\" font-size=\"27.41\" fill=\"black\">\n");
-            p.println("Br \n");
-            p.println("</text>\n");
-            p.println(" <text x=\"" + (cord + 20.63 / 1.1674) + "\" y=\"" + (h1 + 232.5 / 1.1674) + "\" font-family=\"Braille\" font-size=\"23.128\" fill=\"black\">\n");
-            p.println("2 \n");
-            p.println("</text>\n");
-
-
+            
+            g2d.drawString("Br", (float) (cord - 20.63 / 1.1674), (float) (h1 + 222.5/ 1.1674));
+            g2d.setFont(new Font("Braille", Font.PLAIN, 23));
+            g2d.drawString("2", (float) (cord + 20.63 / 1.1674), (float) (h1 + 232.5/ 1.1674));
 
         }
 
@@ -1136,9 +1122,6 @@ class IconPanel extends JPanel {
             converted.add(aalo);
 
         }
-
-
-
 
         int rambo = root.getNumChildren();
 
@@ -2316,14 +2299,12 @@ public class MainClass extends javax.swing.JFrame {
     private void box1ActionPerformed(java.awt.event.ActionEvent evt) {
         int pop = box1.getSelectedIndex();
         int rop = (pop + 1) * 2;
-        panel.pagesize = rop;
         panel.repaint();
 
     }
 
     private void box2ActionPerformed(java.awt.event.ActionEvent evt) {
         int pop = box2.getSelectedIndex();
-        panel.orientation = pop + 1;
         panel.repaint();
 
     }
