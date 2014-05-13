@@ -53,7 +53,6 @@ public class MainClass extends javax.swing.JFrame {
 
         fileChooser = new javax.swing.JFileChooser();
         Grp = new javax.swing.ButtonGroup();
-        Grp2 = new javax.swing.ButtonGroup();
         fileChooser2 = new javax.swing.JFileChooser();
         toolbar = new javax.swing.JToolBar();
         diag = new javax.swing.JToggleButton();
@@ -172,7 +171,6 @@ public class MainClass extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Actions Performed">
     
     // <editor-fold defaultstate="collapsed" desc="Menu Actions Performed">
-    
     private void diagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diagActionPerformed
 
         panel.removeAll();
@@ -1115,198 +1113,6 @@ public class MainClass extends javax.swing.JFrame {
 
     }
 
-    private void funbackActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funxActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funcommaActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funsignActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funleftActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void fun7ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void fun8ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void fundivActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funrightActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void fun9ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void fun4ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void fun5ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void fun6ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funmultActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void fun1ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void fun0ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void fun3ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void fun2ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funsubActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void fundotActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funaddActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funmaxActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funminActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funavgActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funsumActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funintActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funflrActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funpowActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funsqrtActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funabsActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funrecpActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funceilActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funexpActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funlnActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funlogActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funfactActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funasinhActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funtanhActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funatanActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funatanhActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funacoshActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funacosActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funcoshActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funsinhActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funasinActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funsinActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funcosActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void funtanActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
     private void funmediumActionPerformed(java.awt.event.ActionEvent evt) {
         panel.flinethickness = 1;
         panel.repaint();
@@ -1333,7 +1139,6 @@ public class MainClass extends javax.swing.JFrame {
     }
 
     // </editor-fold>
-    
     // </editor-fold>
     
     public static void main(String args[]) {
@@ -1361,11 +1166,9 @@ public class MainClass extends javax.swing.JFrame {
             }
         });
     }
-    
     // <editor-fold defaultstate="collapsed" desc="Variable Declarations">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup Grp;
-    private javax.swing.ButtonGroup Grp2;
     private javax.swing.JMenuItem Save;
     private javax.swing.JMenuItem SaveAs;
     private javax.swing.JToggleButton chem;
@@ -1377,6 +1180,7 @@ public class MainClass extends javax.swing.JFrame {
     private javax.swing.JMenuBar menu;
     private javax.swing.JToolBar toolbar;
     // End of variables declaration//GEN-END:variables
+    
     //Custom variables declaration
     IconPanel panel = new IconPanel();
     JPanel options, chemequ, textenter, diagconv, functions;
@@ -1385,58 +1189,8 @@ public class MainClass extends javax.swing.JFrame {
     JLabel pagesize, orientation;
     JButton txtbutton, open, fungo;
     JTextField txtbx, funbx;
-    JScrollBar bar;
-    JToggleButton english, braille, ascii;
-    ButtonGroup mode;
+    
     // <editor-fold defaultstate="collapsed" desc="Calculator Variable Declarations">
-    private javax.swing.JButton fun0;
-    private javax.swing.JButton fun1;
-    private javax.swing.JButton fun2;
-    private javax.swing.JButton fun3;
-    private javax.swing.JButton fun4;
-    private javax.swing.JButton fun5;
-    private javax.swing.JButton fun6;
-    private javax.swing.JButton fun7;
-    private javax.swing.JButton fun8;
-    private javax.swing.JButton fun9;
-    private javax.swing.JButton funabs;
-    private javax.swing.JButton funacos;
-    private javax.swing.JButton funacosh;
-    private javax.swing.JButton funadd;
-    private javax.swing.JButton funasin;
-    private javax.swing.JButton funasinh;
-    private javax.swing.JButton funatan;
-    private javax.swing.JButton funatanh;
-    private javax.swing.JButton funavg;
-    private javax.swing.JButton funback;
-    private javax.swing.JButton funceil;
-    private javax.swing.JButton funcomma;
-    private javax.swing.JButton funcos;
-    private javax.swing.JButton funcosh;
-    private javax.swing.JButton fundiv;
-    private javax.swing.JButton fundot;
-    private javax.swing.JButton funexp;
-    private javax.swing.JButton funfact;
-    private javax.swing.JButton funflr;
-    private javax.swing.JButton funint;
-    private javax.swing.JButton funleft;
-    private javax.swing.JButton funln;
-    private javax.swing.JButton funlog;
-    private javax.swing.JButton funmax;
-    private javax.swing.JButton funmin;
-    private javax.swing.JButton funmult;
-    private javax.swing.JButton funpow;
-    private javax.swing.JButton funrecp;
-    private javax.swing.JButton funright;
-    private javax.swing.JButton funsign;
-    private javax.swing.JButton funsin;
-    private javax.swing.JButton funsinh;
-    private javax.swing.JButton funsqrt;
-    private javax.swing.JButton funsub;
-    private javax.swing.JButton funsum;
-    private javax.swing.JButton funtan;
-    private javax.swing.JButton funtanh;
-    private javax.swing.JButton funx;
     private javax.swing.JLabel funthickness;
     private javax.swing.JRadioButton funthin;
     private javax.swing.JRadioButton funmedium;
@@ -1444,11 +1198,9 @@ public class MainClass extends javax.swing.JFrame {
     private javax.swing.JLabel funlinetype;
     private javax.swing.JRadioButton funnormal;
     private javax.swing.JRadioButton fundashed;
-    private javax.swing.JPanel input;
-    private javax.swing.JPanel ari;
-    private javax.swing.JPanel trig;
     private javax.swing.JPanel funsettings;
 // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Chemical Variable Declarations">
     JPanel reactantpanel, productpanel, catalystpanel, conditionpanel;
     IconPanel rpanel1, rpanel2, rpanel3, rpanel4, ppanel1, ppanel2, ppanel3, ppanel4, cpanel1, cpanel2, cpanel3, cpanel4;
@@ -1459,7 +1211,6 @@ public class MainClass extends javax.swing.JFrame {
     // </editor-fold>
 
     // </editor-fold>
-    
     private void myInitComponents() {
 
         //----------------------------------------------------------------------------------------------   
@@ -1483,10 +1234,6 @@ public class MainClass extends javax.swing.JFrame {
 
         // <editor-fold defaultstate="collapsed" desc="Assignments">
 
-        english = new javax.swing.JToggleButton();
-        braille = new javax.swing.JToggleButton();
-        ascii = new javax.swing.JToggleButton();
-        mode = new javax.swing.ButtonGroup();
         orientation = new javax.swing.JLabel();
         pagesize = new javax.swing.JLabel();
         options = new javax.swing.JPanel();
@@ -1501,69 +1248,11 @@ public class MainClass extends javax.swing.JFrame {
         open = new javax.swing.JButton();
         txtbx = new javax.swing.JTextField();
         funbx = new javax.swing.JTextField();
-        bar = new javax.swing.JScrollBar(JScrollBar.VERTICAL);
         thickness = new javax.swing.JComboBox();
 
         // </editor-fold>
 
         // <editor-fold defaultstate="collapsed" desc="Calculator Assignments">
-
-        input = new javax.swing.JPanel();
-
-        funback = new javax.swing.JButton();
-        funx = new javax.swing.JButton();
-        funcomma = new javax.swing.JButton();
-        funsign = new javax.swing.JButton();
-        funleft = new javax.swing.JButton();
-        fun7 = new javax.swing.JButton();
-        fun8 = new javax.swing.JButton();
-        fundiv = new javax.swing.JButton();
-        funright = new javax.swing.JButton();
-        fun9 = new javax.swing.JButton();
-        fun4 = new javax.swing.JButton();
-        fun5 = new javax.swing.JButton();
-        fun6 = new javax.swing.JButton();
-        funmult = new javax.swing.JButton();
-        fun1 = new javax.swing.JButton();
-        fun0 = new javax.swing.JButton();
-        fun3 = new javax.swing.JButton();
-        fun2 = new javax.swing.JButton();
-        funsub = new javax.swing.JButton();
-        fundot = new javax.swing.JButton();
-        funadd = new javax.swing.JButton();
-
-        ari = new javax.swing.JPanel();
-
-        funmax = new javax.swing.JButton();
-        funmin = new javax.swing.JButton();
-        funavg = new javax.swing.JButton();
-        funsum = new javax.swing.JButton();
-        funint = new javax.swing.JButton();
-        funflr = new javax.swing.JButton();
-        funpow = new javax.swing.JButton();
-        funsqrt = new javax.swing.JButton();
-        funabs = new javax.swing.JButton();
-        funrecp = new javax.swing.JButton();
-        funceil = new javax.swing.JButton();
-        funexp = new javax.swing.JButton();
-        funln = new javax.swing.JButton();
-        funlog = new javax.swing.JButton();
-        funfact = new javax.swing.JButton();
-
-        trig = new javax.swing.JPanel();
-
-        funcosh = new javax.swing.JButton();
-        funatan = new javax.swing.JButton();
-        funsinh = new javax.swing.JButton();
-        funacosh = new javax.swing.JButton();
-        funtanh = new javax.swing.JButton();
-        funasinh = new javax.swing.JButton();
-        funacos = new javax.swing.JButton();
-        funatanh = new javax.swing.JButton();
-        funasin = new javax.swing.JButton();
-        funsin = new javax.swing.JButton();
-        funcos = new javax.swing.JButton();
-        funtan = new javax.swing.JButton();
 
         funsettings = new javax.swing.JPanel();
 
@@ -1574,7 +1263,6 @@ public class MainClass extends javax.swing.JFrame {
         funlinetype = new javax.swing.JLabel();
         funnormal = new javax.swing.JRadioButton();
         fundashed = new javax.swing.JRadioButton();
-
 
         // </editor-fold>
 
@@ -1625,9 +1313,6 @@ public class MainClass extends javax.swing.JFrame {
         diagconv.setBackground(new java.awt.Color(240, 240, 240));
         functions.setBackground(new java.awt.Color(240, 240, 240));
         textenter.setBackground(new java.awt.Color(240, 240, 240));
-        input.setBackground(new java.awt.Color(240, 240, 240));
-        trig.setBackground(new java.awt.Color(240, 240, 240));
-        ari.setBackground(new java.awt.Color(240, 240, 240));
         funsettings.setBackground(new java.awt.Color(240, 240, 240));
         reactantpanel.setBackground(new java.awt.Color(240, 240, 240));
         productpanel.setBackground(new java.awt.Color(240, 240, 240));
@@ -2215,149 +1900,7 @@ public class MainClass extends javax.swing.JFrame {
 
         Font bigFont = funbx.getFont().deriveFont(Font.PLAIN, 20f);
         funbx.setFont(bigFont);
-
-        input.setBorder(javax.swing.BorderFactory.createTitledBorder("Input"));
-
-        // <editor-fold defaultstate="collapsed" desc="Input panel buttons">
-
-        funback.setText("←");
-        funback.setPreferredSize(new java.awt.Dimension(45, 23));
-        funback.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funbackActionPerformed(evt);
-            }
-        });
-
-        funx.setText("x");
-        funx.setMaximumSize(new java.awt.Dimension(45, 23));
-        funx.setMinimumSize(new java.awt.Dimension(45, 23));
-        funx.setPreferredSize(new java.awt.Dimension(45, 23));
-        funx.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funxActionPerformed(evt);
-            }
-        });
-
-        funcomma.setText(",");
-        funcomma.setMaximumSize(new java.awt.Dimension(45, 23));
-        funcomma.setMinimumSize(new java.awt.Dimension(45, 23));
-        funcomma.setPreferredSize(new java.awt.Dimension(45, 23));
-        funcomma.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funcommaActionPerformed(evt);
-            }
-        });
-
-        funsign.setText("±");
-        funsign.setMaximumSize(new java.awt.Dimension(45, 23));
-        funsign.setMinimumSize(new java.awt.Dimension(45, 23));
-        funsign.setPreferredSize(new java.awt.Dimension(45, 23));
-        funsign.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funsignActionPerformed(evt);
-            }
-        });
-
-        funleft.setText("(");
-        funleft.setMaximumSize(new java.awt.Dimension(45, 23));
-        funleft.setMinimumSize(new java.awt.Dimension(45, 23));
-        funleft.setPreferredSize(new java.awt.Dimension(45, 23));
-        funleft.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funleftActionPerformed(evt);
-            }
-        });
-
-        fun7.setText("7");
-        fun7.setMaximumSize(new java.awt.Dimension(45, 23));
-        fun7.setMinimumSize(new java.awt.Dimension(45, 23));
-        fun7.setPreferredSize(new java.awt.Dimension(45, 23));
-        fun7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fun7ActionPerformed(evt);
-            }
-        });
-
-        fun8.setText("8");
-        fun8.setMaximumSize(new java.awt.Dimension(45, 23));
-        fun8.setMinimumSize(new java.awt.Dimension(45, 23));
-        fun8.setPreferredSize(new java.awt.Dimension(45, 23));
-        fun8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fun8ActionPerformed(evt);
-            }
-        });
-
-        fundiv.setText("/");
-        fundiv.setMaximumSize(new java.awt.Dimension(45, 23));
-        fundiv.setMinimumSize(new java.awt.Dimension(45, 23));
-        fundiv.setPreferredSize(new java.awt.Dimension(45, 23));
-        fundiv.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fundivActionPerformed(evt);
-            }
-        });
-
-        funright.setText(")");
-        funright.setMaximumSize(new java.awt.Dimension(45, 23));
-        funright.setMinimumSize(new java.awt.Dimension(45, 23));
-        funright.setPreferredSize(new java.awt.Dimension(45, 23));
-        funright.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funrightActionPerformed(evt);
-            }
-        });
-
-        fun9.setText("9");
-        fun9.setMaximumSize(new java.awt.Dimension(45, 23));
-        fun9.setMinimumSize(new java.awt.Dimension(45, 23));
-        fun9.setPreferredSize(new java.awt.Dimension(45, 23));
-        fun9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fun9ActionPerformed(evt);
-            }
-        });
-
-        fun4.setText("4");
-        fun4.setMaximumSize(new java.awt.Dimension(45, 23));
-        fun4.setMinimumSize(new java.awt.Dimension(45, 23));
-        fun4.setPreferredSize(new java.awt.Dimension(45, 23));
-        fun4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fun4ActionPerformed(evt);
-            }
-        });
-
-        fun5.setText("5");
-        fun5.setMaximumSize(new java.awt.Dimension(45, 23));
-        fun5.setMinimumSize(new java.awt.Dimension(45, 23));
-        fun5.setPreferredSize(new java.awt.Dimension(45, 23));
-        fun5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fun5ActionPerformed(evt);
-            }
-        });
-
-        fun6.setText("6");
-        fun6.setMaximumSize(new java.awt.Dimension(45, 23));
-        fun6.setMinimumSize(new java.awt.Dimension(45, 23));
-        fun6.setPreferredSize(new java.awt.Dimension(45, 23));
-        fun6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fun6ActionPerformed(evt);
-            }
-        });
-
-        funmult.setText("*");
-        funmult.setMaximumSize(new java.awt.Dimension(45, 23));
-        funmult.setMinimumSize(new java.awt.Dimension(45, 23));
-        funmult.setPreferredSize(new java.awt.Dimension(45, 23));
-        funmult.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funmultActionPerformed(evt);
-            }
-        });
-
+        
         fungo.setText("=");
         fungo.setMaximumSize(new java.awt.Dimension(45, 23));
         fungo.setMinimumSize(new java.awt.Dimension(45, 23));
@@ -2367,553 +1910,6 @@ public class MainClass extends javax.swing.JFrame {
                 FunActionPerformed(evt);
             }
         });
-
-        fun1.setText("1");
-        fun1.setMaximumSize(new java.awt.Dimension(45, 23));
-        fun1.setMinimumSize(new java.awt.Dimension(45, 23));
-        fun1.setPreferredSize(new java.awt.Dimension(45, 23));
-        fun1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fun1ActionPerformed(evt);
-            }
-        });
-
-        fun0.setText("0");
-        fun0.setMaximumSize(new java.awt.Dimension(45, 23));
-        fun0.setMinimumSize(new java.awt.Dimension(45, 23));
-        fun0.setPreferredSize(new java.awt.Dimension(45, 23));
-        fun0.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fun0ActionPerformed(evt);
-            }
-        });
-
-        fun3.setText("3");
-        fun3.setMaximumSize(new java.awt.Dimension(45, 23));
-        fun3.setMinimumSize(new java.awt.Dimension(45, 23));
-        fun3.setPreferredSize(new java.awt.Dimension(45, 23));
-        fun3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fun3ActionPerformed(evt);
-            }
-        });
-
-        fun2.setText("2");
-        fun2.setMaximumSize(new java.awt.Dimension(45, 23));
-        fun2.setMinimumSize(new java.awt.Dimension(45, 23));
-        fun2.setPreferredSize(new java.awt.Dimension(45, 23));
-        fun2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fun2ActionPerformed(evt);
-            }
-        });
-
-        funsub.setText("-");
-        funsub.setMaximumSize(new java.awt.Dimension(45, 23));
-        funsub.setMinimumSize(new java.awt.Dimension(45, 23));
-        funsub.setPreferredSize(new java.awt.Dimension(45, 23));
-        funsub.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funsubActionPerformed(evt);
-            }
-        });
-
-        fundot.setText(".");
-        fundot.setMaximumSize(new java.awt.Dimension(45, 23));
-        fundot.setMinimumSize(new java.awt.Dimension(45, 23));
-        fundot.setPreferredSize(new java.awt.Dimension(45, 23));
-        fundot.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fundotActionPerformed(evt);
-            }
-        });
-
-        funadd.setText("+");
-        funadd.setMaximumSize(new java.awt.Dimension(45, 23));
-        funadd.setMinimumSize(new java.awt.Dimension(45, 23));
-        funadd.setPreferredSize(new java.awt.Dimension(45, 23));
-        funadd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funaddActionPerformed(evt);
-            }
-        });
-
-        // </editor-fold>
-
-        // <editor-fold defaultstate="collapsed" desc="Input panel">
-        javax.swing.GroupLayout inputLayout = new javax.swing.GroupLayout(input);
-        input.setLayout(inputLayout);
-        inputLayout.setHorizontalGroup(
-                inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(inputLayout.createSequentialGroup()
-                .addComponent(funback, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(funx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(funcomma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(funsign, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(funleft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(inputLayout.createSequentialGroup()
-                .addComponent(fun7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fun8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(fun9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fundiv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(funright, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(inputLayout.createSequentialGroup()
-                .addGroup(inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(inputLayout.createSequentialGroup()
-                .addGroup(inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(inputLayout.createSequentialGroup()
-                .addComponent(fun4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fun5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(inputLayout.createSequentialGroup()
-                .addComponent(fun1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fun2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(inputLayout.createSequentialGroup()
-                .addComponent(fun6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(funmult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inputLayout.createSequentialGroup()
-                .addComponent(fun3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(funsub, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGroup(inputLayout.createSequentialGroup()
-                .addComponent(fun0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fundot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(funadd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fungo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)));
-        inputLayout.setVerticalGroup(
-                inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(inputLayout.createSequentialGroup()
-                .addGroup(inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(funback, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(funx, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(funleft, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(funsign, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(funcomma, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(fun7, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(funright, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(fundiv, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(fun8, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(fun9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                .addGroup(inputLayout.createSequentialGroup()
-                .addGroup(inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(fun4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(funmult, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(fun5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(fun6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(fun1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(fun2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(funsub, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(fun3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(fun0, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(fundot, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(funadd, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addComponent(fungo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-
-        //</editor-fold>
-
-        ari.setBorder(javax.swing.BorderFactory.createTitledBorder("Arithmetic"));
-
-        // <editor-fold defaultstate="collapsed" desc="Ari panel buttons">
-
-        funmax.setText("max");
-        funmax.setMaximumSize(new java.awt.Dimension(45, 23));
-        funmax.setMinimumSize(new java.awt.Dimension(45, 23));
-        funmax.setPreferredSize(new java.awt.Dimension(45, 23));
-        funmax.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funmaxActionPerformed(evt);
-            }
-        });
-
-        funmin.setText("min");
-        funmin.setMaximumSize(new java.awt.Dimension(45, 23));
-        funmin.setMinimumSize(new java.awt.Dimension(45, 23));
-        funmin.setPreferredSize(new java.awt.Dimension(45, 23));
-        funmin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funminActionPerformed(evt);
-            }
-        });
-
-        funavg.setText("avg");
-        funavg.setMaximumSize(new java.awt.Dimension(45, 23));
-        funavg.setMinimumSize(new java.awt.Dimension(45, 23));
-        funavg.setPreferredSize(new java.awt.Dimension(45, 23));
-        funavg.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funavgActionPerformed(evt);
-            }
-        });
-
-        funsum.setText("sum");
-        funsum.setMaximumSize(new java.awt.Dimension(45, 23));
-        funsum.setMinimumSize(new java.awt.Dimension(45, 23));
-        funsum.setPreferredSize(new java.awt.Dimension(45, 23));
-        funsum.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funsumActionPerformed(evt);
-            }
-        });
-
-        funint.setText("int");
-        funint.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funintActionPerformed(evt);
-            }
-        });
-
-        funflr.setText("flr");
-        funflr.setPreferredSize(new java.awt.Dimension(47, 19));
-        funflr.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funflrActionPerformed(evt);
-            }
-        });
-
-        funpow.setText("pow");
-        funpow.setMaximumSize(new java.awt.Dimension(45, 23));
-        funpow.setMinimumSize(new java.awt.Dimension(45, 23));
-        funpow.setPreferredSize(new java.awt.Dimension(45, 23));
-        funpow.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funpowActionPerformed(evt);
-            }
-        });
-
-        funsqrt.setText("sqrt");
-        funsqrt.setMaximumSize(new java.awt.Dimension(45, 23));
-        funsqrt.setMinimumSize(new java.awt.Dimension(45, 23));
-        funsqrt.setPreferredSize(new java.awt.Dimension(45, 23));
-        funsqrt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funsqrtActionPerformed(evt);
-            }
-        });
-
-        funabs.setText("abs");
-        funabs.setMaximumSize(new java.awt.Dimension(45, 23));
-        funabs.setMinimumSize(new java.awt.Dimension(45, 23));
-        funabs.setPreferredSize(new java.awt.Dimension(45, 23));
-        funabs.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funabsActionPerformed(evt);
-            }
-        });
-
-        funrecp.setText("1/x");
-        funrecp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funrecpActionPerformed(evt);
-            }
-        });
-
-        funceil.setText("ceil");
-        funceil.setPreferredSize(new java.awt.Dimension(47, 19));
-        funceil.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funceilActionPerformed(evt);
-            }
-        });
-
-        funexp.setText("exp");
-        funexp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funexpActionPerformed(evt);
-            }
-        });
-
-        funln.setText("ln");
-        funln.setMaximumSize(new java.awt.Dimension(45, 23));
-        funln.setMinimumSize(new java.awt.Dimension(45, 23));
-        funln.setPreferredSize(new java.awt.Dimension(45, 23));
-        funln.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funlnActionPerformed(evt);
-            }
-        });
-
-        funlog.setText("log");
-        funlog.setMaximumSize(new java.awt.Dimension(45, 23));
-        funlog.setMinimumSize(new java.awt.Dimension(45, 23));
-        funlog.setPreferredSize(new java.awt.Dimension(45, 23));
-        funlog.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funlogActionPerformed(evt);
-            }
-        });
-
-        funfact.setText("fact");
-        funfact.setMaximumSize(new java.awt.Dimension(45, 23));
-        funfact.setMinimumSize(new java.awt.Dimension(45, 23));
-        funfact.setPreferredSize(new java.awt.Dimension(45, 23));
-        funfact.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funfactActionPerformed(evt);
-            }
-        });
-
-        //</editor-fold>
-
-        // <editor-fold defaultstate="collapsed" desc="Ari panel">
-        javax.swing.GroupLayout ariLayout = new javax.swing.GroupLayout(ari);
-        ari.setLayout(ariLayout);
-        ariLayout.setHorizontalGroup(
-                ariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(ariLayout.createSequentialGroup()
-                .addGroup(ariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(ariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                .addComponent(funmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(funmax, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE))
-                .addGroup(ariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                .addComponent(funsum, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-                .addComponent(funavg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(funint, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(ariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(ariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                .addComponent(funpow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(funflr, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(ariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                .addComponent(funabs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(funsqrt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(funrecp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(ariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(ariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                .addComponent(funfact, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(funceil, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(ariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                .addComponent(funln, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(funlog, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(funexp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))));
-        ariLayout.setVerticalGroup(
-                ariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(ariLayout.createSequentialGroup()
-                .addGroup(ariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(ariLayout.createSequentialGroup()
-                .addComponent(funmax, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(funmin, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(funavg, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(funsum, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(ariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(funint, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(funrecp, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(ariLayout.createSequentialGroup()
-                .addComponent(funflr, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(funpow, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(funsqrt, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(funabs, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(ariLayout.createSequentialGroup()
-                .addGap(148, 148, 148)
-                .addComponent(funexp, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(ariLayout.createSequentialGroup()
-                .addComponent(funceil, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(funfact, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(funlog, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(funln, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-
-        // </editor-fold>
-
-        trig.setBorder(javax.swing.BorderFactory.createTitledBorder("Trigonometric"));
-
-        // <editor-fold defaultstate="collapsed" desc="Trig panel buttons">
-        funcosh.setText("cosh");
-        funcosh.setMaximumSize(new java.awt.Dimension(45, 23));
-        funcosh.setMinimumSize(new java.awt.Dimension(45, 23));
-        funcosh.setPreferredSize(new java.awt.Dimension(45, 23));
-        funcosh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funcoshActionPerformed(evt);
-            }
-        });
-
-        funatan.setText("atan");
-        funatan.setMaximumSize(new java.awt.Dimension(45, 23));
-        funatan.setMinimumSize(new java.awt.Dimension(45, 23));
-        funatan.setPreferredSize(new java.awt.Dimension(45, 23));
-        funatan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funatanActionPerformed(evt);
-            }
-        });
-
-        funsinh.setText("sinh");
-        funsinh.setPreferredSize(new java.awt.Dimension(47, 19));
-        funsinh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funsinhActionPerformed(evt);
-            }
-        });
-
-        funacosh.setText("acosh");
-        funacosh.setMaximumSize(new java.awt.Dimension(45, 23));
-        funacosh.setMinimumSize(new java.awt.Dimension(45, 23));
-        funacosh.setPreferredSize(new java.awt.Dimension(45, 23));
-        funacosh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funacoshActionPerformed(evt);
-            }
-        });
-
-        funtanh.setText("tanh");
-        funtanh.setMaximumSize(new java.awt.Dimension(45, 23));
-        funtanh.setMinimumSize(new java.awt.Dimension(45, 23));
-        funtanh.setPreferredSize(new java.awt.Dimension(45, 23));
-        funtanh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funtanhActionPerformed(evt);
-            }
-        });
-
-        funasinh.setText("asinh");
-        funasinh.setPreferredSize(new java.awt.Dimension(47, 19));
-        funasinh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funasinhActionPerformed(evt);
-            }
-        });
-
-        funacos.setText("acos");
-        funacos.setMaximumSize(new java.awt.Dimension(45, 23));
-        funacos.setMinimumSize(new java.awt.Dimension(45, 23));
-        funacos.setPreferredSize(new java.awt.Dimension(45, 23));
-        funacos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funacosActionPerformed(evt);
-            }
-        });
-
-        funatanh.setText("atanh");
-        funatanh.setMaximumSize(new java.awt.Dimension(45, 23));
-        funatanh.setMinimumSize(new java.awt.Dimension(45, 23));
-        funatanh.setPreferredSize(new java.awt.Dimension(45, 23));
-        funatanh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funatanhActionPerformed(evt);
-            }
-        });
-
-        funasin.setText("asin");
-        funasin.setPreferredSize(new java.awt.Dimension(47, 19));
-        funasin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funasinActionPerformed(evt);
-            }
-        });
-
-        funsin.setText("sin");
-        funsin.setPreferredSize(new java.awt.Dimension(47, 19));
-        funsin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funsinActionPerformed(evt);
-            }
-        });
-
-        funcos.setText("cos");
-        funcos.setMaximumSize(new java.awt.Dimension(45, 23));
-        funcos.setMinimumSize(new java.awt.Dimension(45, 23));
-        funcos.setPreferredSize(new java.awt.Dimension(45, 23));
-        funcos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funcosActionPerformed(evt);
-            }
-        });
-
-        funtan.setText("tan");
-        funtan.setMaximumSize(new java.awt.Dimension(45, 23));
-        funtan.setMinimumSize(new java.awt.Dimension(45, 23));
-        funtan.setPreferredSize(new java.awt.Dimension(45, 23));
-        funtan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                funtanActionPerformed(evt);
-            }
-        });
-
-        // </editor-fold>
-
-        // <editor-fold defaultstate="collapsed" desc="Trig panel">
-        javax.swing.GroupLayout trigLayout = new javax.swing.GroupLayout(trig);
-        trig.setLayout(trigLayout);
-        trigLayout.setHorizontalGroup(
-                trigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(trigLayout.createSequentialGroup()
-                .addGroup(trigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(funatanh, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(funacosh, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(funasinh, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(trigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(funacos, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(funasin, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(funatan, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(trigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(funcosh, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(funsinh, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(funtanh, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(trigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(funsin, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(funcos, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(funtan, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))));
-        trigLayout.setVerticalGroup(
-                trigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(trigLayout.createSequentialGroup()
-                .addGroup(trigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(funasinh, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(funasin, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(funsinh, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(funsin, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(trigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(funacosh, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(funacos, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(funcosh, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(funcos, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(trigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(funatanh, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(funatan, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(funtanh, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(funtan, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE)));
-
-        // </editor-fold>
 
         funsettings.setBorder(javax.swing.BorderFactory.createTitledBorder("Settings"));
 
@@ -3011,39 +2007,32 @@ public class MainClass extends javax.swing.JFrame {
                 .addContainerGap(277, Short.MAX_VALUE)));
         // </editor-fold>
 
-        javax.swing.GroupLayout fLayout = new javax.swing.GroupLayout(functions);
-        functions.setLayout(fLayout);
-        fLayout.setHorizontalGroup(
-                fLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(fLayout.createSequentialGroup()
+        
+        javax.swing.GroupLayout flayout = new javax.swing.GroupLayout(functions);
+        functions.setLayout(flayout);
+        flayout.setHorizontalGroup(
+            flayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(flayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(fLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(fLayout.createSequentialGroup()
-                .addComponent(funbx)
+                .addGroup(flayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(funsettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(flayout.createSequentialGroup()
+                        .addComponent(funbx)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fungo)))
                 .addContainerGap())
-                .addGroup(fLayout.createSequentialGroup()
-                .addGroup(fLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                .addComponent(funsettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(fLayout.createSequentialGroup()
-                .addComponent(trig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 5, Short.MAX_VALUE)))));
-        fLayout.setVerticalGroup(
-                fLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(fLayout.createSequentialGroup()
+        );
+        flayout.setVerticalGroup(
+            flayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(flayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(funbx, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(fLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                .addComponent(ari, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(input, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(trig, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(flayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(fungo, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                    .addComponent(funbx))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(funsettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap()));
+                .addContainerGap())
+        );
 
 
 
@@ -3084,7 +2073,7 @@ public class MainClass extends javax.swing.JFrame {
                 .addComponent(txtbutton)
                 .addGap(0, 80, Short.MAX_VALUE))
                 .addComponent(txtbx, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, (height - taskBarHeight) - 300, Short.MAX_VALUE)));
+                .addGap(0, (height - taskBarHeight) - 1037, Short.MAX_VALUE)));
 
         // </editor-fold>
 

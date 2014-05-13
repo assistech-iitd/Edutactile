@@ -57,6 +57,7 @@ public class NewJFrame11 extends javax.swing.JFrame {
         jRadioButton7 = new javax.swing.JRadioButton();
         jRadioButton8 = new javax.swing.JRadioButton();
         jButton2 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
         bottomleft = new javax.swing.JPanel();
         txtbx = new javax.swing.JTextField();
         txtbutton = new javax.swing.JButton();
@@ -267,6 +268,8 @@ public class NewJFrame11 extends javax.swing.JFrame {
                 .addContainerGap(224, Short.MAX_VALUE))
         );
 
+        jTextField1.setText("jTextField1");
+
         javax.swing.GroupLayout middleleftLayout = new javax.swing.GroupLayout(middleleft);
         middleleft.setLayout(middleleftLayout);
         middleleftLayout.setHorizontalGroup(
@@ -276,15 +279,18 @@ public class NewJFrame11 extends javax.swing.JFrame {
                 .addGroup(middleleftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(middleleftLayout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jTextField1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)))
                 .addContainerGap())
         );
         middleleftLayout.setVerticalGroup(
             middleleftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(middleleftLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(middleleftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                    .addComponent(jTextField1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -452,6 +458,7 @@ public class NewJFrame11 extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JRadioButton jRadioButton7;
     private javax.swing.JRadioButton jRadioButton8;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToolBar jToolBar1;
