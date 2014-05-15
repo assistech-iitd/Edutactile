@@ -20,10 +20,10 @@ import java.util.logging.Logger;
 
 public class ImageConverter {
 
-    void draw(Graphics2D g2d, File f, IconPanel panel, String txt, ArrayList<Shape> converted) throws SVGException {
+    void draw(Graphics2D g2d, File f, IconPanel panel, String txt, ArrayList<Shape> converted,int fontsize) throws SVGException {
 
-        double h1,h2,w1,w2,ratio,newwidth;
-    
+        double h1, h2, w1, w2, ratio, newwidth;
+
         ratio = ((double) panel.getHeight()) / 297;
         newwidth = ratio * 210;
 
@@ -42,11 +42,20 @@ public class ImageConverter {
                     txt1 = txt1 + txtbuffer + ' ';
                     txtbuffer = "";
                 }
-                if ((t > 29) && (t <= 59)) {
+                if ((t > 30) && (t <= 59)) {
                     txt2 = txt2 + txtbuffer + ' ';
                     txtbuffer = "";
                 }
 
+            } else if((t==txt.length()-1)||(t==29))  {
+                if (t <= 29) {
+                    txt1 = txt1+txtbuffer+txt.charAt(t);
+                    txtbuffer = "";
+                }
+                if ((t > 29) && (t <= 59)) {
+                    txt2 = txt2+txtbuffer+txt.charAt(t);
+                }
+                               
             } else {
                 txtbuffer = txtbuffer + txt.charAt(t);
             }
@@ -55,12 +64,12 @@ public class ImageConverter {
 
         //Boundary + Top Right Corner Circle
         g2d.draw(new Rectangle2D.Double(w1, h1, w2 - w1, h2 - h1));
-        g2d.draw(new Ellipse2D.Double(w1 + 10, h1 + 10, 40, 40));
+        g2d.fill(new Ellipse2D.Double(w1 + 20, h1 + 20, 25, 25));
 
         // Text box
-        g2d.setFont(new Font("Braille", Font.PLAIN, 25));
-        g2d.drawString(txt1, (float) w1 + 20, (float) h1 + 100);
-        g2d.drawString(txt2, (float) w1 + 20, (float) h1 + 135);
+        g2d.setFont(new Font("Braille", Font.PLAIN, fontsize));
+        g2d.drawString(txt1, (float) w1 + 60, (float) h1 + 40);
+        g2d.drawString(txt2, (float) w1 + 60, (float) h1 + 75);
 
         if (f != null) {
 
@@ -69,9 +78,9 @@ public class ImageConverter {
                 SVGDiagram diagram = svgUniverse.getDiagram(svgUniverse.loadSVG(f.toURI().toURL()));
                 SVGElement root = diagram.getRoot();
 
-                converter(root,converted);
-                scaling(converted,panel);
-                aslipaint(g2d,converted);
+                converter(root, converted);
+                scaling(converted, panel);
+                aslipaint(g2d, converted);
 
             } catch (MalformedURLException ex) {
                 Logger.getLogger(IconPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -80,351 +89,384 @@ public class ImageConverter {
         }
     }
 
-    private void converter(SVGElement root,ArrayList<Shape> converted) throws SVGElementException, SVGException {
+    private void converter(SVGElement root, ArrayList<Shape> converted) throws SVGElementException, SVGException {
 
         switch (root.getTagName()) {
-            case "rect":
-                {
-                    double height = root.getPresAbsolute("height").getDoubleValue();
-                    double width = root.getPresAbsolute("width").getDoubleValue();
-                    double x = root.getPresAbsolute("x").getDoubleValue();
-                    double y = root.getPresAbsolute("y").getDoubleValue();
-                    Shape aalo = new Shape();
-                    aalo.type = "Rect";
-                    aalo.recheight = height;
-                    aalo.recwidth = width;
-                    aalo.recx = x;
-                    aalo.recy = y;
-                    aalo.recheight2 = height;
-                    aalo.recwidth2 = width;
-                    aalo.recx2 = x;
-                    aalo.recy2 = y;
-                    aalo.minx = x;
-                    aalo.miny = y;
-                    aalo.maxx = x + width;
-                    aalo.maxy = y + height;
-                    converted.add(aalo);
-                    break;
-                }
-            case "circle":
-                {
-                    double radius = root.getPresAbsolute("r").getDoubleValue();
-                    double x = root.getPresAbsolute("cx").getDoubleValue();
-                    double y = root.getPresAbsolute("cy").getDoubleValue();
-                    Shape aalo = new Shape();
-                    aalo.type = "Circ";
-                    aalo.circr = radius;
-                    aalo.circx = x;
-                    aalo.circy = y;
-                    aalo.circr2 = radius;
-                    aalo.circx2 = x;
-                    aalo.circy2 = y;
-                    aalo.minx = x - radius;
-                    aalo.miny = y - radius;
-                    aalo.maxx = x + radius;
-                    aalo.maxy = y + radius;
-                    converted.add(aalo);
-                    break;
-                }
-            case "line":
-                {
-                    double x1 = root.getPresAbsolute("x1").getDoubleValue();
-                    double y1 = root.getPresAbsolute("y1").getDoubleValue();
-                    double x2 = root.getPresAbsolute("x2").getDoubleValue();
-                    double y2 = root.getPresAbsolute("y2").getDoubleValue();
-                    Shape aalo = new Shape();
-                    aalo.type = "Line";
-                    aalo.linx = x1;
-                    aalo.liny = y1;
-                    aalo.linxa = x2;
-                    aalo.linya = y2;
-                    aalo.linx2 = x1;
-                    aalo.liny2 = y1;
-                    aalo.linxa2 = x2;
-                    aalo.linya2 = y2;
-                    aalo.minx = Math.min(x1, x2);
-                    aalo.miny = Math.min(y1, y2);
-                    aalo.maxx = Math.max(x1, x2);
-                    aalo.maxy = Math.max(y1, y2);
-                    converted.add(aalo);
-                    break;
-                }
-            case "tspan":
-                {
-                    String s = ((Tspan) root).getText();
-                    double x = root.getPresAbsolute("x").getDoubleValue();
-                    double y = root.getPresAbsolute("y").getDoubleValue();
-                    double valuea = 25.0;
-                    Shape aalo = new Shape();
-                    aalo.type = "Text";
-                    aalo.textx = x;
-                    aalo.texty = y;
-                    aalo.text = s;
-                    aalo.font = valuea;
-                    aalo.font2 = valuea;
-                    aalo.textx2 = x;
-                    aalo.texty2 = y;
-                    aalo.minx = x;
-                    aalo.miny = y;
-                    aalo.maxx = x + ((s.length()) * valuea);
-                    aalo.maxy = y + (valuea);
-                    converted.add(aalo);
-                    break;
-                }
-            case "path":
-                {
-                    String love = root.getPresAbsolute("d").getStringValue();
-                    System.out.println(love);
-                    int state = 0;
-                    Shape aalo = new Shape();
-                    aalo.type = "Path";
-                    aalo.path = new ArrayList<>();
-                    PathType reserve = null;
-                    Coordinate r1 = null;
-                    String first = null, second = null;
-                    //<editor-fold defaultstate="collapsed" desc="State Machine">
-                    while (love.length() != 0) {
-                        
-                        System.out.println("State: " + state);
-                        System.out.println("Character: " + love.charAt(0));
-                        System.out.println(" ");
-                        
-                        switch (state) {
-                            case 0:
-                                r1 = new Coordinate();
-                                if (love.charAt(0) == (' ')) {
-                                    love = love.substring(1, love.length());
-                                } else if (love.charAt(0) == ('z') || love.charAt(0) == ('Z')) {
-                                    char chor = love.charAt(0);
-                                    love = love.substring(1, love.length());
-                                    reserve = new PathType();
-                                    reserve.Type = chor;
-                                    aalo.path.add(reserve);
-                                } else if (love.charAt(0) == ('m') || love.charAt(0) == ('M') || love.charAt(0) == ('L') || love.charAt(0) == ('l')) {
-                                    char chor = love.charAt(0);
-                                    love = love.substring(1, love.length());
-                                    state = 1;
-                                    reserve = new PathType();
-                                    reserve.Type = chor;
-                                } else if (love.charAt(0) == ('c') || love.charAt(0) == ('C')) {
-                                    char chor = love.charAt(0);
-                                    love = love.substring(1, love.length());
-                                    state = 5;
-                                    reserve = new PathType();
-                                    reserve.Type = chor;
-                                }
-                                break;
-                                
-                            case 1:
-                                if (love.charAt(0) == (' ')) {
-                                    love = love.substring(1, love.length());
-                                } else if (love.charAt(0) == ('0') || love.charAt(0) == ('1') || love.charAt(0) == ('-') || love.charAt(0) == ('2') || love.charAt(0) == ('3') || love.charAt(0) == ('4') || love.charAt(0) == ('5') || love.charAt(0) == ('6') || love.charAt(0) == ('7') || love.charAt(0) == ('8') || love.charAt(0) == ('9')) {
-                                    char chor = love.charAt(0);
-                                    love = love.substring(1, love.length());
-                                    state = 2;
-                                    first = "";
-                                    first = first + chor;
-                                }
-                                break;
-                                
-                            case 2:
-                                if (love.charAt(0) == (' ') || love.charAt(0) == (',')) {
-                                    love = love.substring(1, love.length());
-                                    state = 3;
-                                    r1.x = (Double.parseDouble(first));
-                                } else if (love.charAt(0) == ('0') || love.charAt(0) == ('1') || love.charAt(0) == ('2') || love.charAt(0) == ('3') || love.charAt(0) == ('.') || love.charAt(0) == ('4') || love.charAt(0) == ('5') || love.charAt(0) == ('6') || love.charAt(0) == ('7') || love.charAt(0) == ('8') || love.charAt(0) == ('9')) {
-                                    char chor = love.charAt(0);
-                                    love = love.substring(1, love.length());
-                                    first = first + chor;
-                                }
-                                break;
-                                
-                            case 3:
-                                if (love.charAt(0) == (' ')) {
-                                    love = love.substring(1, love.length());
-                                } else if (love.charAt(0) == ('0') || love.charAt(0) == ('1') || love.charAt(0) == ('-') || love.charAt(0) == ('2') || love.charAt(0) == ('3') || love.charAt(0) == ('4') || love.charAt(0) == ('5') || love.charAt(0) == ('6') || love.charAt(0) == ('7') || love.charAt(0) == ('8') || love.charAt(0) == ('9')) {
-                                    char chor = love.charAt(0);
-                                    love = love.substring(1, love.length());
-                                    state = 4;
-                                    second = "";
-                                    second = second + chor;
-                                }
-                                break;
-                                
-                            case 4:
-                                if (love.charAt(0) == (' ')) {
-                                    love = love.substring(1, love.length());
-                                    state = 0;
+            case "rect": {
+                double height = root.getPresAbsolute("height").getDoubleValue();
+                double width = root.getPresAbsolute("width").getDoubleValue();
+                double x = root.getPresAbsolute("x").getDoubleValue();
+                double y = root.getPresAbsolute("y").getDoubleValue();
+                Shape aalo = new Shape();
+                aalo.type = "Rect";
+                aalo.recheight = height;
+                aalo.recwidth = width;
+                aalo.recx = x;
+                aalo.recy = y;
+                aalo.recheight2 = height;
+                aalo.recwidth2 = width;
+                aalo.recx2 = x;
+                aalo.recy2 = y;
+                aalo.minx = x;
+                aalo.miny = y;
+                aalo.maxx = x + width;
+                aalo.maxy = y + height;
+                converted.add(aalo);
+                break;
+            }
+            case "circle": {
+                double radius = root.getPresAbsolute("r").getDoubleValue();
+                double x = root.getPresAbsolute("cx").getDoubleValue();
+                double y = root.getPresAbsolute("cy").getDoubleValue();
+                Shape aalo = new Shape();
+                aalo.type = "Circ";
+                aalo.circr = radius;
+                aalo.circx = x;
+                aalo.circy = y;
+                aalo.circr2 = radius;
+                aalo.circx2 = x;
+                aalo.circy2 = y;
+                aalo.minx = x - radius;
+                aalo.miny = y - radius;
+                aalo.maxx = x + radius;
+                aalo.maxy = y + radius;
+                converted.add(aalo);
+                break;
+            }
+            case "line": {
+                double x1 = root.getPresAbsolute("x1").getDoubleValue();
+                double y1 = root.getPresAbsolute("y1").getDoubleValue();
+                double x2 = root.getPresAbsolute("x2").getDoubleValue();
+                double y2 = root.getPresAbsolute("y2").getDoubleValue();
+                Shape aalo = new Shape();
+                aalo.type = "Line";
+                aalo.linx = x1;
+                aalo.liny = y1;
+                aalo.linxa = x2;
+                aalo.linya = y2;
+                aalo.linx2 = x1;
+                aalo.liny2 = y1;
+                aalo.linxa2 = x2;
+                aalo.linya2 = y2;
+                aalo.minx = Math.min(x1, x2);
+                aalo.miny = Math.min(y1, y2);
+                aalo.maxx = Math.max(x1, x2);
+                aalo.maxy = Math.max(y1, y2);
+                converted.add(aalo);
+                break;
+            }
+            case "tspan": {
+                String s = ((Tspan) root).getText();
+                double x = root.getPresAbsolute("x").getDoubleValue();
+                double y = root.getPresAbsolute("y").getDoubleValue();
+                double valuea = 25.0;
+                Shape aalo = new Shape();
+                aalo.type = "Text";
+                aalo.textx = x;
+                aalo.texty = y;
+                aalo.text = s;
+                aalo.font = valuea;
+                aalo.font2 = valuea;
+                aalo.textx2 = x;
+                aalo.texty2 = y;
+                aalo.minx = x;
+                aalo.miny = y;
+                aalo.maxx = x + ((s.length()) * valuea);
+                aalo.maxy = y + (valuea);
+                converted.add(aalo);
+                break;
+            }
+            case "path": {
+                String love = root.getPresAbsolute("d").getStringValue();
+                System.out.println(love);
+                int state = 0;
+                Shape aalo = new Shape();
+                aalo.type = "Path";
+                aalo.path = new ArrayList<>();
+                PathType reserve = null;
+                Coordinate r1 = null;
+                String first = null, second = null;
+                //<editor-fold defaultstate="collapsed" desc="State Machine">
+                while (love.length() != 0) {
+
+                    System.out.println("State: " + state);
+                    System.out.println("Character: " + love.charAt(0));
+                    System.out.println(" ");
+
+                    switch (state) {
+                        case 0:
+                            r1 = new Coordinate();
+                            if (love.charAt(0) == (' ')) {
+                                love = love.substring(1, love.length());
+                            } else if (love.charAt(0) == ('z') || love.charAt(0) == ('Z')) {
+                                char chor = love.charAt(0);
+                                love = love.substring(1, love.length());
+                                reserve = new PathType();
+                                reserve.Type = chor;
+                                aalo.path.add(reserve);
+                            } else if (love.charAt(0) == ('m') || love.charAt(0) == ('M') || love.charAt(0) == ('L') || love.charAt(0) == ('l')) {
+                                char chor = love.charAt(0);
+                                love = love.substring(1, love.length());
+                                state = 1;
+                                reserve = new PathType();
+                                reserve.Type = chor;
+                            } else if (love.charAt(0) == ('c') || love.charAt(0) == ('C')) {
+                                char chor = love.charAt(0);
+                                love = love.substring(1, love.length());
+                                state = 5;
+                                reserve = new PathType();
+                                reserve.Type = chor;
+                            }
+                            break;
+
+                        case 1:
+                            if (love.charAt(0) == (' ')) {
+                                love = love.substring(1, love.length());
+                            } else if (love.charAt(0) == ('0') || love.charAt(0) == ('1') || love.charAt(0) == ('-') || love.charAt(0) == ('2') || love.charAt(0) == ('3') || love.charAt(0) == ('4') || love.charAt(0) == ('5') || love.charAt(0) == ('6') || love.charAt(0) == ('7') || love.charAt(0) == ('8') || love.charAt(0) == ('9')) {
+                                char chor = love.charAt(0);
+                                love = love.substring(1, love.length());
+                                state = 2;
+                                first = "";
+                                first = first + chor;
+                            }
+                            break;
+
+                        case 2:
+                            if (love.charAt(0) == (' ') || love.charAt(0) == (',')) {
+                                love = love.substring(1, love.length());
+                                state = 3;
+                                r1.x = (Double.parseDouble(first));
+                            } else if (love.charAt(0) == ('0') || love.charAt(0) == ('1') || love.charAt(0) == ('2') || love.charAt(0) == ('3') || love.charAt(0) == ('.') || love.charAt(0) == ('4') || love.charAt(0) == ('5') || love.charAt(0) == ('6') || love.charAt(0) == ('7') || love.charAt(0) == ('8') || love.charAt(0) == ('9')) {
+                                char chor = love.charAt(0);
+                                love = love.substring(1, love.length());
+                                first = first + chor;
+                            }
+                            break;
+
+                        case 3:
+                            if (love.charAt(0) == (' ')) {
+                                love = love.substring(1, love.length());
+                            } else if (love.charAt(0) == ('0') || love.charAt(0) == ('1') || love.charAt(0) == ('-') || love.charAt(0) == ('2') || love.charAt(0) == ('3') || love.charAt(0) == ('4') || love.charAt(0) == ('5') || love.charAt(0) == ('6') || love.charAt(0) == ('7') || love.charAt(0) == ('8') || love.charAt(0) == ('9')) {
+                                char chor = love.charAt(0);
+                                love = love.substring(1, love.length());
+                                state = 4;
+                                second = "";
+                                second = second + chor;
+                            }
+                            break;
+
+                        case 4:
+                            if (love.charAt(0) == (' ')) {
+                                love = love.substring(1, love.length());
+                                state = 0;
+                                r1.y = Double.parseDouble(second);
+                                reserve.single = r1;
+                                aalo.path.add(reserve);
+                            } else if (love.charAt(0) == ('z') || love.charAt(0) == ('Z')) {
+
+                                char chor = love.charAt(0);
+
+                                love = love.substring(1, love.length());
+                                state = 0;
+                                r1.y = Double.parseDouble(second);
+                                reserve.single = r1;
+                                aalo.path.add(reserve);
+
+                                reserve = new PathType();
+                                reserve.Type = chor;
+                                aalo.path.add(reserve);
+
+                            } else if (love.charAt(0) == ('c') || love.charAt(0) == ('C')) {
+
+                                char chor = love.charAt(0);
+                                love = love.substring(1, love.length());
+                                state = 5;
+
+                                r1.y = Double.parseDouble(second);
+                                reserve.single = r1;
+                                aalo.path.add(reserve);
+
+                                reserve = new PathType();
+                                reserve.Type = chor;
+
+                            } else if (love.charAt(0) == ('0') || love.charAt(0) == ('1') || love.charAt(0) == ('2') || love.charAt(0) == ('.') || love.charAt(0) == ('3') || love.charAt(0) == ('4') || love.charAt(0) == ('5') || love.charAt(0) == ('6') || love.charAt(0) == ('7') || love.charAt(0) == ('8') || love.charAt(0) == ('9')) {
+                                char chor = love.charAt(0);
+                                second = second + chor;
+                                if (love.length() == 1) {
                                     r1.y = Double.parseDouble(second);
                                     reserve.single = r1;
                                     aalo.path.add(reserve);
-                                } else if (love.charAt(0) == ('z') || love.charAt(0) == ('Z')) {
-                                    
-                                    char chor = love.charAt(0);
-                                    
-                                    love = love.substring(1, love.length());
-                                    state = 0;
-                                    r1.y = Double.parseDouble(second);
-                                    reserve.single = r1;
-                                    aalo.path.add(reserve);
-                                    
-                                    reserve = new PathType();
-                                    reserve.Type = chor;
-                                    aalo.path.add(reserve);
-                                    
-                                } else if (love.charAt(0) == ('c') || love.charAt(0) == ('C')) {
-                                    
-                                    char chor = love.charAt(0);
-                                    love = love.substring(1, love.length());
-                                    state = 5;
-                                    
-                                    r1.y = Double.parseDouble(second);
-                                    reserve.single = r1;
-                                    aalo.path.add(reserve);
-                                    
-                                    reserve = new PathType();
-                                    reserve.Type = chor;
-                                    
-                                } else if (love.charAt(0) == ('0') || love.charAt(0) == ('1') || love.charAt(0) == ('2') || love.charAt(0) == ('.') || love.charAt(0) == ('3') || love.charAt(0) == ('4') || love.charAt(0) == ('5') || love.charAt(0) == ('6') || love.charAt(0) == ('7') || love.charAt(0) == ('8') || love.charAt(0) == ('9')) {
-                                    char chor = love.charAt(0);
-                                    second = second + chor;
-                                    if (love.length() == 1) {
-                                        r1.y = Double.parseDouble(second);
-                                        reserve.single = r1;
-                                        aalo.path.add(reserve);
-                                    }
-                                    love = love.substring(1, love.length());
                                 }
-                                break;
-                                
-                            case 5:
-                                if (love.charAt(0) == (' ')) {
-                                    love = love.substring(1, love.length());
-                                } else if (love.charAt(0) == ('0') || love.charAt(0) == ('1') || love.charAt(0) == ('-') || love.charAt(0) == ('2') || love.charAt(0) == ('3') || love.charAt(0) == ('4') || love.charAt(0) == ('5') || love.charAt(0) == ('6') || love.charAt(0) == ('7') || love.charAt(0) == ('8') || love.charAt(0) == ('9')) {
-                                    char chor = love.charAt(0);
-                                    love = love.substring(1, love.length());
-                                    state = 6;
-                                    first = "";
-                                    first = first + chor;
-                                }
-                                break;
-                                
-                            case 6:
-                                if (love.charAt(0) == (' ') || love.charAt(0) == (',')) {
-                                    love = love.substring(1, love.length());
-                                    state = 7;
-                                    r1.x = (Double.parseDouble(first));
-                                } else if (love.charAt(0) == ('0') || love.charAt(0) == ('1') || love.charAt(0) == ('2') || love.charAt(0) == ('3') || love.charAt(0) == ('.') || love.charAt(0) == ('4') || love.charAt(0) == ('5') || love.charAt(0) == ('6') || love.charAt(0) == ('7') || love.charAt(0) == ('8') || love.charAt(0) == ('9')) {
-                                    char chor = love.charAt(0);
-                                    love = love.substring(1, love.length());
-                                    first = first + chor;
-                                }
-                                break;
-                                
-                            case 7:
-                                if (love.charAt(0) == (' ')) {
-                                    love = love.substring(1, love.length());
-                                } else if (love.charAt(0) == ('0') || love.charAt(0) == ('1') || love.charAt(0) == ('-') || love.charAt(0) == ('2') || love.charAt(0) == ('3') || love.charAt(0) == ('4') || love.charAt(0) == ('5') || love.charAt(0) == ('6') || love.charAt(0) == ('7') || love.charAt(0) == ('8') || love.charAt(0) == ('9')) {
-                                    char chor = love.charAt(0);
-                                    state = 8;
-                                    second = "";
-                                    second = second + chor;
-                                    
-                                    if (love.length() == 1) {
-                                        r1.y = Double.parseDouble(second);
-                                        reserve.multi.add(r1);
-                                        aalo.path.add(reserve);
-                                    }
-                                    
-                                    love = love.substring(1, love.length());
-                                }
-                                break;
-                                
-                            case 8:
-                                if (love.charAt(0) == (' ')) {
-                                    love = love.substring(1, love.length());
-                                    state = 9;
-                                    r1.y = Double.parseDouble(second);
-                                    reserve.multi.add(r1);
-                                } else if (love.charAt(0) == ('z') || love.charAt(0) == ('Z')) {
-                                    
-                                    char chor = love.charAt(0);
-                                    love = love.substring(1, love.length());
-                                    state = 0;
-                                    
+                                love = love.substring(1, love.length());
+                            }
+                            break;
+
+                        case 5:
+                            if (love.charAt(0) == (' ')) {
+                                love = love.substring(1, love.length());
+                            } else if (love.charAt(0) == ('0') || love.charAt(0) == ('1') || love.charAt(0) == ('-') || love.charAt(0) == ('2') || love.charAt(0) == ('3') || love.charAt(0) == ('4') || love.charAt(0) == ('5') || love.charAt(0) == ('6') || love.charAt(0) == ('7') || love.charAt(0) == ('8') || love.charAt(0) == ('9')) {
+                                char chor = love.charAt(0);
+                                love = love.substring(1, love.length());
+                                state = 6;
+                                first = "";
+                                first = first + chor;
+                            }
+                            break;
+
+                        case 6:
+                            if (love.charAt(0) == (' ') || love.charAt(0) == (',')) {
+                                love = love.substring(1, love.length());
+                                state = 7;
+                                r1.x = (Double.parseDouble(first));
+                            } else if (love.charAt(0) == ('0') || love.charAt(0) == ('1') || love.charAt(0) == ('2') || love.charAt(0) == ('3') || love.charAt(0) == ('.') || love.charAt(0) == ('4') || love.charAt(0) == ('5') || love.charAt(0) == ('6') || love.charAt(0) == ('7') || love.charAt(0) == ('8') || love.charAt(0) == ('9')) {
+                                char chor = love.charAt(0);
+                                love = love.substring(1, love.length());
+                                first = first + chor;
+                            }
+                            break;
+
+                        case 7:
+                            if (love.charAt(0) == (' ')) {
+                                love = love.substring(1, love.length());
+                            } else if (love.charAt(0) == ('0') || love.charAt(0) == ('1') || love.charAt(0) == ('-') || love.charAt(0) == ('2') || love.charAt(0) == ('3') || love.charAt(0) == ('4') || love.charAt(0) == ('5') || love.charAt(0) == ('6') || love.charAt(0) == ('7') || love.charAt(0) == ('8') || love.charAt(0) == ('9')) {
+                                char chor = love.charAt(0);
+                                state = 8;
+                                second = "";
+                                second = second + chor;
+
+                                if (love.length() == 1) {
                                     r1.y = Double.parseDouble(second);
                                     reserve.multi.add(r1);
                                     aalo.path.add(reserve);
-                                    
-                                    reserve = new PathType();
-                                    reserve.Type = chor;
-                                    aalo.path.add(reserve);
-                                    
-                                } else if (love.charAt(0) == ('0') || love.charAt(0) == ('1') || love.charAt(0) == ('2') || love.charAt(0) == ('.') || love.charAt(0) == ('3') || love.charAt(0) == ('4') || love.charAt(0) == ('5') || love.charAt(0) == ('6') || love.charAt(0) == ('7') || love.charAt(0) == ('8') || love.charAt(0) == ('9')) {
-                                    char chor = love.charAt(0);
-                                    second = second + chor;
-                                    if (love.length() == 1) {
-                                        r1.y = Double.parseDouble(second);
-                                        reserve.multi.add(r1);
-                                        aalo.path.add(reserve);
-                                    }
-                                    love = love.substring(1, love.length());
                                 }
-                                break;
-                                
-                            case 9:
-                                r1 = new Coordinate();
-                                if (love.charAt(0) == (' ')) {
-                                    if (love.length() == 1) {
-                                        aalo.path.add(reserve);
-                                    }
-                                    love = love.substring(1, love.length());
-                                } else if (love.charAt(0) == ('z') || love.charAt(0) == ('Z')) {
-                                    char chor = love.charAt(0);
-                                    love = love.substring(1, love.length());
-                                    state = 0;
+
+                                love = love.substring(1, love.length());
+                            }
+                            break;
+
+                        case 8:
+                            if (love.charAt(0) == (' ')) {
+                                love = love.substring(1, love.length());
+                                state = 9;
+                                r1.y = Double.parseDouble(second);
+                                reserve.multi.add(r1);
+                            } else if (love.charAt(0) == ('z') || love.charAt(0) == ('Z')) {
+
+                                char chor = love.charAt(0);
+                                love = love.substring(1, love.length());
+                                state = 0;
+
+                                r1.y = Double.parseDouble(second);
+                                reserve.multi.add(r1);
+                                aalo.path.add(reserve);
+
+                                reserve = new PathType();
+                                reserve.Type = chor;
+                                aalo.path.add(reserve);
+
+                            } else if (love.charAt(0) == ('0') || love.charAt(0) == ('1') || love.charAt(0) == ('2') || love.charAt(0) == ('.') || love.charAt(0) == ('3') || love.charAt(0) == ('4') || love.charAt(0) == ('5') || love.charAt(0) == ('6') || love.charAt(0) == ('7') || love.charAt(0) == ('8') || love.charAt(0) == ('9')) {
+                                char chor = love.charAt(0);
+                                second = second + chor;
+                                if (love.length() == 1) {
+                                    r1.y = Double.parseDouble(second);
+                                    reserve.multi.add(r1);
                                     aalo.path.add(reserve);
-                                    reserve = new PathType();
-                                    reserve.Type = chor;
-                                    aalo.path.add(reserve);
-                                } else if (love.charAt(0) == ('m') || love.charAt(0) == ('M') || love.charAt(0) == ('L') || love.charAt(0) == ('l')) {
-                                    char chor = love.charAt(0);
-                                    love = love.substring(1, love.length());
-                                    state = 1;
-                                    aalo.path.add(reserve);
-                                    reserve = new PathType();
-                                    reserve.Type = chor;
-                                } else if (love.charAt(0) == ('c') || love.charAt(0) == ('C')) {
-                                    char chor = love.charAt(0);
-                                    love = love.substring(1, love.length());
-                                    state = 5;
-                                    aalo.path.add(reserve);
-                                    reserve = new PathType();
-                                    reserve.Type = chor;
-                                } else if (love.charAt(0) == ('0') || love.charAt(0) == ('1') || love.charAt(0) == ('-') || love.charAt(0) == ('2') || love.charAt(0) == ('3') || love.charAt(0) == ('4') || love.charAt(0) == ('5') || love.charAt(0) == ('6') || love.charAt(0) == ('7') || love.charAt(0) == ('8') || love.charAt(0) == ('9')) {
-                                    char chor = love.charAt(0);
-                                    love = love.substring(1, love.length());
-                                    state = 6;
-                                    first = "";
-                                    first = first + chor;
                                 }
-                                break;
-                                
-                        }
+                                love = love.substring(1, love.length());
+                            }
+                            break;
+
+                        case 9:
+                            r1 = new Coordinate();
+                            if (love.charAt(0) == (' ')) {
+                                if (love.length() == 1) {
+                                    aalo.path.add(reserve);
+                                }
+                                love = love.substring(1, love.length());
+                            } else if (love.charAt(0) == ('z') || love.charAt(0) == ('Z')) {
+                                char chor = love.charAt(0);
+                                love = love.substring(1, love.length());
+                                state = 0;
+                                aalo.path.add(reserve);
+                                reserve = new PathType();
+                                reserve.Type = chor;
+                                aalo.path.add(reserve);
+                            } else if (love.charAt(0) == ('m') || love.charAt(0) == ('M') || love.charAt(0) == ('L') || love.charAt(0) == ('l')) {
+                                char chor = love.charAt(0);
+                                love = love.substring(1, love.length());
+                                state = 1;
+                                aalo.path.add(reserve);
+                                reserve = new PathType();
+                                reserve.Type = chor;
+                            } else if (love.charAt(0) == ('c') || love.charAt(0) == ('C')) {
+                                char chor = love.charAt(0);
+                                love = love.substring(1, love.length());
+                                state = 5;
+                                aalo.path.add(reserve);
+                                reserve = new PathType();
+                                reserve.Type = chor;
+                            } else if (love.charAt(0) == ('0') || love.charAt(0) == ('1') || love.charAt(0) == ('-') || love.charAt(0) == ('2') || love.charAt(0) == ('3') || love.charAt(0) == ('4') || love.charAt(0) == ('5') || love.charAt(0) == ('6') || love.charAt(0) == ('7') || love.charAt(0) == ('8') || love.charAt(0) == ('9')) {
+                                char chor = love.charAt(0);
+                                love = love.substring(1, love.length());
+                                state = 6;
+                                first = "";
+                                first = first + chor;
+                            }
+                            break;
+
                     }
+                }
                     //</editor-fold>
-                    // <editor-fold defaultstate="collapsed" desc="Bounding the path">
-                    Coordinate current = new Coordinate();
-                    current.x = 0;
-                    current.y = 0;
-                    aalo.minx = Double.POSITIVE_INFINITY;
-                    aalo.miny = Double.POSITIVE_INFINITY;
-                    aalo.maxx = 0;
-                    aalo.maxy = 0;
-                    for (int i = 0; i < aalo.path.size(); i++) {
-                        
-                        if (i == 0) {
-                            
+                // <editor-fold defaultstate="collapsed" desc="Bounding the path">
+                Coordinate current = new Coordinate();
+                current.x = 0;
+                current.y = 0;
+                aalo.minx = Double.POSITIVE_INFINITY;
+                aalo.miny = Double.POSITIVE_INFINITY;
+                aalo.maxx = 0;
+                aalo.maxy = 0;
+                for (int i = 0; i < aalo.path.size(); i++) {
+
+                    if (i == 0) {
+
+                        if (aalo.minx > aalo.path.get(i).single.x) {
+                            aalo.minx = aalo.path.get(i).single.x;
+                        }
+                        if (aalo.miny > aalo.path.get(i).single.y) {
+                            aalo.miny = aalo.path.get(i).single.y;
+                        }
+                        if (aalo.maxx < aalo.path.get(i).single.x) {
+                            aalo.maxx = aalo.path.get(i).single.x;
+                        }
+                        if (aalo.maxy < aalo.path.get(i).single.y) {
+                            aalo.maxy = aalo.path.get(i).single.y;
+                        }
+
+                        current.x = aalo.path.get(i).single.x;
+                        current.y = aalo.path.get(i).single.y;
+
+                    } else {
+
+                        if (aalo.path.get(i).Type == 'm') {
+
+                            if (aalo.minx > current.x + aalo.path.get(i).single.x) {
+                                aalo.minx = current.x + aalo.path.get(i).single.x;
+                            }
+                            if (aalo.miny > current.y + aalo.path.get(i).single.y) {
+                                aalo.miny = current.y + aalo.path.get(i).single.y;
+                            }
+                            if (aalo.maxx < current.x + aalo.path.get(i).single.x) {
+                                aalo.maxx = current.x + aalo.path.get(i).single.x;
+                            }
+                            if (aalo.maxy < current.y + aalo.path.get(i).single.y) {
+                                aalo.maxy = current.y + aalo.path.get(i).single.y;
+                            }
+
+                            current.x = aalo.path.get(i).single.x;
+                            current.y = aalo.path.get(i).single.y;
+
+                        } else if (aalo.path.get(i).Type == 'M') {
+
                             if (aalo.minx > aalo.path.get(i).single.x) {
                                 aalo.minx = aalo.path.get(i).single.x;
                             }
@@ -437,152 +479,114 @@ public class ImageConverter {
                             if (aalo.maxy < aalo.path.get(i).single.y) {
                                 aalo.maxy = aalo.path.get(i).single.y;
                             }
-                            
+
                             current.x = aalo.path.get(i).single.x;
                             current.y = aalo.path.get(i).single.y;
-                            
-                        } else {
-                            
-                            if (aalo.path.get(i).Type == 'm') {
-                                
-                                if (aalo.minx > current.x + aalo.path.get(i).single.x) {
-                                    aalo.minx = current.x + aalo.path.get(i).single.x;
+
+                        } else if (aalo.path.get(i).Type == 'l') {
+
+                            if (aalo.minx > current.x + aalo.path.get(i).single.x) {
+                                aalo.minx = current.x + aalo.path.get(i).single.x;
+                            }
+                            if (aalo.miny > current.y + aalo.path.get(i).single.y) {
+                                aalo.miny = current.y + aalo.path.get(i).single.y;
+                            }
+                            if (aalo.maxx < current.x + aalo.path.get(i).single.x) {
+                                aalo.maxx = current.x + aalo.path.get(i).single.x;
+                            }
+                            if (aalo.maxy < current.y + aalo.path.get(i).single.y) {
+                                aalo.maxy = current.y + aalo.path.get(i).single.y;
+                            }
+
+                            current.x = aalo.path.get(i).single.x;
+                            current.y = aalo.path.get(i).single.y;
+
+                        } else if (aalo.path.get(i).Type == 'L') {
+
+                            if (aalo.minx > aalo.path.get(i).single.x) {
+                                aalo.minx = aalo.path.get(i).single.x;
+                            }
+                            if (aalo.miny > aalo.path.get(i).single.y) {
+                                aalo.miny = aalo.path.get(i).single.y;
+                            }
+                            if (aalo.maxx < aalo.path.get(i).single.x) {
+                                aalo.maxx = aalo.path.get(i).single.x;
+                            }
+                            if (aalo.maxy < aalo.path.get(i).single.y) {
+                                aalo.maxy = aalo.path.get(i).single.y;
+                            }
+
+                            current.x = aalo.path.get(i).single.x;
+                            current.y = aalo.path.get(i).single.y;
+
+                        } else if (aalo.path.get(i).Type == 'c') {
+
+                            for (int a = 0; a < aalo.path.get(i).multi.size(); a++) {
+
+                                if (aalo.minx > current.x + aalo.path.get(i).multi.get(a).x) {
+                                    aalo.minx = current.x + aalo.path.get(i).multi.get(a).x;
                                 }
-                                if (aalo.miny > current.y + aalo.path.get(i).single.y) {
-                                    aalo.miny = current.y + aalo.path.get(i).single.y;
+                                if (aalo.miny > current.y + aalo.path.get(i).multi.get(a).y) {
+                                    aalo.miny = current.y + aalo.path.get(i).multi.get(a).y;
                                 }
-                                if (aalo.maxx < current.x + aalo.path.get(i).single.x) {
-                                    aalo.maxx = current.x + aalo.path.get(i).single.x;
+                                if (aalo.maxx < current.x + aalo.path.get(i).multi.get(a).x) {
+                                    aalo.maxx = current.x + aalo.path.get(i).multi.get(a).x;
                                 }
-                                if (aalo.maxy < current.y + aalo.path.get(i).single.y) {
-                                    aalo.maxy = current.y + aalo.path.get(i).single.y;
+                                if (aalo.maxy < current.y + aalo.path.get(i).multi.get(a).y) {
+                                    aalo.maxy = current.y + aalo.path.get(i).multi.get(a).y;
                                 }
-                                
-                                current.x = aalo.path.get(i).single.x;
-                                current.y = aalo.path.get(i).single.y;
-                                
-                            } else if (aalo.path.get(i).Type == 'M') {
-                                
-                                if (aalo.minx > aalo.path.get(i).single.x) {
-                                    aalo.minx = aalo.path.get(i).single.x;
+
+                                if (a % 3 == 2) {
+                                    current.x = current.x + aalo.path.get(i).multi.get(a).x;
+                                    current.y = current.y + aalo.path.get(i).multi.get(a).y;
                                 }
-                                if (aalo.miny > aalo.path.get(i).single.y) {
-                                    aalo.miny = aalo.path.get(i).single.y;
+
+                            }
+
+                        } else if (aalo.path.get(i).Type == 'C') {
+
+                            for (int a = 0; a < aalo.path.get(i).multi.size(); a++) {
+
+                                if (aalo.minx > aalo.path.get(i).multi.get(a).x) {
+                                    aalo.minx = aalo.path.get(i).multi.get(a).x;
                                 }
-                                if (aalo.maxx < aalo.path.get(i).single.x) {
-                                    aalo.maxx = aalo.path.get(i).single.x;
+                                if (aalo.miny > aalo.path.get(i).multi.get(a).y) {
+                                    aalo.miny = aalo.path.get(i).multi.get(a).y;
                                 }
-                                if (aalo.maxy < aalo.path.get(i).single.y) {
-                                    aalo.maxy = aalo.path.get(i).single.y;
+                                if (aalo.maxx < aalo.path.get(i).multi.get(a).x) {
+                                    aalo.maxx = aalo.path.get(i).multi.get(a).x;
                                 }
-                                
-                                current.x = aalo.path.get(i).single.x;
-                                current.y = aalo.path.get(i).single.y;
-                                
-                            } else if (aalo.path.get(i).Type == 'l') {
-                                
-                                if (aalo.minx > current.x + aalo.path.get(i).single.x) {
-                                    aalo.minx = current.x + aalo.path.get(i).single.x;
+                                if (aalo.maxy < aalo.path.get(i).multi.get(a).y) {
+                                    aalo.maxy = aalo.path.get(i).multi.get(a).y;
                                 }
-                                if (aalo.miny > current.y + aalo.path.get(i).single.y) {
-                                    aalo.miny = current.y + aalo.path.get(i).single.y;
+
+                                if (a % 3 == 2) {
+                                    current.x = aalo.path.get(i).multi.get(a).x;
+                                    current.y = aalo.path.get(i).multi.get(a).y;
                                 }
-                                if (aalo.maxx < current.x + aalo.path.get(i).single.x) {
-                                    aalo.maxx = current.x + aalo.path.get(i).single.x;
-                                }
-                                if (aalo.maxy < current.y + aalo.path.get(i).single.y) {
-                                    aalo.maxy = current.y + aalo.path.get(i).single.y;
-                                }
-                                
-                                current.x = aalo.path.get(i).single.x;
-                                current.y = aalo.path.get(i).single.y;
-                                
-                            } else if (aalo.path.get(i).Type == 'L') {
-                                
-                                if (aalo.minx > aalo.path.get(i).single.x) {
-                                    aalo.minx = aalo.path.get(i).single.x;
-                                }
-                                if (aalo.miny > aalo.path.get(i).single.y) {
-                                    aalo.miny = aalo.path.get(i).single.y;
-                                }
-                                if (aalo.maxx < aalo.path.get(i).single.x) {
-                                    aalo.maxx = aalo.path.get(i).single.x;
-                                }
-                                if (aalo.maxy < aalo.path.get(i).single.y) {
-                                    aalo.maxy = aalo.path.get(i).single.y;
-                                }
-                                
-                                current.x = aalo.path.get(i).single.x;
-                                current.y = aalo.path.get(i).single.y;
-                                
-                            } else if (aalo.path.get(i).Type == 'c') {
-                                
-                                for (int a = 0; a < aalo.path.get(i).multi.size(); a++) {
-                                    
-                                    if (aalo.minx > current.x + aalo.path.get(i).multi.get(a).x) {
-                                        aalo.minx = current.x + aalo.path.get(i).multi.get(a).x;
-                                    }
-                                    if (aalo.miny > current.y + aalo.path.get(i).multi.get(a).y) {
-                                        aalo.miny = current.y + aalo.path.get(i).multi.get(a).y;
-                                    }
-                                    if (aalo.maxx < current.x + aalo.path.get(i).multi.get(a).x) {
-                                        aalo.maxx = current.x + aalo.path.get(i).multi.get(a).x;
-                                    }
-                                    if (aalo.maxy < current.y + aalo.path.get(i).multi.get(a).y) {
-                                        aalo.maxy = current.y + aalo.path.get(i).multi.get(a).y;
-                                    }
-                                    
-                                    if (a % 3 == 2) {
-                                        current.x = current.x + aalo.path.get(i).multi.get(a).x;
-                                        current.y = current.y + aalo.path.get(i).multi.get(a).y;
-                                    }
-                                    
-                                }
-                                
-                            } else if (aalo.path.get(i).Type == 'C') {
-                                
-                                for (int a = 0; a < aalo.path.get(i).multi.size(); a++) {
-                                    
-                                    if (aalo.minx > aalo.path.get(i).multi.get(a).x) {
-                                        aalo.minx = aalo.path.get(i).multi.get(a).x;
-                                    }
-                                    if (aalo.miny > aalo.path.get(i).multi.get(a).y) {
-                                        aalo.miny = aalo.path.get(i).multi.get(a).y;
-                                    }
-                                    if (aalo.maxx < aalo.path.get(i).multi.get(a).x) {
-                                        aalo.maxx = aalo.path.get(i).multi.get(a).x;
-                                    }
-                                    if (aalo.maxy < aalo.path.get(i).multi.get(a).y) {
-                                        aalo.maxy = aalo.path.get(i).multi.get(a).y;
-                                    }
-                                    
-                                    if (a % 3 == 2) {
-                                        current.x = aalo.path.get(i).multi.get(a).x;
-                                        current.y = aalo.path.get(i).multi.get(a).y;
-                                    }
-                                    
-                                }
-                                
+
                             }
 
                         }
 
                     }
-                    // </editor-fold>
-                    converted.add(aalo);
-                    break;
+
                 }
+                // </editor-fold>
+                converted.add(aalo);
+                break;
+            }
         }
 
         int rambo = root.getNumChildren();
 
         for (int i = 0; i < rambo; i++) {
-            converter(root.getChild(i),converted);
+            converter(root.getChild(i), converted);
         }
 
     }
 
-    private void scaling(ArrayList<Shape> converted,IconPanel panel) {
+    private void scaling(ArrayList<Shape> converted, IconPanel panel) {
 
         double minx = Double.POSITIVE_INFINITY;
         double miny = Double.POSITIVE_INFINITY;
@@ -667,7 +671,6 @@ public class ImageConverter {
         }
 
         // </editor-fold>
-        
         // <editor-fold defaultstate="collapsed" desc="Applying the Scaling">
         for (int iki = 0; iki < is; iki++) {
 
@@ -805,7 +808,7 @@ public class ImageConverter {
         // </editor-fold>
     }
 
-    private void aslipaint(Graphics2D g2d,ArrayList<Shape> converted) {
+    private void aslipaint(Graphics2D g2d, ArrayList<Shape> converted) {
 
         int is = converted.size();
         for (int iki = 0; iki < is; iki++) {

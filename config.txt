@@ -1,0 +1,2 @@
+fontsize=25
+linethickness=2

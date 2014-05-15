@@ -20,7 +20,7 @@ import java.awt.geom.Rectangle2D;
 public class ChemicalEquation {
     
     
-    void draw(Graphics2D g2d, IconPanel panel, String txt, int nop, int nor, String pressure,String temp,String r1nam, String r2nam, String r3nam, String r4nam, String p1nam, String p2nam, String p3nam, String p4nam) {
+    void draw(Graphics2D g2d, IconPanel panel, String txt, int nop, int nor, String pressure,String temp,String r1nam, String r2nam, String r3nam, String r4nam, String p1nam, String p2nam, String p3nam, String p4nam,int fontsize) {
 
         double h1,h2,w1,w2,wmid,wq1,wq2,we1,we2,we3,we4,ratio,newwidth;
 
@@ -49,25 +49,34 @@ public class ChemicalEquation {
                     txt1 = txt1 + txtbuffer + ' ';
                     txtbuffer = "";
                 }
-                if ((t > 29) && (t <= 59)) {
+                if ((t > 30) && (t <= 59)) {
                     txt2 = txt2 + txtbuffer + ' ';
                     txtbuffer = "";
                 }
 
+            } else if((t==txt.length()-1)||(t==29))  {
+                if (t <= 29) {
+                    txt1 = txt1+txtbuffer+txt.charAt(t);
+                    txtbuffer = "";
+                }
+                if ((t > 29) && (t <= 59)) {
+                    txt2 = txt2+txtbuffer+txt.charAt(t);
+                }
+                               
             } else {
                 txtbuffer = txtbuffer + txt.charAt(t);
             }
 
         }
-
+        
         //Boundary + Top Right Corner Circle
         g2d.draw(new Rectangle2D.Double(w1, h1, w2 - w1, h2 - h1));
-        g2d.draw(new Ellipse2D.Double(w1 + 10, h1 + 10, 40, 40));
+        g2d.fill(new Ellipse2D.Double(w1 + 20, h1 + 20, 25, 25));
 
         // Text box
-        g2d.setFont(new Font("Braille", Font.PLAIN, 25));
-        g2d.drawString(txt1, (float) w1 + 20, (float) h1 + 100);
-        g2d.drawString(txt2, (float) w1 + 20, (float) h1 + 135);
+        g2d.setFont(new Font("Braille", Font.PLAIN, fontsize));
+        g2d.drawString(txt1, (float) w1 + 60, (float) h1 + 40);
+        g2d.drawString(txt2, (float) w1 + 60, (float) h1 + 75);
 
         //Reactants
         if ((nor == 2) || (nor == 4)) {

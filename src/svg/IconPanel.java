@@ -13,7 +13,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 class IconPanel extends JPanel {
@@ -26,6 +25,7 @@ class IconPanel extends JPanel {
     Expression fun = null;
     VarMap vm = new VarMap(false);
     FuncMap fm = new FuncMap();
+    int fontsize,linethickness;
     int flinethickness = 0;
     int flinetype = 0;
     Image image = null;
@@ -65,24 +65,24 @@ class IconPanel extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
 
         g2d.setColor(new Color(0, 0, 0));
-        g2d.setStroke(new BasicStroke(2));
+        g2d.setStroke(new BasicStroke(linethickness));
 
         switch (value) {
             case 1:
                 ImageConverter imageconverter = new ImageConverter();
                 try {
-                    imageconverter.draw(g2d, f, this, txt, converted);
+                    imageconverter.draw(g2d, f, this, txt, converted,fontsize);
                 } catch (SVGException ex) {
                     Logger.getLogger(IconPanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 break;
             case 2:
                 ChemicalEquation chemicalequation = new ChemicalEquation();
-                chemicalequation.draw(g2d,this,txt,nop,nor,pressure,temp,r1nam,r2nam,r3nam,r4nam,p1nam,p2nam,p3nam,p4nam);
+                chemicalequation.draw(g2d,this,txt,nop,nor,pressure,temp,r1nam,r2nam,r3nam,r4nam,p1nam,p2nam,p3nam,p4nam,fontsize);
                 break;
             case 3:
                 MathFunction mathfunction = new MathFunction();
-                mathfunction.draw(g2d, this, txt, flinethickness, flinetype, fun, vm, fm);
+                mathfunction.draw(g2d, this, txt, flinethickness, flinetype, fun, vm, fm,fontsize);
                 break;
             case 4:
                 IconPaint iconpaint = new IconPaint();

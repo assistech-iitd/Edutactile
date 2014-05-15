@@ -15,8 +15,6 @@ public class NewJFrame11 extends javax.swing.JFrame {
      */
     public NewJFrame11() {
         initComponents();
-        middleleft.setBackground(new java.awt.Color(240, 240, 240));
-        jPanel1.setBackground(new java.awt.Color(240, 240, 240));
     }
 
     /**
