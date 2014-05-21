@@ -54,21 +54,21 @@ public class MathFunction implements Printable {
 
             if ((txt.charAt(t) == (' '))) {
 
-                if (t <= 29) {
+                if (t <= 27) {
                     txt1 = txt1 + txtbuffer + ' ';
                     txtbuffer = "";
                 }
-                if ((t > 30) && (t <= 59)) {
+                if ((t > 28) && (t <= 55)) {
                     txt2 = txt2 + txtbuffer + ' ';
                     txtbuffer = "";
                 }
 
-            } else if ((t == txt.length() - 1) || (t == 29)) {
-                if (t <= 29) {
+            } else if ((t == txt.length() - 1) || (t == 27)) {
+                if (t <= 27) {
                     txt1 = txt1 + txtbuffer + txt.charAt(t);
                     txtbuffer = "";
                 }
-                if ((t > 29) && (t <= 59)) {
+                if ((t > 27) && (t <= 55)) {
                     txt2 = txt2 + txtbuffer + txt.charAt(t);
                 }
 
@@ -158,20 +158,19 @@ public class MathFunction implements Printable {
         Graphics2D g2d = (Graphics2D) g;
         g2d.translate(pf.getImageableX(), pf.getImageableY());
         print2(g2d);
+        //g2d.draw(new Line2D.Double(10, 10, 605, 10));
+        //g2d.draw(new Line2D.Double(10, 10, 10, 874));
 
         return PAGE_EXISTS;
     }
 
     private void print2(Graphics2D g2d) {
-        double h1, h2, w1, w2, wmid, ratio, newwidth;
+        double h1, h2, w1, w2, wmid;
 
-        ratio = ((double) panel.getHeight()) / 297;
-        newwidth = ratio * 210;
-
-        h2 = 1049.6468 - 10;
-        w1 = 35;
-        w2 = 791.21;
-        h1 = 10;
+        h2 = 860;
+        w1 = 0;
+        w2 = 585;
+        h1 = 0;
         wmid = (w1 + w2) / 2;
 
         String txt1 = "", txt2 = "", txtbuffer = "";
@@ -180,21 +179,21 @@ public class MathFunction implements Printable {
 
             if ((txt.charAt(t) == (' '))) {
 
-                if (t <= 29) {
+                if (t <= 27) {
                     txt1 = txt1 + txtbuffer + ' ';
                     txtbuffer = "";
                 }
-                if ((t > 30) && (t <= 59)) {
+                if ((t > 28) && (t <= 55)) {
                     txt2 = txt2 + txtbuffer + ' ';
                     txtbuffer = "";
                 }
 
-            } else if ((t == txt.length() - 1) || (t == 29)) {
-                if (t <= 29) {
+            } else if ((t == txt.length() - 1) || (t == 27)) {
+                if (t <= 27) {
                     txt1 = txt1 + txtbuffer + txt.charAt(t);
                     txtbuffer = "";
                 }
-                if ((t > 29) && (t <= 59)) {
+                if ((t > 27) && (t <= 55)) {
                     txt2 = txt2 + txtbuffer + txt.charAt(t);
                 }
 
@@ -214,12 +213,12 @@ public class MathFunction implements Printable {
 
         //Coordinate axes
         g2d.setStroke(new BasicStroke(1));
-        g2d.draw(new Line2D.Double(wmid, h1 + 300, wmid, h1 + 800));
-        g2d.draw(new Line2D.Double(wmid - 250, h1 + 550, wmid + 250, h1 + 550));
-        g2d.drawString("X", (float) wmid + 260, (float) h1 + 560);
-        g2d.drawString("X'", (float) wmid - 290, (float) h1 + 560);
-        g2d.drawString("Y", (float) wmid - 10, (float) h1 + 290);
-        g2d.drawString("Y'", (float) wmid - 10, (float) h1 + 830);
+        g2d.draw(new Line2D.Double(wmid, h1 + 300-100, wmid, h1 + 800-100));
+        g2d.draw(new Line2D.Double(wmid - 250, h1 + 550-100, wmid + 250, h1 + 550-100));
+        g2d.drawString("X", (float) wmid + 260, (float) h1 + 560-100);
+        g2d.drawString("X'", (float) wmid - 290, (float) h1 + 560-100);
+        g2d.drawString("Y", (float) wmid - 10, (float) h1 + 290-100);
+        g2d.drawString("Y'", (float) wmid - 10, (float) h1 + 830-100);
 
         if (fun != null) {
 
@@ -243,11 +242,11 @@ public class MathFunction implements Printable {
                     double b = 25 * fun.eval(vm, fm);
 
                     if ((a <= 250) && (b <= 250) && (a >= -250) && (b >= -250)) {
-                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 - a, wmid + m + 1, h1 + 550 - b));
+                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 -100 - a, wmid + m + 1, h1 + 550 -100 - b));
                     } else if ((a <= 250) && (a >= -250) && (b >= 250)) {
-                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 - a, wmid + m + 1, h1 + 300));
+                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 -100 - a, wmid + m + 1, h1 + 300 -100));
                     } else if ((a <= -250) && (b <= 250) && (b >= -250)) {
-                        g2d.draw(new Line2D.Double(wmid + m, h1 + 800, wmid + m + 1, h1 + 550 - b));
+                        g2d.draw(new Line2D.Double(wmid + m, h1 + 800 -100, wmid + m + 1, h1 + 550 -100 - b));
                     }
                 }
             }
@@ -260,11 +259,11 @@ public class MathFunction implements Printable {
                     double b = 25 * fun.eval(vm, fm);
 
                     if ((a <= 250) && (b <= 250) && (a >= -250) && (b >= -250)) {
-                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 - a, wmid + m + 1, h1 + 550 - b));
+                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 -100 - a, wmid + m + 1, h1 + 550 -100 - b));
                     } else if ((a <= 250) && (a >= -250) && (b >= 250)) {
-                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 - a, wmid + m + 1, h1 + 300));
+                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 -100 - a, wmid + m + 1, h1 + 300 -100));
                     } else if ((a <= -250) && (b <= 250) && (b >= -250)) {
-                        g2d.draw(new Line2D.Double(wmid + m, h1 + 800, wmid + m + 1, h1 + 550 - b));
+                        g2d.draw(new Line2D.Double(wmid + m, h1 + 800 -100, wmid + m + 1, h1 + 550 -100 - b));
                     }
 
                 }
