@@ -32,8 +32,20 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="File"/>
             <Property name="focusPainted" type="boolean" value="true"/>
+            <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
           </Properties>
           <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="Print">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Print"/>
+                <Property name="focusPainted" type="boolean" value="true"/>
+                <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
+                <Property name="focusable" type="boolean" value="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PrintActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="Save">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Save"/>

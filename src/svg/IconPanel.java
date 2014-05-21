@@ -15,9 +15,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
 
-class IconPanel extends JPanel {
+/*! \brief An extension of the Jpanel class.
+ *
+ *  An extension of the Swing Jpanel class. Used for rendering images. 
+ */
 
-    File f = null;
+public class IconPanel extends JPanel {
+
+    public File f = null; /**< The file to be converted */
     int value = 0;
     int nor = 0, nop = 0, noc = 0;
     ArrayList<Shape> converted = new ArrayList<>();
@@ -48,7 +53,7 @@ class IconPanel extends JPanel {
         p3nam = "";
         p4nam = "";
         fnam = "";
-        converted = new ArrayList<Shape>();
+        converted = new ArrayList<>();
 
     }
 
@@ -81,8 +86,8 @@ class IconPanel extends JPanel {
                 chemicalequation.draw(g2d,this,txt,nop,nor,pressure,temp,r1nam,r2nam,r3nam,r4nam,p1nam,p2nam,p3nam,p4nam,fontsize);
                 break;
             case 3:
-                MathFunction mathfunction = new MathFunction();
-                mathfunction.draw(g2d, this, txt, flinethickness, flinetype, fun, vm, fm,fontsize);
+                MathFunction mathfunction = new MathFunction(this, txt, flinethickness, flinetype, fun, vm, fm,fontsize);
+                mathfunction.draw(g2d);
                 break;
             case 4:
                 IconPaint iconpaint = new IconPaint();

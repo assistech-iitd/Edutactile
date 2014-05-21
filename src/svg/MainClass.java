@@ -1,12 +1,15 @@
 package svg;
 
 import com.graphbuilder.math.*;
+import com.kitfox.svg.SVGException;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -75,6 +78,7 @@ public class MainClass extends javax.swing.JFrame {
         function = new javax.swing.JToggleButton();
         menu = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        Print = new javax.swing.JMenuItem();
         Save = new javax.swing.JMenuItem();
         SaveAs = new javax.swing.JMenuItem();
 
@@ -144,6 +148,18 @@ public class MainClass extends javax.swing.JFrame {
 
         jMenu1.setText("File");
         jMenu1.setFocusPainted(true);
+        jMenu1.setFocusTraversalPolicyProvider(true);
+
+        Print.setText("Print");
+        Print.setFocusPainted(true);
+        Print.setFocusTraversalPolicyProvider(true);
+        Print.setFocusable(true);
+        Print.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PrintActionPerformed(evt);
+            }
+        });
+        jMenu1.add(Print);
 
         Save.setText("Save");
         Save.setFocusPainted(true);
@@ -817,6 +833,39 @@ public class MainClass extends javax.swing.JFrame {
         funchoice();
     }//GEN-LAST:event_functionActionPerformed
 
+    private void PrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintActionPerformed
+        PrinterJob job = PrinterJob.getPrinterJob();
+        switch (panel.value) {
+            /*case 1:
+             ImageConverter imageconverter = new ImageConverter();
+             try {
+             imageconverter.draw(g2d, f, this, txt, converted,fontsize);
+             } catch (SVGException ex) {
+             Logger.getLogger(IconPanel.class.getName()).log(Level.SEVERE, null, ex);
+             }
+             break;
+             case 2:
+             ChemicalEquation chemicalequation = new ChemicalEquation();
+             chemicalequation.draw(g2d,this,txt,nop,nor,pressure,temp,r1nam,r2nam,r3nam,r4nam,p1nam,p2nam,p3nam,p4nam,fontsize);
+             break;*/
+            case 3:
+                MathFunction mathfunction = new MathFunction(panel, panel.txt, panel.flinethickness, panel.flinetype, panel.fun, panel.vm, panel.fm, panel.fontsize);
+                job.setPrintable(mathfunction);
+                boolean ok = job.printDialog();
+                if (ok) {
+                    try {
+                        job.print();
+                    } catch (PrinterException ex) {
+                    }
+                }
+                break;
+            /*case 4:
+             IconPaint iconpaint = new IconPaint();
+             iconpaint.draw(chemical, image, this, g2d);*/
+        }
+
+    }//GEN-LAST:event_PrintActionPerformed
+
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Converter Actions Performed">
     private void OpenActionPerformed(java.awt.event.ActionEvent evt) {
@@ -1157,6 +1206,7 @@ public class MainClass extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Variable Declarations">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup Grp;
+    private javax.swing.JMenuItem Print;
     private javax.swing.JMenuItem Save;
     private javax.swing.JMenuItem SaveAs;
     private javax.swing.JToggleButton chem;
@@ -1196,7 +1246,6 @@ public class MainClass extends javax.swing.JFrame {
     // </editor-fold>
 
     // </editor-fold>
-    
     private void myInitComponents(int fontsize, int linethickness) {
 
         //----------------------------------------------------------------------------------------------   
