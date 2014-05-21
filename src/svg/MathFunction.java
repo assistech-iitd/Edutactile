@@ -89,13 +89,13 @@ public class MathFunction implements Printable {
 
         //Coordinate axes
         g2d.setStroke(new BasicStroke(1));
-        g2d.draw(new Line2D.Double(wmid, h1 + 300, wmid, h1 + 800));
-        g2d.draw(new Line2D.Double(wmid - 250, h1 + 550, wmid + 250, h1 + 550));
-        g2d.drawString("X", (float) wmid + 260, (float) h1 + 560);
-        g2d.drawString("X'", (float) wmid - 290, (float) h1 + 560);
-        g2d.drawString("Y", (float) wmid - 10, (float) h1 + 290);
-        g2d.drawString("Y'", (float) wmid - 10, (float) h1 + 830);
-
+        g2d.draw(new Line2D.Double(wmid, h1 + 225, wmid, h1 + 675));
+        g2d.draw(new Line2D.Double(wmid - 225, h1 + 450, wmid + 225, h1 + 450));
+        g2d.drawString("X", (float) wmid + 235, (float) h1 + 460);
+        g2d.drawString("X'", (float) wmid - 265, (float) h1 + 460);
+        g2d.drawString("Y", (float) wmid - 10, (float) h1 + 215);
+        g2d.drawString("Y'", (float) wmid - 10, (float) h1 + 705);
+        
         if (fun != null) {
 
             switch (flinethickness) {
@@ -110,36 +110,36 @@ public class MathFunction implements Printable {
                     break;
             }
 
-            if (flinetype == 0) {
-                for (double m = -250; m < 250; m = m + 1) {
+             if (flinetype == 0) {
+                for (double m = -225; m < 225; m = m + 1) {
                     vm.setValue("x", 0.04 * m);
                     double a = 25 * fun.eval(vm, fm);
                     vm.setValue("x", 0.04 * (m + 1));
                     double b = 25 * fun.eval(vm, fm);
 
-                    if ((a <= 250) && (b <= 250) && (a >= -250) && (b >= -250)) {
-                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 - a, wmid + m + 1, h1 + 550 - b));
-                    } else if ((a <= 250) && (a >= -250) && (b >= 250)) {
-                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 - a, wmid + m + 1, h1 + 300));
-                    } else if ((a <= -250) && (b <= 250) && (b >= -250)) {
-                        g2d.draw(new Line2D.Double(wmid + m, h1 + 800, wmid + m + 1, h1 + 550 - b));
+                    if ((a <= 225) && (b <= 225) && (a >= -225) && (b >= -225)) {
+                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 -100 - a, wmid + m + 1, h1 + 550 -100 - b));
+                    } else if ((a <= 225) && (a >= -225) && (b >= 225)) {
+                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 -100 - a, wmid + m + 1, h1 + 300 -100));
+                    } else if ((a <= -225) && (b <= 225) && (b >= -225)) {
+                        g2d.draw(new Line2D.Double(wmid + m, h1 + 800 -100, wmid + m + 1, h1 + 550 -100 - b));
                     }
                 }
             }
 
             if (flinetype == 1) {
-                for (double m = -250; m < 250; m = m + 4) {
+                for (double m = -225; m < 225; m = m + 4) {
                     vm.setValue("x", 0.04 * m);
                     double a = 25 * fun.eval(vm, fm);
                     vm.setValue("x", 0.04 * (m + 1));
                     double b = 25 * fun.eval(vm, fm);
 
-                    if ((a <= 250) && (b <= 250) && (a >= -250) && (b >= -250)) {
-                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 - a, wmid + m + 1, h1 + 550 - b));
-                    } else if ((a <= 250) && (a >= -250) && (b >= 250)) {
-                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 - a, wmid + m + 1, h1 + 300));
-                    } else if ((a <= -250) && (b <= 250) && (b >= -250)) {
-                        g2d.draw(new Line2D.Double(wmid + m, h1 + 800, wmid + m + 1, h1 + 550 - b));
+                    if ((a <= 225) && (b <= 225) && (a >= -225) && (b >= -225)) {
+                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 -100 - a, wmid + m + 1, h1 + 550 -100 - b));
+                    } else if ((a <= 225) && (a >= -225) && (b >= 225)) {
+                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 -100 - a, wmid + m + 1, h1 + 300 -100));
+                    } else if ((a <= -225) && (b <= 225) && (b >= -225)) {
+                        g2d.draw(new Line2D.Double(wmid + m, h1 + 800 -100, wmid + m + 1, h1 + 550 -100 - b));
                     }
 
                 }
@@ -213,12 +213,12 @@ public class MathFunction implements Printable {
 
         //Coordinate axes
         g2d.setStroke(new BasicStroke(1));
-        g2d.draw(new Line2D.Double(wmid, h1 + 300-100, wmid, h1 + 800-100));
-        g2d.draw(new Line2D.Double(wmid - 250, h1 + 550-100, wmid + 250, h1 + 550-100));
-        g2d.drawString("X", (float) wmid + 260, (float) h1 + 560-100);
-        g2d.drawString("X'", (float) wmid - 290, (float) h1 + 560-100);
-        g2d.drawString("Y", (float) wmid - 10, (float) h1 + 290-100);
-        g2d.drawString("Y'", (float) wmid - 10, (float) h1 + 830-100);
+        g2d.draw(new Line2D.Double(wmid, h1 + 225, wmid, h1 + 675));
+        g2d.draw(new Line2D.Double(wmid - 225, h1 + 450, wmid + 225, h1 + 450));
+        g2d.drawString("X", (float) wmid + 235, (float) h1 + 460);
+        g2d.drawString("X'", (float) wmid - 265, (float) h1 + 460);
+        g2d.drawString("Y", (float) wmid - 10, (float) h1 + 215);
+        g2d.drawString("Y'", (float) wmid - 10, (float) h1 + 705);
 
         if (fun != null) {
 
@@ -235,34 +235,34 @@ public class MathFunction implements Printable {
             }
 
             if (flinetype == 0) {
-                for (double m = -250; m < 250; m = m + 1) {
+                for (double m = -225; m < 225; m = m + 1) {
                     vm.setValue("x", 0.04 * m);
                     double a = 25 * fun.eval(vm, fm);
                     vm.setValue("x", 0.04 * (m + 1));
                     double b = 25 * fun.eval(vm, fm);
 
-                    if ((a <= 250) && (b <= 250) && (a >= -250) && (b >= -250)) {
+                    if ((a <= 225) && (b <= 225) && (a >= -225) && (b >= -225)) {
                         g2d.draw(new Line2D.Double(wmid + m, h1 + 550 -100 - a, wmid + m + 1, h1 + 550 -100 - b));
-                    } else if ((a <= 250) && (a >= -250) && (b >= 250)) {
+                    } else if ((a <= 225) && (a >= -225) && (b >= 225)) {
                         g2d.draw(new Line2D.Double(wmid + m, h1 + 550 -100 - a, wmid + m + 1, h1 + 300 -100));
-                    } else if ((a <= -250) && (b <= 250) && (b >= -250)) {
+                    } else if ((a <= -225) && (b <= 225) && (b >= -225)) {
                         g2d.draw(new Line2D.Double(wmid + m, h1 + 800 -100, wmid + m + 1, h1 + 550 -100 - b));
                     }
                 }
             }
 
             if (flinetype == 1) {
-                for (double m = -250; m < 250; m = m + 4) {
+                for (double m = -225; m < 225; m = m + 4) {
                     vm.setValue("x", 0.04 * m);
                     double a = 25 * fun.eval(vm, fm);
                     vm.setValue("x", 0.04 * (m + 1));
                     double b = 25 * fun.eval(vm, fm);
 
-                    if ((a <= 250) && (b <= 250) && (a >= -250) && (b >= -250)) {
+                    if ((a <= 225) && (b <= 225) && (a >= -225) && (b >= -225)) {
                         g2d.draw(new Line2D.Double(wmid + m, h1 + 550 -100 - a, wmid + m + 1, h1 + 550 -100 - b));
-                    } else if ((a <= 250) && (a >= -250) && (b >= 250)) {
+                    } else if ((a <= 225) && (a >= -225) && (b >= 225)) {
                         g2d.draw(new Line2D.Double(wmid + m, h1 + 550 -100 - a, wmid + m + 1, h1 + 300 -100));
-                    } else if ((a <= -250) && (b <= 250) && (b >= -250)) {
+                    } else if ((a <= -225) && (b <= 225) && (b >= -225)) {
                         g2d.draw(new Line2D.Double(wmid + m, h1 + 800 -100, wmid + m + 1, h1 + 550 -100 - b));
                     }
 
