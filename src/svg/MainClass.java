@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -836,22 +837,33 @@ public class MainClass extends javax.swing.JFrame {
     private void PrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintActionPerformed
         PrinterJob job = PrinterJob.getPrinterJob();
         switch (panel.value) {
-            /*case 1:
-             ImageConverter imageconverter = new ImageConverter();
-             try {
-             imageconverter.draw(g2d, f, this, txt, converted,fontsize);
-             } catch (SVGException ex) {
-             Logger.getLogger(IconPanel.class.getName()).log(Level.SEVERE, null, ex);
-             }
-             break;
+            case 1:
+                ImageConverter imageconverter = new ImageConverter(panel.f, panel, panel.txt, panel.converted,panel.fontsize);;
+                job.setPrintable(imageconverter);
+                boolean ok = job.printDialog();
+                if (ok) {
+                    try {
+                        job.print();
+                    } catch (PrinterException ex) {
+                    }
+                }
+                break;
+             
              case 2:
-             ChemicalEquation chemicalequation = new ChemicalEquation();
-             chemicalequation.draw(g2d,this,txt,nop,nor,pressure,temp,r1nam,r2nam,r3nam,r4nam,p1nam,p2nam,p3nam,p4nam,fontsize);
-             break;*/
+             ChemicalEquation chemicalequation = new ChemicalEquation(panel, panel.txt, panel.nop,panel.nor,panel.fontsize,panel.pressure,panel.temp,panel.r1nam,panel.r2nam,panel.r3nam,panel.r4nam,panel.p1nam,panel.p2nam,panel.p3nam,panel.p4nam);
+                job.setPrintable(chemicalequation);
+                ok = job.printDialog();
+                if (ok) {
+                    try {
+                        job.print();
+                    } catch (PrinterException ex) {
+                    }
+                }
+                break;
             case 3:
                 MathFunction mathfunction = new MathFunction(panel, panel.txt, panel.flinethickness, panel.flinetype, panel.fun, panel.vm, panel.fm, panel.fontsize);
                 job.setPrintable(mathfunction);
-                boolean ok = job.printDialog();
+                ok = job.printDialog();
                 if (ok) {
                     try {
                         job.print();

@@ -2,16 +2,45 @@
 package svg;
 
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
 
-public class ChemicalEquation {
+public class ChemicalEquation implements Printable{
     
+    IconPanel panel;
+    String txt;
+    int nop;
+    int nor;
+    int fontsize;
+    String pressure;
+    String temp;String r1nam; String r2nam; String r3nam; String r4nam; String p1nam; String p2nam; String p3nam; String p4nam;
     
-    void draw(Graphics2D g2d, IconPanel panel, String txt, int nop, int nor, String pressure,String temp,String r1nam, String r2nam, String r3nam, String r4nam, String p1nam, String p2nam, String p3nam, String p4nam,int fontsize) {
+    ChemicalEquation(IconPanel p,String t,int np,int nr,int fsize,String pr,String te,String r1,String r2,String r3,String r4,String p1,String p2,String p3,String p4){
+     panel = p;
+     txt = t;
+     nop = np;
+     nor = nr;
+     fontsize = fsize;
+     pressure = pr;
+     temp = te;
+     r1nam = r1;
+     r2nam = r2;
+     r3nam = r3;
+     r4nam = r4;
+     p1nam = p1;
+     p2nam = p2;
+     p3nam = p3;
+     p4nam = p4;
+    }
+    
+    void draw(Graphics2D g2d) {
 
         double h1,h2,w1,w2,wmid,wq1,wq2,we1,we2,we3,we4,ratio,newwidth;
 
@@ -36,24 +65,24 @@ public class ChemicalEquation {
 
             if ((txt.charAt(t) == (' '))) {
 
-                if (t <= 29) {
+                if (t <= 27) {
                     txt1 = txt1 + txtbuffer + ' ';
                     txtbuffer = "";
                 }
-                if ((t > 30) && (t <= 59)) {
+                if ((t > 28) && (t <= 55)) {
                     txt2 = txt2 + txtbuffer + ' ';
                     txtbuffer = "";
                 }
 
-            } else if((t==txt.length()-1)||(t==29))  {
-                if (t <= 29) {
-                    txt1 = txt1+txtbuffer+txt.charAt(t);
+            } else if ((t == txt.length() - 1) || (t == 27)) {
+                if (t <= 27) {
+                    txt1 = txt1 + txtbuffer + txt.charAt(t);
                     txtbuffer = "";
                 }
-                if ((t > 29) && (t <= 59)) {
-                    txt2 = txt2+txtbuffer+txt.charAt(t);
+                if ((t > 27) && (t <= 55)) {
+                    txt2 = txt2 + txtbuffer + txt.charAt(t);
                 }
-                               
+
             } else {
                 txtbuffer = txtbuffer + txt.charAt(t);
             }
@@ -243,6 +272,185 @@ public class ChemicalEquation {
 
         }
 
+    }
+    
+     public int print(Graphics g, PageFormat pf, int page) throws PrinterException {
+
+        if (page > 0) {
+
+            return NO_SUCH_PAGE;
+        }
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.translate(pf.getImageableX(), pf.getImageableY());
+        print2(g2d);
+
+        return PAGE_EXISTS;
+    }
+
+    private void print2(Graphics2D g2d) {
+        
+        double h1,h2,w1,w2,wmid,wq1,wq2,we1,we2,we3,we4;
+
+        h2 = 860;
+        w1 = 0;
+        w2 = 585;
+        h1 = 0;
+        wmid = (w1 + w2) / 2;
+        wq1 = (w1 + wmid) / 2;
+        wq2 = (wmid + w2) / 2;
+        we1 = (w1 + wq1) / 2;
+        we2 = (wq1 + wmid) / 2;
+        we3 = (wmid + wq2) / 2;
+        we4 = (w2 + wq2) / 2;
+
+       String txt1 = "", txt2 = "", txtbuffer = "";
+
+        for (int t = 0; t < txt.length(); t++) {
+
+            if ((txt.charAt(t) == (' '))) {
+
+                if (t <= 27) {
+                    txt1 = txt1 + txtbuffer + ' ';
+                    txtbuffer = "";
+                }
+                if ((t > 28) && (t <= 55)) {
+                    txt2 = txt2 + txtbuffer + ' ';
+                    txtbuffer = "";
+                }
+
+            } else if ((t == txt.length() - 1) || (t == 27)) {
+                if (t <= 27) {
+                    txt1 = txt1 + txtbuffer + txt.charAt(t);
+                    txtbuffer = "";
+                }
+                if ((t > 27) && (t <= 55)) {
+                    txt2 = txt2 + txtbuffer + txt.charAt(t);
+                }
+
+            } else {
+                txtbuffer = txtbuffer + txt.charAt(t);
+            }
+
+        }
+        
+        //Top Right Corner Circle
+        g2d.fill(new Ellipse2D.Double(w1 + 20, h1 + 20, 25, 25));
+
+        // Text box
+        g2d.setFont(new Font("Braille", Font.PLAIN, fontsize));
+        g2d.drawString(txt1, (float) w1 + 60, (float) h1 + 40);
+        g2d.drawString(txt2, (float) w1 + 60, (float) h1 + 75);
+
+        //Reactants
+        if ((nor == 2) || (nor == 4)) {
+            g2d.draw(new Line2D.Double(wmid, h1 + 369.5 / 1.1674, wmid, h1 + 385.5 / 1.1674));
+            g2d.draw(new Line2D.Double(wmid - 8 / 1.1674, h1 + 377.5 / 1.1674, wmid + 8 / 1.1674, h1 + 377.5 / 1.1674));
+        }
+
+        if (nor == 4) {
+            g2d.draw(new Line2D.Double(wq1, h1 + 369.5 / 1.1674, wq1, h1 + 385.5 / 1.1674));
+            g2d.draw(new Line2D.Double(wq1 - 8 / 1.1674, h1 + 377.5 / 1.1674, wq1 + 8 / 1.1674, h1 + 377.5 / 1.1674));
+
+            g2d.draw(new Line2D.Double(wq2, h1 + 369.5 / 1.1674, wq2, h1 + 385.5 / 1.1674));
+            g2d.draw(new Line2D.Double(wq2 - 8 / 1.1674, h1 + 377.5 / 1.1674, wq2 + 8 / 1.1674, h1 + 377.5 / 1.1674));
+        }
+
+        if (nor == 3) {
+            g2d.draw(new Line2D.Double(we2, h1 + 369.5 / 1.1674, we2, h1 + 385.5 / 1.1674));
+            g2d.draw(new Line2D.Double(we2 - 8 / 1.1674, h1 + 377.5 / 1.1674, we2 + 8 / 1.1674, h1 + 377.5 / 1.1674));
+
+            g2d.draw(new Line2D.Double(we3, h1 + 369.5 / 1.1674, we3, h1 + 385.5 / 1.1674));
+            g2d.draw(new Line2D.Double(we3 - 8 / 1.1674, h1 + 377.5 / 1.1674, we3 + 8 / 1.1674, h1 + 377.5 / 1.1674));
+        }
+
+        if (nor == 2) {
+            rmaker(g2d, we2, h1 + 145.6227, r1nam);
+            rmaker(g2d, we3, h1 + 145.6227, r2nam);
+        }
+
+        if (nor == 4) {
+            rmaker(g2d, we1, h1 + 145.6227, r1nam);
+            rmaker(g2d, we2, h1 + 145.6227, r2nam);
+            rmaker(g2d, we3, h1 + 145.6227, r3nam);
+            rmaker(g2d, we4, h1 + 145.6227, r4nam);
+        }
+
+        if (nor == 1) {
+            rmaker(g2d, wmid, h1 + 145.6227, r1nam);
+        }
+
+        if (nor == 3) {
+            rmaker(g2d, wq1, h1 + 145.6227, r1nam);
+            rmaker(g2d, wmid, h1 + 145.6227, r2nam);
+            rmaker(g2d, wq2, h1 + 145.6227, r3nam);
+        }
+
+        //Arrow
+        if ((nop != 0) && (nor != 0)) {
+
+            double x2Points[] = {wmid, wmid, wmid + 24 / 1.1674};
+            double y2Points[] = {h1 + 450 / 1.1674, h1 + 700 / 1.1674, h1 + 680 / 1.1674};
+            GeneralPath polyline
+                    = new GeneralPath(GeneralPath.WIND_EVEN_ODD, x2Points.length);
+
+            polyline.moveTo(x2Points[0], y2Points[0]);
+
+            for (int index = 1; index < x2Points.length; index++) {
+                polyline.lineTo(x2Points[index], y2Points[index]);
+            };
+
+            g2d.draw(polyline);
+
+            g2d.draw(new Line2D.Double(wmid, h1 + 700 / 1.1674, wmid - 24 / 1.1674, h1 + 680 / 1.1674));
+        }
+
+        //Conditions
+        g2d.drawString(pressure, (float) (wmid - (pressure.length() * 20)), (float) (h1 + 550 / 1.1674));
+        g2d.drawString(temp, (float) (wmid - (temp.length() * 20)), (float) (h1 + 600 / 1.1674));
+
+        //Products
+        if ((nop == 2) || (nop == 4)) {
+            g2d.draw(new Line2D.Double(wmid, h1 + 807.5 / 1.1674, wmid, h1 + 823.5 / 1.1674));
+            g2d.draw(new Line2D.Double(wmid - 8 / 1.1674, h1 + 815.5 / 1.1674, wmid + 8 / 1.1674, h1 + 815.5 / 1.1674));
+        }
+
+        if (nop == 4) {
+            g2d.draw(new Line2D.Double(wq1, h1 + 807.5 / 1.1674, wq1, h1 + 823.5 / 1.1674));
+            g2d.draw(new Line2D.Double(wq1 - 8 / 1.1674, h1 + 815.5 / 1.1674, wq1 + 8 / 1.1674, h1 + 815.5 / 1.1674));
+
+            g2d.draw(new Line2D.Double(wq2, h1 + 807.5 / 1.1674, wq2, h1 + 823.5 / 1.1674));
+            g2d.draw(new Line2D.Double(wq2 - 8 / 1.1674, h1 + 815.5 / 1.1674, wq2 + 8 / 1.1674, h1 + 815.5 / 1.1674));
+        }
+
+        if (nop == 3) {
+            g2d.draw(new Line2D.Double(we2, h1 + 807.5 / 1.1674, we2, h1 + 823.5 / 1.1674));
+            g2d.draw(new Line2D.Double(we2 - 8 / 1.1674, h1 + 815.5 / 1.1674, we2 + 8 / 1.1674, h1 + 815.5 / 1.1674));
+
+            g2d.draw(new Line2D.Double(we3, h1 + 807.5 / 1.1674, we3, h1 + 823.5 / 1.1674));
+            g2d.draw(new Line2D.Double(we3 - 8 / 1.1674, h1 + 815.5 / 1.1674, we3 + 8 / 1.1674, h1 + 815.5 / 1.1674));
+        }
+
+        if (nop == 2) {
+            rmaker(g2d, we2, h1 + 608 / 1.1674, p1nam);
+            rmaker(g2d, we3, h1 + 608 / 1.1674, p2nam);
+        }
+
+        if (nop == 4) {
+            rmaker(g2d, we1, h1 + 608 / 1.1674, p1nam);
+            rmaker(g2d, we2, h1 + 608 / 1.1674, p2nam);
+            rmaker(g2d, we3, h1 + 608 / 1.1674, p3nam);
+            rmaker(g2d, we4, h1 + 608 / 1.1674, p4nam);
+        }
+
+        if (nop == 1) {
+            rmaker(g2d, wmid, h1 + 608 / 1.1674, p1nam);
+        }
+
+        if (nop == 3) {
+            rmaker(g2d, wq1, h1 + 608 / 1.1674, p1nam);
+            rmaker(g2d, wmid, h1 + 608 / 1.1674, p2nam);
+            rmaker(g2d, wq2, h1 + 608 / 1.1674, p3nam);
+        }
     }
 
     

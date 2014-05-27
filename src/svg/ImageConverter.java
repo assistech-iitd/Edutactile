@@ -7,20 +7,38 @@ import com.kitfox.svg.SVGException;
 import com.kitfox.svg.SVGUniverse;
 import com.kitfox.svg.Tspan;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ImageConverter {
+public class ImageConverter implements Printable {
 
-    void draw(Graphics2D g2d, File f, IconPanel panel, String txt, ArrayList<Shape> converted,int fontsize) throws SVGException {
+    File f;
+    IconPanel panel;
+    String txt;
+    ArrayList<Shape> converted;
+    int fontsize;
+
+    ImageConverter(File f1, IconPanel panel1, String txt1, ArrayList<Shape> converted1, int fontsize1) {
+        f = f1;
+        panel = panel1;
+        txt = txt1;
+        converted = converted1;
+        fontsize = fontsize1;
+    }
+
+    void draw(Graphics2D g2d) throws SVGException {
 
         double h1, h2, w1, w2, ratio, newwidth;
 
@@ -32,30 +50,30 @@ public class ImageConverter {
         w2 = ((panel.getWidth() + newwidth) / 2) - 10;
         h1 = 10;
 
-        String txt1 = "", txt2 = "", txtbuffer = "";
+       String txt1 = "", txt2 = "", txtbuffer = "";
 
         for (int t = 0; t < txt.length(); t++) {
 
             if ((txt.charAt(t) == (' '))) {
 
-                if (t <= 29) {
+                if (t <= 27) {
                     txt1 = txt1 + txtbuffer + ' ';
                     txtbuffer = "";
                 }
-                if ((t > 30) && (t <= 59)) {
+                if ((t > 28) && (t <= 55)) {
                     txt2 = txt2 + txtbuffer + ' ';
                     txtbuffer = "";
                 }
 
-            } else if((t==txt.length()-1)||(t==29))  {
-                if (t <= 29) {
-                    txt1 = txt1+txtbuffer+txt.charAt(t);
+            } else if ((t == txt.length() - 1) || (t == 27)) {
+                if (t <= 27) {
+                    txt1 = txt1 + txtbuffer + txt.charAt(t);
                     txtbuffer = "";
                 }
-                if ((t > 29) && (t <= 59)) {
-                    txt2 = txt2+txtbuffer+txt.charAt(t);
+                if ((t > 27) && (t <= 55)) {
+                    txt2 = txt2 + txtbuffer + txt.charAt(t);
                 }
-                               
+
             } else {
                 txtbuffer = txtbuffer + txt.charAt(t);
             }
@@ -416,7 +434,7 @@ public class ImageConverter {
 
                     }
                 }
-                    //</editor-fold>
+                //</editor-fold>
                 // <editor-fold defaultstate="collapsed" desc="Bounding the path">
                 Coordinate current = new Coordinate();
                 current.x = 0;
@@ -929,4 +947,76 @@ public class ImageConverter {
 
     }
 
+    public int print(Graphics g, PageFormat pf, int page) throws PrinterException {
+
+        if (page > 0) {
+
+            return NO_SUCH_PAGE;
+        }
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.translate(pf.getImageableX(), pf.getImageableY());
+        try {
+            print2(g2d);
+        } catch (SVGElementException ex) {
+            Logger.getLogger(ImageConverter.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SVGException ex) {
+            Logger.getLogger(ImageConverter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return PAGE_EXISTS;
+    }
+
+    private void print2(Graphics2D g2d) throws SVGElementException, SVGException {
+        double h1, h2, w1, w2;
+
+        h2 = 860;
+        w1 = 0;
+        w2 = 585;
+        h1 = 0;
+
+        String txt1 = "", txt2 = "", txtbuffer = "";
+
+        for (int t = 0; t < txt.length(); t++) {
+
+            if ((txt.charAt(t) == (' '))) {
+
+                if (t <= 27) {
+                    txt1 = txt1 + txtbuffer + ' ';
+                    txtbuffer = "";
+                }
+                if ((t > 28) && (t <= 55)) {
+                    txt2 = txt2 + txtbuffer + ' ';
+                    txtbuffer = "";
+                }
+
+            } else if ((t == txt.length() - 1) || (t == 27)) {
+                if (t <= 27) {
+                    txt1 = txt1 + txtbuffer + txt.charAt(t);
+                    txtbuffer = "";
+                }
+                if ((t > 27) && (t <= 55)) {
+                    txt2 = txt2 + txtbuffer + txt.charAt(t);
+                }
+
+            } else {
+                txtbuffer = txtbuffer + txt.charAt(t);
+            }
+
+        }
+
+        //Top Right Corner Circle
+        g2d.fill(new Ellipse2D.Double(w1 + 20, h1 + 20, 25, 25));
+
+        // Text box
+        g2d.setFont(new Font("Braille", Font.PLAIN, fontsize));
+        g2d.drawString(txt1, (float) w1 + 60, (float) h1 + 40);
+        g2d.drawString(txt2, (float) w1 + 60, (float) h1 + 75);
+
+        if (f != null) {
+            
+                aslipaint(g2d, converted);
+
+            } 
+        
+    }
 }
