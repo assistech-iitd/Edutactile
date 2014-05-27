@@ -1,7 +1,6 @@
 package svg;
 
 import com.graphbuilder.math.*;
-import com.kitfox.svg.SVGException;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GraphicsDevice;
@@ -19,7 +18,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -65,8 +63,7 @@ public class MainClass extends javax.swing.JFrame {
         initComponents();
         myInitComponents(fontsize, linethickness);
     }
-
-    @SuppressWarnings("unchecked")
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -202,6 +199,7 @@ public class MainClass extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // <editor-fold defaultstate="collapsed" desc="Actions Performed">
+    
     // <editor-fold defaultstate="collapsed" desc="Menu Actions Performed">
     private void diagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diagActionPerformed
 
@@ -525,6 +523,7 @@ public class MainClass extends javax.swing.JFrame {
                 outf.write("</text>\n");
 
                 // </editor-fold>
+                
                 // <editor-fold defaultstate="collapsed" desc="Chemical">
                 if (panel.value == 2) {
 
@@ -630,6 +629,7 @@ public class MainClass extends javax.swing.JFrame {
                         rmaker2(outf, wq2, h1 + 608, panel.p3nam);
                     }
                 } // </editor-fold>
+                
                 // <editor-fold defaultstate="collapsed" desc="Converter">
                 else if (panel.value == 1) {
 
@@ -658,6 +658,7 @@ public class MainClass extends javax.swing.JFrame {
                     }
 
                 } // </editor-fold>
+                
                 // <editor-fold defaultstate="collapsed" desc="Functions">
                 else if (panel.value == 3) {
 
@@ -781,6 +782,7 @@ public class MainClass extends javax.swing.JFrame {
                 }
 
                 // </editor-fold>
+                
                 outf.write("</svg>\n");
 
                 outf.flush();
@@ -871,14 +873,13 @@ public class MainClass extends javax.swing.JFrame {
                     }
                 }
                 break;
-            /*case 4:
-             IconPaint iconpaint = new IconPaint();
-             iconpaint.draw(chemical, image, this, g2d);*/
+          
         }
 
     }//GEN-LAST:event_PrintActionPerformed
 
     // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Converter Actions Performed">
     private void OpenActionPerformed(java.awt.event.ActionEvent evt) {
         int returnVal = fileChooser.showOpenDialog(this);
@@ -909,6 +910,7 @@ public class MainClass extends javax.swing.JFrame {
     }
 
     // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Chemical Actions Performed">
     private void p1ActionPerformed(java.awt.event.ActionEvent evt) {
         String pop = (String) p1.getSelectedItem();
@@ -1146,6 +1148,7 @@ public class MainClass extends javax.swing.JFrame {
     }
 
     // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Calculator Actions Performed">
     private void FunActionPerformed(java.awt.event.ActionEvent evt) {
 
@@ -1184,7 +1187,9 @@ public class MainClass extends javax.swing.JFrame {
     }
 
     // </editor-fold>
+    
     // </editor-fold>
+    
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1248,6 +1253,7 @@ public class MainClass extends javax.swing.JFrame {
     JPanel funsettings;
 
 // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Chemical Variable Declarations">
     JPanel reactantpanel, productpanel, catalystpanel, conditionpanel;
     IconPanel rpanel1, rpanel2, rpanel3, rpanel4, ppanel1, ppanel2, ppanel3, ppanel4, cpanel1, cpanel2, cpanel3, cpanel4;
@@ -1258,6 +1264,7 @@ public class MainClass extends javax.swing.JFrame {
     // </editor-fold>
 
     // </editor-fold>
+    
     private void myInitComponents(int fontsize, int linethickness) {
 
         //----------------------------------------------------------------------------------------------   
@@ -1275,6 +1282,7 @@ public class MainClass extends javax.swing.JFrame {
 
         //End screen fitting------------------------------------------------------------------------------
         //-----------------------------------------------------------------------------------------------
+        
         // <editor-fold defaultstate="collapsed" desc="Assignments">
         panel.linethickness = linethickness;
         panel.fontsize = fontsize;
@@ -1293,6 +1301,7 @@ public class MainClass extends javax.swing.JFrame {
         thickness = new javax.swing.JComboBox();
 
         // </editor-fold>
+        
         // <editor-fold defaultstate="collapsed" desc="Calculator Assignments">
         funsettings = new javax.swing.JPanel();
 
@@ -1307,6 +1316,7 @@ public class MainClass extends javax.swing.JFrame {
         fundashed = new javax.swing.JRadioButton();
 
         // </editor-fold>
+        
         // <editor-fold defaultstate="collapsed" desc="Chemical Assignments">
         reactantpanel = new javax.swing.JPanel();
         rpanel1 = new IconPanel();
@@ -1343,6 +1353,7 @@ public class MainClass extends javax.swing.JFrame {
         c4 = new javax.swing.JComboBox();
 
         // </editor-fold>
+        
         // <editor-fold defaultstate="collapsed" desc="Panel backgrounds">
         panel.setBackground(new java.awt.Color(255, 255, 255));
         options.setBackground(new java.awt.Color(240, 240, 240));
@@ -1382,6 +1393,7 @@ public class MainClass extends javax.swing.JFrame {
         cpanel4.value = 4;
 
         // </editor-fold>
+        
         // <editor-fold defaultstate="collapsed" desc="Image panel">
         javax.swing.GroupLayout playout = new javax.swing.GroupLayout(panel);
         panel.setLayout(playout);
@@ -1395,6 +1407,7 @@ public class MainClass extends javax.swing.JFrame {
         panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         // </editor-fold>
+        
         // <editor-fold defaultstate="collapsed" desc="Options panel">
         options.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -1449,6 +1462,7 @@ public class MainClass extends javax.swing.JFrame {
                         .addGap(5, 5, 5)));
 
         // </editor-fold>
+        
         // <editor-fold defaultstate="collapsed" desc="Equations panel">
         chemequ.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -1882,6 +1896,7 @@ public class MainClass extends javax.swing.JFrame {
                         .addComponent(conditionpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)));
 
         // </editor-fold>
+        
         // <editor-fold defaultstate="collapsed" desc="Diagram Conversion panel">
         diagconv.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -1915,6 +1930,7 @@ public class MainClass extends javax.swing.JFrame {
                         .addContainerGap(171, Short.MAX_VALUE)));
 
         // </editor-fold>
+        
         // <editor-fold defaultstate="collapsed" desc="Functions panel">
         functions.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -2053,6 +2069,7 @@ public class MainClass extends javax.swing.JFrame {
         );
 
         // </editor-fold>
+        
         // <editor-fold defaultstate="collapsed" desc="Text enter panel">
         textenter.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -2093,6 +2110,7 @@ public class MainClass extends javax.swing.JFrame {
                         .addGap(0, (height - taskBarHeight) - 1037, Short.MAX_VALUE)));
 
         // </editor-fold>
+        
     }
 
     public void chemchoice() {

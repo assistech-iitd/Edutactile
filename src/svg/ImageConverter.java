@@ -204,6 +204,7 @@ public class ImageConverter implements Printable {
                 PathType reserve = null;
                 Coordinate r1 = null;
                 String first = null, second = null;
+                
                 //<editor-fold defaultstate="collapsed" desc="State Machine">
                 while (love.length() != 0) {
 
@@ -435,6 +436,7 @@ public class ImageConverter implements Printable {
                     }
                 }
                 //</editor-fold>
+                
                 // <editor-fold defaultstate="collapsed" desc="Bounding the path">
                 Coordinate current = new Coordinate();
                 current.x = 0;
@@ -591,6 +593,7 @@ public class ImageConverter implements Printable {
 
                 }
                 // </editor-fold>
+                
                 converted.add(aalo);
                 break;
             }
@@ -689,6 +692,7 @@ public class ImageConverter implements Printable {
         }
 
         // </editor-fold>
+        
         // <editor-fold defaultstate="collapsed" desc="Applying the Scaling">
         for (int iki = 0; iki < is; iki++) {
 
@@ -824,6 +828,7 @@ public class ImageConverter implements Printable {
         }
 
         // </editor-fold>
+        
     }
 
     private void aslipaint(Graphics2D g2d, ArrayList<Shape> converted) {

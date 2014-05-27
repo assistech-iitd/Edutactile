@@ -158,8 +158,6 @@ public class MathFunction implements Printable {
         Graphics2D g2d = (Graphics2D) g;
         g2d.translate(pf.getImageableX(), pf.getImageableY());
         print2(g2d);
-        //g2d.draw(new Line2D.Double(10, 10, 605, 10));
-        //g2d.draw(new Line2D.Double(10, 10, 10, 874));
 
         return PAGE_EXISTS;
     }

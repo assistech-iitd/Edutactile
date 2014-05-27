@@ -22,7 +22,7 @@ import javax.swing.JPanel;
 
 public class IconPanel extends JPanel {
 
-    public File f = null; /**< The file to be converted */
+    File f = null; /**< The file to be converted */
     int value = 0;
     int nor = 0, nop = 0, noc = 0;
     ArrayList<Shape> converted = new ArrayList<>();

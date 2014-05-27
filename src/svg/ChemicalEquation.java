@@ -274,7 +274,7 @@ public class ChemicalEquation implements Printable{
 
     }
     
-     public int print(Graphics g, PageFormat pf, int page) throws PrinterException {
+    public int print(Graphics g, PageFormat pf, int page) throws PrinterException {
 
         if (page > 0) {
 
