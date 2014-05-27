@@ -74,20 +74,20 @@ public class IconPanel extends JPanel {
 
         switch (value) {
             case 1:
-                ImageConverter imageconverter = new ImageConverter(f, this, txt, converted,fontsize);
+                ImageConverter imageconverter = new ImageConverter(this);
                 try {
-                    imageconverter.draw(g2d) ;
+                    imageconverter.draw(g2d,0) ;
                 } catch (SVGException ex) {
                     Logger.getLogger(IconPanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 break;
             case 2:
-                ChemicalEquation chemicalequation = new ChemicalEquation(this,txt,nop,nor,fontsize,pressure,temp,r1nam,r2nam,r3nam,r4nam,p1nam,p2nam,p3nam,p4nam);
-                chemicalequation.draw(g2d);
+                ChemicalEquation chemicalequation = new ChemicalEquation(this);
+                chemicalequation.draw(g2d,0);
                 break;
             case 3:
-                MathFunction mathfunction = new MathFunction(this, txt, flinethickness, flinetype, fun, vm, fm,fontsize);
-                mathfunction.draw(g2d);
+                MathFunction mathfunction = new MathFunction(this);
+                mathfunction.draw(g2d,0);
                 break;
             case 4:
                 IconPaint iconpaint = new IconPaint();

@@ -24,21 +24,13 @@ import java.util.logging.Logger;
 
 public class ImageConverter implements Printable {
 
-    File f;
     IconPanel panel;
-    String txt;
-    ArrayList<Shape> converted;
-    int fontsize;
 
-    ImageConverter(File f1, IconPanel panel1, String txt1, ArrayList<Shape> converted1, int fontsize1) {
-        f = f1;
-        panel = panel1;
-        txt = txt1;
-        converted = converted1;
-        fontsize = fontsize1;
+    ImageConverter(IconPanel p) {
+        panel = p;
     }
 
-    void draw(Graphics2D g2d) throws SVGException {
+    void draw(Graphics2D g2d, int mode) throws SVGException {
 
         double h1, h2, w1, w2, ratio, newwidth;
 
@@ -50,11 +42,19 @@ public class ImageConverter implements Printable {
         w2 = ((panel.getWidth() + newwidth) / 2) - 10;
         h1 = 10;
 
-       String txt1 = "", txt2 = "", txtbuffer = "";
+        if (mode == 1) {
+            h2 = 860;
+            w1 = 0;
+            w2 = 585;
+            h1 = 0;
+        }
 
-        for (int t = 0; t < txt.length(); t++) {
 
-            if ((txt.charAt(t) == (' '))) {
+        String txt1 = "", txt2 = "", txtbuffer = "";
+
+        for (int t = 0; t < panel.txt.length(); t++) {
+
+            if ((panel.txt.charAt(t) == (' '))) {
 
                 if (t <= 27) {
                     txt1 = txt1 + txtbuffer + ' ';
@@ -65,40 +65,45 @@ public class ImageConverter implements Printable {
                     txtbuffer = "";
                 }
 
-            } else if ((t == txt.length() - 1) || (t == 27)) {
+            } else if ((t == panel.txt.length() - 1) || (t == 27)) {
                 if (t <= 27) {
-                    txt1 = txt1 + txtbuffer + txt.charAt(t);
+                    txt1 = txt1 + txtbuffer + panel.txt.charAt(t);
                     txtbuffer = "";
                 }
                 if ((t > 27) && (t <= 55)) {
-                    txt2 = txt2 + txtbuffer + txt.charAt(t);
+                    txt2 = txt2 + txtbuffer + panel.txt.charAt(t);
                 }
 
             } else {
-                txtbuffer = txtbuffer + txt.charAt(t);
+                txtbuffer = txtbuffer + panel.txt.charAt(t);
             }
 
         }
 
-        //Boundary + Top Right Corner Circle
-        g2d.draw(new Rectangle2D.Double(w1, h1, w2 - w1, h2 - h1));
+        if (mode == 0) {
+            //Boundary
+            g2d.draw(new Rectangle2D.Double(w1, h1, w2 - w1, h2 - h1));
+        }
+
+        //Top Right Corner Circle
         g2d.fill(new Ellipse2D.Double(w1 + 20, h1 + 20, 25, 25));
 
         // Text box
-        g2d.setFont(new Font("Braille", Font.PLAIN, fontsize));
+        g2d.setFont(new Font("Braille", Font.PLAIN, panel.fontsize));
         g2d.drawString(txt1, (float) w1 + 60, (float) h1 + 40);
         g2d.drawString(txt2, (float) w1 + 60, (float) h1 + 75);
 
-        if (f != null) {
+        if (panel.f != null) {
 
             try {
                 SVGUniverse svgUniverse = new SVGUniverse();
-                SVGDiagram diagram = svgUniverse.getDiagram(svgUniverse.loadSVG(f.toURI().toURL()));
+                SVGDiagram diagram = svgUniverse.getDiagram(svgUniverse.loadSVG(panel.f.toURI().toURL()));
                 SVGElement root = diagram.getRoot();
 
-                converter(root, converted);
-                scaling(converted, panel);
-                aslipaint(g2d, converted);
+                panel.converted.clear();
+                converter(root, panel.converted);
+                scaling(panel.converted, panel, mode);
+                aslipaint(g2d, panel.converted);
 
             } catch (MalformedURLException ex) {
                 Logger.getLogger(IconPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -121,10 +126,6 @@ public class ImageConverter implements Printable {
                 aalo.recwidth = width;
                 aalo.recx = x;
                 aalo.recy = y;
-                aalo.recheight2 = height;
-                aalo.recwidth2 = width;
-                aalo.recx2 = x;
-                aalo.recy2 = y;
                 aalo.minx = x;
                 aalo.miny = y;
                 aalo.maxx = x + width;
@@ -141,9 +142,6 @@ public class ImageConverter implements Printable {
                 aalo.circr = radius;
                 aalo.circx = x;
                 aalo.circy = y;
-                aalo.circr2 = radius;
-                aalo.circx2 = x;
-                aalo.circy2 = y;
                 aalo.minx = x - radius;
                 aalo.miny = y - radius;
                 aalo.maxx = x + radius;
@@ -162,10 +160,6 @@ public class ImageConverter implements Printable {
                 aalo.liny = y1;
                 aalo.linxa = x2;
                 aalo.linya = y2;
-                aalo.linx2 = x1;
-                aalo.liny2 = y1;
-                aalo.linxa2 = x2;
-                aalo.linya2 = y2;
                 aalo.minx = Math.min(x1, x2);
                 aalo.miny = Math.min(y1, y2);
                 aalo.maxx = Math.max(x1, x2);
@@ -184,13 +178,10 @@ public class ImageConverter implements Printable {
                 aalo.texty = y;
                 aalo.text = s;
                 aalo.font = valuea;
-                aalo.font2 = valuea;
-                aalo.textx2 = x;
-                aalo.texty2 = y;
                 aalo.minx = x;
                 aalo.miny = y;
-                aalo.maxx = x + ((s.length()) * valuea);
-                aalo.maxy = y + (valuea);
+                aalo.maxx = x + ((s.length()) * 35);
+                aalo.maxy = y + (35);
                 converted.add(aalo);
                 break;
             }
@@ -204,7 +195,7 @@ public class ImageConverter implements Printable {
                 PathType reserve = null;
                 Coordinate r1 = null;
                 String first = null, second = null;
-                
+
                 //<editor-fold defaultstate="collapsed" desc="State Machine">
                 while (love.length() != 0) {
 
@@ -436,7 +427,7 @@ public class ImageConverter implements Printable {
                     }
                 }
                 //</editor-fold>
-                
+
                 // <editor-fold defaultstate="collapsed" desc="Bounding the path">
                 Coordinate current = new Coordinate();
                 current.x = 0;
@@ -593,7 +584,7 @@ public class ImageConverter implements Printable {
 
                 }
                 // </editor-fold>
-                
+
                 converted.add(aalo);
                 break;
             }
@@ -607,7 +598,7 @@ public class ImageConverter implements Printable {
 
     }
 
-    private void scaling(ArrayList<Shape> converted, IconPanel panel) {
+    private void scaling(ArrayList<Shape> converted, IconPanel panel, int mode) {
 
         double minx = Double.POSITIVE_INFINITY;
         double miny = Double.POSITIVE_INFINITY;
@@ -647,6 +638,12 @@ public class ImageConverter implements Printable {
         double w1 = ((panel.getWidth() - newwidth) / 2) + 10;
         double w2 = ((panel.getWidth() + newwidth) / 2) - 10;
 
+        if (mode == 1) {
+            h2 = 700;
+            w1 = 0;
+            w2 = 550;
+        }
+
         double asliheight = (h2 - 5) - (h2 / 4);
         double asliwidth = (w2 - 5) - (w1 + 5);
 
@@ -654,45 +651,35 @@ public class ImageConverter implements Printable {
         double yshift = 0.0;
         double scaling = 0.0;
 
-        double xshift2 = 0.0;
-        double yshift2 = 0.0;
-        double scaling2 = 0.0;
-
-        double asliwidth2 = 746.21;
-        double asliheight2 = (1034.6468) - (1039.6468 / 4);
-
         if (inputheight >= inputwidth) {
 
             scaling = (asliheight / inputheight);
-            scaling2 = (asliheight2 / inputheight);
 
-            double inputwidth2 = inputwidth * scaling2;
             inputwidth = inputwidth * scaling;
 
             xshift = (w1 + 5) + ((asliwidth - inputwidth) / 2);
+            if (mode == 1) {
+                xshift = xshift + 25;
+            }
             yshift = h2 / 4;
-
-            xshift2 = (40) + ((asliwidth2 - inputwidth2) / 2);
-            yshift2 = 1039.6468 / 4;
 
         } else {
 
             scaling = (asliwidth / inputwidth);
-            scaling2 = (asliwidth2 / inputwidth);
 
-            double inputheight2 = inputheight * scaling2;
             inputheight = inputheight * scaling;
 
             xshift = (w1 + 5);
             yshift = h2 / 4 + ((asliheight - inputheight) / 2);
+            if (mode == 1) {
+                xshift = xshift + 25;
+            }
 
-            xshift2 = 40;
-            yshift2 = (1039.6468 / 4) + ((asliheight2 - inputheight2) / 2);
 
         }
 
         // </editor-fold>
-        
+
         // <editor-fold defaultstate="collapsed" desc="Applying the Scaling">
         for (int iki = 0; iki < is; iki++) {
 
@@ -706,12 +693,6 @@ public class ImageConverter implements Printable {
                 l.recx = (l.recx - (minx - 10)) * scaling + xshift;
                 l.recy = (l.recy - (miny - 10)) * scaling + yshift;
 
-                //Parameters for printing a rectangle
-                l.recheight2 = l.recheight2 * scaling2;
-                l.recwidth2 = l.recwidth2 * scaling2;
-                l.recx2 = (l.recx2 - (minx - 10)) * scaling2 + xshift2;
-                l.recy2 = (l.recy2 - (miny - 10)) * scaling2 + yshift2;
-
             } else if (l.type.equals("Circ")) {
 
                 //Parameters for displaying a circle
@@ -719,22 +700,12 @@ public class ImageConverter implements Printable {
                 l.circx = (l.circx - (minx - 10)) * scaling + xshift;
                 l.circy = (l.circy - (miny - 10)) * scaling + yshift;
 
-                //Parameters for printing a circle
-                l.circr2 = l.circr2 * scaling2;
-                l.circx2 = (l.circx2 - (minx - 10)) * scaling2 + xshift2;
-                l.circy2 = (l.circy2 - (miny - 10)) * scaling2 + yshift2;
-
             } else if (l.type.equals("Text")) {
 
                 //Parameters for displaying text
                 l.textx = (l.textx - (minx - 10)) * scaling + xshift;
                 l.texty = (l.texty - (miny - 10)) * scaling + yshift;
                 l.font = l.font;
-
-                //Parameters for printing text
-                l.textx2 = (l.textx2 - (minx - 10)) * scaling2 + xshift2;
-                l.texty2 = (l.texty2 - (miny - 10)) * scaling2 + yshift2;
-                l.font2 = l.font2;
 
             } else if (l.type.equals("Line")) {
 
@@ -744,40 +715,20 @@ public class ImageConverter implements Printable {
                 l.linxa = (l.linxa - (minx - 10)) * scaling + xshift;
                 l.linya = (l.linya - (miny - 10)) * scaling + yshift;
 
-                //Parameters for printing a line
-                l.linx2 = (l.linx2 - (minx - 10)) * scaling2 + xshift2;
-                l.liny2 = (l.liny2 - (miny - 10)) * scaling2 + yshift2;
-                l.linxa2 = (l.linxa2 - (minx - 10)) * scaling2 + xshift2;
-                l.linya2 = (l.linya2 - (miny - 10)) * scaling2 + yshift2;
-
             } else if (l.type.equals("Path")) {
 
                 int okok = l.path.size();
 
                 for (int i = 0; i < okok; i++) {
 
-                    /* System.out.println(l.path.get(i).Type + " " + l.path.get(i).single.x + " " + l.path.get(i).single.y);
-                    
-                     for(int a = 0; a<l.path.get(i).multi.size();a++){
-                     System.out.println("X "+l.path.get(i).multi.get(a).x);
-                     System.out.println("Y "+l.path.get(i).multi.get(a).y);
-                     }*/
                     if ((l.path.get(i).Type) == ('m') || (l.path.get(i).Type) == ('l')) {
 
                         if (i == 0) {
-
-                            //For printing a path
-                            l.path.get(i).single2.x = (l.path.get(i).single2.x - (minx - 10)) * scaling2 + xshift2;
-                            l.path.get(i).single2.y = (l.path.get(i).single2.y - (miny - 10)) * scaling2 + yshift2;
 
                             //For displaying a path
                             l.path.get(i).single.x = (l.path.get(i).single.x - (minx - 10)) * scaling + xshift;
                             l.path.get(i).single.y = (l.path.get(i).single.y - (miny - 10)) * scaling + yshift;
                         } else {
-
-                            //For printing a path
-                            l.path.get(i).single2.x = l.path.get(i).single2.x * scaling2;
-                            l.path.get(i).single2.y = l.path.get(i).single2.y * scaling2;
 
                             //For displaying a path
                             l.path.get(i).single.x = l.path.get(i).single.x * scaling;
@@ -787,10 +738,6 @@ public class ImageConverter implements Printable {
                     };
 
                     if ((l.path.get(i).Type) == ('M') || (l.path.get(i).Type) == ('L')) {
-
-                        //For printing a path
-                        l.path.get(i).single2.x = (l.path.get(i).single2.x - (minx - 10)) * scaling2 + xshift2;
-                        l.path.get(i).single2.y = (l.path.get(i).single2.y - (miny - 10)) * scaling2 + yshift2;
 
                         //For displaying a path
                         l.path.get(i).single.x = (l.path.get(i).single.x - (minx - 10)) * scaling + xshift;
@@ -828,7 +775,7 @@ public class ImageConverter implements Printable {
         }
 
         // </editor-fold>
-        
+
     }
 
     private void aslipaint(Graphics2D g2d, ArrayList<Shape> converted) {
@@ -961,7 +908,7 @@ public class ImageConverter implements Printable {
         Graphics2D g2d = (Graphics2D) g;
         g2d.translate(pf.getImageableX(), pf.getImageableY());
         try {
-            print2(g2d);
+            draw(g2d, 1);
         } catch (SVGElementException ex) {
             Logger.getLogger(ImageConverter.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SVGException ex) {
@@ -969,59 +916,5 @@ public class ImageConverter implements Printable {
         }
 
         return PAGE_EXISTS;
-    }
-
-    private void print2(Graphics2D g2d) throws SVGElementException, SVGException {
-        double h1, h2, w1, w2;
-
-        h2 = 860;
-        w1 = 0;
-        w2 = 585;
-        h1 = 0;
-
-        String txt1 = "", txt2 = "", txtbuffer = "";
-
-        for (int t = 0; t < txt.length(); t++) {
-
-            if ((txt.charAt(t) == (' '))) {
-
-                if (t <= 27) {
-                    txt1 = txt1 + txtbuffer + ' ';
-                    txtbuffer = "";
-                }
-                if ((t > 28) && (t <= 55)) {
-                    txt2 = txt2 + txtbuffer + ' ';
-                    txtbuffer = "";
-                }
-
-            } else if ((t == txt.length() - 1) || (t == 27)) {
-                if (t <= 27) {
-                    txt1 = txt1 + txtbuffer + txt.charAt(t);
-                    txtbuffer = "";
-                }
-                if ((t > 27) && (t <= 55)) {
-                    txt2 = txt2 + txtbuffer + txt.charAt(t);
-                }
-
-            } else {
-                txtbuffer = txtbuffer + txt.charAt(t);
-            }
-
-        }
-
-        //Top Right Corner Circle
-        g2d.fill(new Ellipse2D.Double(w1 + 20, h1 + 20, 25, 25));
-
-        // Text box
-        g2d.setFont(new Font("Braille", Font.PLAIN, fontsize));
-        g2d.drawString(txt1, (float) w1 + 60, (float) h1 + 40);
-        g2d.drawString(txt2, (float) w1 + 60, (float) h1 + 75);
-
-        if (f != null) {
-            
-                aslipaint(g2d, converted);
-
-            } 
-        
     }
 }

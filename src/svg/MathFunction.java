@@ -17,25 +17,12 @@ import java.awt.print.PrinterException;
 public class MathFunction implements Printable {
 
     IconPanel panel;
-    String txt;
-    int flinethickness, flinetype;
-    Expression fun;
-    VarMap vm;
-    FuncMap fm;
-    int fontsize;
 
-    MathFunction(IconPanel p, String t, int fthick, int ftype, Expression func, VarMap varm, FuncMap funcm, int size) {
+    MathFunction(IconPanel p) {
         panel = p;
-        txt = t;
-        flinethickness = fthick;
-        flinetype = ftype;
-        fun = func;
-        vm = varm;
-        fm = funcm;
-        fontsize = size;
     }
 
-    void draw(Graphics2D g2d) {
+    public void draw(Graphics2D g2d, int mode) {
 
         double h1, h2, w1, w2, wmid, ratio, newwidth;
 
@@ -46,13 +33,21 @@ public class MathFunction implements Printable {
         w1 = ((panel.getWidth() - newwidth) / 2) + 10;
         w2 = ((panel.getWidth() + newwidth) / 2) - 10;
         h1 = 10;
+
+        if (mode == 1) {
+            h2 = 860;
+            w1 = 0;
+            w2 = 585;
+            h1 = 0;
+        }
+
         wmid = (w1 + w2) / 2;
 
         String txt1 = "", txt2 = "", txtbuffer = "";
 
-        for (int t = 0; t < txt.length(); t++) {
+        for (int t = 0; t < panel.txt.length(); t++) {
 
-            if ((txt.charAt(t) == (' '))) {
+            if ((panel.txt.charAt(t) == (' '))) {
 
                 if (t <= 27) {
                     txt1 = txt1 + txtbuffer + ' ';
@@ -63,42 +58,46 @@ public class MathFunction implements Printable {
                     txtbuffer = "";
                 }
 
-            } else if ((t == txt.length() - 1) || (t == 27)) {
+            } else if ((t == panel.txt.length() - 1) || (t == 27)) {
                 if (t <= 27) {
-                    txt1 = txt1 + txtbuffer + txt.charAt(t);
+                    txt1 = txt1 + txtbuffer + panel.txt.charAt(t);
                     txtbuffer = "";
                 }
                 if ((t > 27) && (t <= 55)) {
-                    txt2 = txt2 + txtbuffer + txt.charAt(t);
+                    txt2 = txt2 + txtbuffer + panel.txt.charAt(t);
                 }
 
             } else {
-                txtbuffer = txtbuffer + txt.charAt(t);
+                txtbuffer = txtbuffer + panel.txt.charAt(t);
             }
 
         }
 
-        //Boundary + Top Right Corner Circle
-        g2d.draw(new Rectangle2D.Double(w1, h1, w2 - w1, h2 - h1));
+        if (mode == 0) {
+            //Boundary
+            g2d.draw(new Rectangle2D.Double(w1, h1, w2 - w1, h2 - h1));
+        }
+
+        //Top Right Corner Circle
         g2d.fill(new Ellipse2D.Double(w1 + 20, h1 + 20, 25, 25));
 
         // Text box
-        g2d.setFont(new Font("Braille", Font.PLAIN, fontsize));
+        g2d.setFont(new Font("Braille", Font.PLAIN, panel.fontsize));
         g2d.drawString(txt1, (float) w1 + 60, (float) h1 + 40);
         g2d.drawString(txt2, (float) w1 + 60, (float) h1 + 75);
 
         //Coordinate axes
         g2d.setStroke(new BasicStroke(1));
-        g2d.draw(new Line2D.Double(wmid, h1 + 300, wmid, h1 + 800));
-        g2d.draw(new Line2D.Double(wmid - 250, h1 + 550, wmid + 250, h1 + 550));
-        g2d.drawString("X", (float) wmid + 260, (float) h1 + 560);
-        g2d.drawString("X'", (float) wmid - 290, (float) h1 + 560);
-        g2d.drawString("Y", (float) wmid - 10, (float) h1 + 290);
-        g2d.drawString("Y'", (float) wmid - 10, (float) h1 + 830);
+        g2d.draw(new Line2D.Double(wmid, h1 + 300 - 100, wmid, h1 + 800 - 100));
+        g2d.draw(new Line2D.Double(wmid - 250, h1 + 550 - 100, wmid + 250, h1 + 550 - 100));
+        g2d.drawString("X", (float) wmid + 260, (float) h1 + 560 - 100);
+        g2d.drawString("X'", (float) wmid - 290, (float) h1 + 560 - 100);
+        g2d.drawString("Y", (float) wmid - 10, (float) h1 + 290 - 100);
+        g2d.drawString("Y'", (float) wmid - 10, (float) h1 + 830 - 100);
 
-        if (fun != null) {
+        if (panel.fun != null) {
 
-            switch (flinethickness) {
+            switch (panel.flinethickness) {
                 case 0:
                     g2d.setStroke(new BasicStroke(1));
                     break;
@@ -110,43 +109,42 @@ public class MathFunction implements Printable {
                     break;
             }
 
-            if (flinetype == 0) {
+            if (panel.flinetype == 0) {
                 for (double m = -250; m < 250; m = m + 1) {
-                    vm.setValue("x", 0.04 * m);
-                    double a = 25 * fun.eval(vm, fm);
-                    vm.setValue("x", 0.04 * (m + 1));
-                    double b = 25 * fun.eval(vm, fm);
+                    panel.vm.setValue("x", 0.04 * m);
+                    double a = 25 * panel.fun.eval(panel.vm, panel.fm);
+                    panel.vm.setValue("x", 0.04 * (m + 1));
+                    double b = 25 * panel.fun.eval(panel.vm, panel.fm);
 
                     if ((a <= 250) && (b <= 250) && (a >= -250) && (b >= -250)) {
-                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 - a, wmid + m + 1, h1 + 550 - b));
+                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 - 100 - a, wmid + m + 1, h1 + 550 - 100 - b));
                     } else if ((a <= 250) && (a >= -250) && (b >= 250)) {
-                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 - a, wmid + m + 1, h1 + 300));
+                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 - 100 - a, wmid + m + 1, h1 + 300 - 100));
                     } else if ((a <= -250) && (b <= 250) && (b >= -250)) {
-                        g2d.draw(new Line2D.Double(wmid + m, h1 + 800, wmid + m + 1, h1 + 550 - b));
+                        g2d.draw(new Line2D.Double(wmid + m, h1 + 800 - 100, wmid + m + 1, h1 + 550 - 100 - b));
                     }
                 }
             }
 
-            if (flinetype == 1) {
+            if (panel.flinetype == 1) {
                 for (double m = -250; m < 250; m = m + 4) {
-                    vm.setValue("x", 0.04 * m);
-                    double a = 25 * fun.eval(vm, fm);
-                    vm.setValue("x", 0.04 * (m + 1));
-                    double b = 25 * fun.eval(vm, fm);
+                    panel.vm.setValue("x", 0.04 * m);
+                    double a = 25 * panel.fun.eval(panel.vm, panel.fm);
+                    panel.vm.setValue("x", 0.04 * (m + 1));
+                    double b = 25 * panel.fun.eval(panel.vm, panel.fm);
 
                     if ((a <= 250) && (b <= 250) && (a >= -250) && (b >= -250)) {
-                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 - a, wmid + m + 1, h1 + 550 - b));
+                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 - 100 - a, wmid + m + 1, h1 + 550 - 100 - b));
                     } else if ((a <= 250) && (a >= -250) && (b >= 250)) {
-                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 - a, wmid + m + 1, h1 + 300));
+                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 - 100 - a, wmid + m + 1, h1 + 300 - 100));
                     } else if ((a <= -250) && (b <= 250) && (b >= -250)) {
-                        g2d.draw(new Line2D.Double(wmid + m, h1 + 800, wmid + m + 1, h1 + 550 - b));
+                        g2d.draw(new Line2D.Double(wmid + m, h1 + 800 - 100, wmid + m + 1, h1 + 550 - 100 - b));
                     }
 
                 }
             }
 
         }
-
     }
 
     public int print(Graphics g, PageFormat pf, int page) throws PrinterException {
@@ -157,117 +155,8 @@ public class MathFunction implements Printable {
         }
         Graphics2D g2d = (Graphics2D) g;
         g2d.translate(pf.getImageableX(), pf.getImageableY());
-        print2(g2d);
+        draw(g2d, 1);
 
         return PAGE_EXISTS;
     }
-
-    private void print2(Graphics2D g2d) {
-        double h1, h2, w1, w2, wmid;
-
-        h2 = 860;
-        w1 = 0;
-        w2 = 585;
-        h1 = 0;
-        wmid = (w1 + w2) / 2;
-
-        String txt1 = "", txt2 = "", txtbuffer = "";
-
-        for (int t = 0; t < txt.length(); t++) {
-
-            if ((txt.charAt(t) == (' '))) {
-
-                if (t <= 27) {
-                    txt1 = txt1 + txtbuffer + ' ';
-                    txtbuffer = "";
-                }
-                if ((t > 28) && (t <= 55)) {
-                    txt2 = txt2 + txtbuffer + ' ';
-                    txtbuffer = "";
-                }
-
-            } else if ((t == txt.length() - 1) || (t == 27)) {
-                if (t <= 27) {
-                    txt1 = txt1 + txtbuffer + txt.charAt(t);
-                    txtbuffer = "";
-                }
-                if ((t > 27) && (t <= 55)) {
-                    txt2 = txt2 + txtbuffer + txt.charAt(t);
-                }
-
-            } else {
-                txtbuffer = txtbuffer + txt.charAt(t);
-            }
-
-        }
-
-        //Top Right Corner Circle
-        g2d.fill(new Ellipse2D.Double(w1 + 20, h1 + 20, 25, 25));
-
-        // Text box
-        g2d.setFont(new Font("Braille", Font.PLAIN, fontsize));
-        g2d.drawString(txt1, (float) w1 + 60, (float) h1 + 40);
-        g2d.drawString(txt2, (float) w1 + 60, (float) h1 + 75);
-
-        //Coordinate axes
-        g2d.setStroke(new BasicStroke(1));
-        g2d.draw(new Line2D.Double(wmid, h1 + 300-100, wmid, h1 + 800-100));
-        g2d.draw(new Line2D.Double(wmid - 250, h1 + 550-100, wmid + 250, h1 + 550-100));
-        g2d.drawString("X", (float) wmid + 260, (float) h1 + 560-100);
-        g2d.drawString("X'", (float) wmid - 290, (float) h1 + 560-100);
-        g2d.drawString("Y", (float) wmid - 10, (float) h1 + 290-100);
-        g2d.drawString("Y'", (float) wmid - 10, (float) h1 + 830-100);
-
-        if (fun != null) {
-
-            switch (flinethickness) {
-                case 0:
-                    g2d.setStroke(new BasicStroke(1));
-                    break;
-                case 1:
-                    g2d.setStroke(new BasicStroke(2));
-                    break;
-                case 2:
-                    g2d.setStroke(new BasicStroke(3));
-                    break;
-            }
-
-            if (flinetype == 0) {
-                for (double m = -250; m < 250; m = m + 1) {
-                    vm.setValue("x", 0.04 * m);
-                    double a = 25 * fun.eval(vm, fm);
-                    vm.setValue("x", 0.04 * (m + 1));
-                    double b = 25 * fun.eval(vm, fm);
-
-                    if ((a <= 250) && (b <= 250) && (a >= -250) && (b >= -250)) {
-                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 -100 - a, wmid + m + 1, h1 + 550 -100 - b));
-                    } else if ((a <= 250) && (a >= -250) && (b >= 250)) {
-                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 -100 - a, wmid + m + 1, h1 + 300 -100));
-                    } else if ((a <= -250) && (b <= 250) && (b >= -250)) {
-                        g2d.draw(new Line2D.Double(wmid + m, h1 + 800 -100, wmid + m + 1, h1 + 550 -100 - b));
-                    }
-                }
-            }
-
-            if (flinetype == 1) {
-                for (double m = -250; m < 250; m = m + 4) {
-                    vm.setValue("x", 0.04 * m);
-                    double a = 25 * fun.eval(vm, fm);
-                    vm.setValue("x", 0.04 * (m + 1));
-                    double b = 25 * fun.eval(vm, fm);
-
-                    if ((a <= 250) && (b <= 250) && (a >= -250) && (b >= -250)) {
-                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 -100 - a, wmid + m + 1, h1 + 550 -100 - b));
-                    } else if ((a <= 250) && (a >= -250) && (b >= 250)) {
-                        g2d.draw(new Line2D.Double(wmid + m, h1 + 550 -100 - a, wmid + m + 1, h1 + 300 -100));
-                    } else if ((a <= -250) && (b <= 250) && (b >= -250)) {
-                        g2d.draw(new Line2D.Double(wmid + m, h1 + 800 -100, wmid + m + 1, h1 + 550 -100 - b));
-                    }
-
-                }
-            }
-
-        }
-    }
-
 }
