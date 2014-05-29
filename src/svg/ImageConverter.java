@@ -16,7 +16,6 @@ import java.awt.geom.Rectangle2D;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
-import java.io.File;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -187,7 +186,7 @@ public class ImageConverter implements Printable {
             }
             case "path": {
                 String love = root.getPresAbsolute("d").getStringValue();
-                System.out.println(love);
+                //System.out.println(love);
                 int state = 0;
                 Shape aalo = new Shape();
                 aalo.type = "Path";
@@ -199,9 +198,9 @@ public class ImageConverter implements Printable {
                 //<editor-fold defaultstate="collapsed" desc="State Machine">
                 while (love.length() != 0) {
 
-                    System.out.println("State: " + state);
-                    System.out.println("Character: " + love.charAt(0));
-                    System.out.println(" ");
+                    //System.out.println("State: " + state);
+                    //System.out.println("Character: " + love.charAt(0));
+                    //System.out.println(" ");
 
                     switch (state) {
                         case 0:
