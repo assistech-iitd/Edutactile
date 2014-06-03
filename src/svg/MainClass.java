@@ -742,7 +742,9 @@ public class MainClass extends javax.swing.JFrame {
                         }
                     }
                     
+                    if(e.getButton() != MouseEvent.BUTTON2){
                     panel.textures.add(b);
+                    }
                 }
                 panel.repaint();
             }
