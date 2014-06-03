@@ -26,6 +26,7 @@ public class IconPanel extends JPanel {
     int value = 0;
     int nor = 0, nop = 0, noc = 0;
     ArrayList<Shape> converted = new ArrayList<>();
+    ArrayList<Texture> textures = new ArrayList<>();
     String txt = "", r1nam = "", r2nam = "", r3nam = "", r4nam = "", p1nam = "", p2nam = "", p3nam = "", p4nam = "", fnam = "", c1nam = "", c2nam = "", c3nam = "", c4nam = "", pressure = "", temp = "", chemical = "";
     Expression fun = null;
     VarMap vm = new VarMap(false);
@@ -54,6 +55,7 @@ public class IconPanel extends JPanel {
         p4nam = "";
         fnam = "";
         converted = new ArrayList<>();
+        textures = new ArrayList<>();
 
     }
 

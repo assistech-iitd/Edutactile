@@ -7,6 +7,8 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.io.BufferedReader;
@@ -60,7 +62,7 @@ public class MainClass extends javax.swing.JFrame {
         initComponents();
         myInitComponents(fontsize, linethickness);
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -186,7 +188,6 @@ public class MainClass extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // <editor-fold defaultstate="collapsed" desc="Actions Performed">
-    
     // <editor-fold defaultstate="collapsed" desc="Menu Actions Performed">
     private void diagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diagActionPerformed
 
@@ -262,9 +263,9 @@ public class MainClass extends javax.swing.JFrame {
                     }
                 }
                 break;
-             
-             case 2:
-             ChemicalEquation chemicalequation = new ChemicalEquation(panel);
+
+            case 2:
+                ChemicalEquation chemicalequation = new ChemicalEquation(panel);
                 job.setPrintable(chemicalequation);
                 ok = job.printDialog();
                 if (ok) {
@@ -285,13 +286,12 @@ public class MainClass extends javax.swing.JFrame {
                     }
                 }
                 break;
-          
+
         }
 
     }//GEN-LAST:event_PrintActionPerformed
 
     // </editor-fold>
-    
     // <editor-fold defaultstate="collapsed" desc="Converter Actions Performed">
     private void OpenActionPerformed(java.awt.event.ActionEvent evt) {
         int returnVal = fileChooser.showOpenDialog(this);
@@ -322,7 +322,6 @@ public class MainClass extends javax.swing.JFrame {
     }
 
     // </editor-fold>
-    
     // <editor-fold defaultstate="collapsed" desc="Chemical Actions Performed">
     private void p1ActionPerformed(java.awt.event.ActionEvent evt) {
         String pop = (String) p1.getSelectedItem();
@@ -560,7 +559,6 @@ public class MainClass extends javax.swing.JFrame {
     }
 
     // </editor-fold>
-    
     // <editor-fold defaultstate="collapsed" desc="Calculator Actions Performed">
     private void FunActionPerformed(java.awt.event.ActionEvent evt) {
 
@@ -597,16 +595,14 @@ public class MainClass extends javax.swing.JFrame {
         panel.flinetype = 1;
         panel.repaint();
     }
-    
-     private void fundotActionPerformed(java.awt.event.ActionEvent evt) {
+
+    private void fundotActionPerformed(java.awt.event.ActionEvent evt) {
         panel.flinetype = 2;
         panel.repaint();
     }
 
     // </editor-fold>
-    
     // </editor-fold>
-    
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -670,7 +666,6 @@ public class MainClass extends javax.swing.JFrame {
     JPanel funsettings;
 
 // </editor-fold>
-    
     // <editor-fold defaultstate="collapsed" desc="Chemical Variable Declarations">
     JPanel reactantpanel, productpanel, catalystpanel, conditionpanel;
     IconPanel rpanel1, rpanel2, rpanel3, rpanel4, ppanel1, ppanel2, ppanel3, ppanel4, cpanel1, cpanel2, cpanel3, cpanel4;
@@ -681,7 +676,6 @@ public class MainClass extends javax.swing.JFrame {
     // </editor-fold>
 
     // </editor-fold>
-    
     private void myInitComponents(int fontsize, int linethickness) {
 
         //----------------------------------------------------------------------------------------------   
@@ -699,7 +693,6 @@ public class MainClass extends javax.swing.JFrame {
 
         //End screen fitting------------------------------------------------------------------------------
         //-----------------------------------------------------------------------------------------------
-                
         // <editor-fold defaultstate="collapsed" desc="Assignments">
         panel.linethickness = linethickness;
         panel.fontsize = fontsize;
@@ -719,7 +712,42 @@ public class MainClass extends javax.swing.JFrame {
         thickness = new javax.swing.JComboBox();
 
         // </editor-fold>
-        
+        // <editor-fold defaultstate="collapsed" desc="Textures">
+        panel.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+
+                String s = "";
+                for (int i = 0; i < panel.converted.size(); i++) {
+                    if (panel.converted.get(i).s.contains(e.getX(), e.getY())) {
+                        s = s + "1";
+                    } else {
+                        s = s + "0";
+                    }
+                }
+                if (!s.equals("") && Integer.parseInt(s) != 0) {
+                    Texture b = new Texture();
+                    b.code = s;
+
+                    if (e.getButton() == MouseEvent.BUTTON1) {
+                        b.texturetype = 1;
+                    } 
+                    
+                    if (e.getButton() == MouseEvent.BUTTON3) {
+                        b.texturetype = 2;
+                    }
+
+                    for(int j = 0;j<panel.textures.size();j++){
+                        if(s.equals(panel.textures.get(j).code)){
+                            panel.textures.remove(j);
+                        }
+                    }
+                    
+                    panel.textures.add(b);
+                }
+                panel.repaint();
+            }
+        });
+        // </editor-fold>
         // <editor-fold defaultstate="collapsed" desc="Calculator Assignments">
         funsettings = new javax.swing.JPanel();
 
@@ -734,10 +762,9 @@ public class MainClass extends javax.swing.JFrame {
         funlinetype = new javax.swing.JLabel();
         funnormal = new javax.swing.JRadioButton();
         fundashed = new javax.swing.JRadioButton();
-        fundot= new javax.swing.JRadioButton();
+        fundot = new javax.swing.JRadioButton();
 
         // </editor-fold>
-        
         // <editor-fold defaultstate="collapsed" desc="Chemical Assignments">
         reactantpanel = new javax.swing.JPanel();
         rpanel1 = new IconPanel();
@@ -774,7 +801,6 @@ public class MainClass extends javax.swing.JFrame {
         c4 = new javax.swing.JComboBox();
 
         // </editor-fold>
-        
         // <editor-fold defaultstate="collapsed" desc="Panel backgrounds">
         panel.setBackground(new java.awt.Color(255, 255, 255));
         options.setBackground(new java.awt.Color(240, 240, 240));
@@ -814,7 +840,6 @@ public class MainClass extends javax.swing.JFrame {
         cpanel4.value = 4;
 
         // </editor-fold>
-        
         // <editor-fold defaultstate="collapsed" desc="Image panel">
         javax.swing.GroupLayout playout = new javax.swing.GroupLayout(panel);
         panel.setLayout(playout);
@@ -828,7 +853,6 @@ public class MainClass extends javax.swing.JFrame {
         panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         // </editor-fold>
-        
         // <editor-fold defaultstate="collapsed" desc="Options panel">
         options.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -883,7 +907,6 @@ public class MainClass extends javax.swing.JFrame {
                         .addGap(5, 5, 5)));
 
         // </editor-fold>
-        
         // <editor-fold defaultstate="collapsed" desc="Equations panel">
         chemequ.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -1317,7 +1340,6 @@ public class MainClass extends javax.swing.JFrame {
                         .addComponent(conditionpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)));
 
         // </editor-fold>
-        
         // <editor-fold defaultstate="collapsed" desc="Diagram Conversion panel">
         diagconv.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -1351,7 +1373,6 @@ public class MainClass extends javax.swing.JFrame {
                         .addContainerGap(171, Short.MAX_VALUE)));
 
         // </editor-fold>
-        
         // <editor-fold defaultstate="collapsed" desc="Functions panel">
         functions.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -1423,7 +1444,7 @@ public class MainClass extends javax.swing.JFrame {
                 fundashedActionPerformed(evt);
             }
         });
-        
+
         fundot.setText("Dotted");
         fundot.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1500,7 +1521,6 @@ public class MainClass extends javax.swing.JFrame {
         );
 
         // </editor-fold>
-        
         // <editor-fold defaultstate="collapsed" desc="Text enter panel">
         textenter.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -1541,7 +1561,6 @@ public class MainClass extends javax.swing.JFrame {
                         .addGap(0, (height - taskBarHeight) - 1037, Short.MAX_VALUE)));
 
         // </editor-fold>
-        
     }
 
     public void chemchoice() {

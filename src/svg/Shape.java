@@ -16,4 +16,5 @@ public class Shape {
     public double minx,miny,maxx,maxy;
     public double recx, recy, recheight, recwidth, textx, texty, font, circx, circy, circr, linx, liny,linxa,linya;
     public ArrayList<PathType> path;
+    public java.awt.Shape s;
 }

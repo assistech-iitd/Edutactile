@@ -6,13 +6,18 @@ import com.kitfox.svg.SVGElementException;
 import com.kitfox.svg.SVGException;
 import com.kitfox.svg.SVGUniverse;
 import com.kitfox.svg.Tspan;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.TexturePaint;
+import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
@@ -47,7 +52,6 @@ public class ImageConverter implements Printable {
             w2 = 585;
             h1 = 0;
         }
-
 
         String txt1 = "", txt2 = "", txtbuffer = "";
 
@@ -102,7 +106,7 @@ public class ImageConverter implements Printable {
                 panel.converted.clear();
                 converter(root, panel.converted);
                 scaling(panel.converted, panel, mode);
-                aslipaint(g2d, panel.converted);
+                aslipaint(g2d, panel.converted, panel.textures);
 
             } catch (MalformedURLException ex) {
                 Logger.getLogger(IconPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -201,7 +205,6 @@ public class ImageConverter implements Printable {
                     //System.out.println("State: " + state);
                     //System.out.println("Character: " + love.charAt(0));
                     //System.out.println(" ");
-
                     switch (state) {
                         case 0:
                             r1 = new Coordinate();
@@ -674,11 +677,9 @@ public class ImageConverter implements Printable {
                 xshift = xshift + 25;
             }
 
-
         }
 
         // </editor-fold>
-
         // <editor-fold defaultstate="collapsed" desc="Applying the Scaling">
         for (int iki = 0; iki < is; iki++) {
 
@@ -774,11 +775,9 @@ public class ImageConverter implements Printable {
         }
 
         // </editor-fold>
-
     }
 
-    private void aslipaint(Graphics2D g2d, ArrayList<Shape> converted) {
-
+    private void aslipaint(Graphics2D g2d, ArrayList<Shape> converted, ArrayList<Texture> textures) {
         int is = converted.size();
         for (int iki = 0; iki < is; iki++) {
 
@@ -787,12 +786,14 @@ public class ImageConverter implements Printable {
             if (l.type.equals("Rect")) {
 
                 g2d.draw(new Rectangle2D.Double(l.recx, l.recy, l.recwidth, l.recheight));
+                converted.get(iki).s = new Rectangle2D.Double(l.recx, l.recy, l.recwidth, l.recheight);
 
             }
 
             if (l.type.equals("Circ")) {
 
                 g2d.draw(new Ellipse2D.Double(l.circx - l.circr, l.circy - l.circr, 2 * l.circr, 2 * l.circr));
+                converted.get(iki).s = new Ellipse2D.Double(l.circx - l.circr, l.circy - l.circr, 2 * l.circr, 2 * l.circr);
 
             }
 
@@ -805,6 +806,7 @@ public class ImageConverter implements Printable {
             if (l.type.equals("Line")) {
 
                 g2d.draw(new Line2D.Double(l.linx, l.liny, l.linxa, l.linya));
+                converted.get(iki).s = new Line2D.Double(l.linx, l.liny, l.linxa, l.linya);
             }
 
             if (l.type.equals("Path")) {
@@ -892,8 +894,47 @@ public class ImageConverter implements Printable {
                 }
 
                 g2d.draw(polyline);
+                converted.get(iki).s = polyline;
 
             }
+        }
+
+        for (int i = 0; i < textures.size(); i++) {
+
+            Rectangle2D rect = new Rectangle2D.Double(0, 0, panel.getWidth(), panel.getHeight());
+            BufferedImage bi = new BufferedImage(5, 5, BufferedImage.TYPE_INT_RGB);
+            Graphics2D big = bi.createGraphics();
+
+            if (textures.get(i).texturetype == 1) {
+                big.setColor(Color.black);
+                big.fillRect(0, 0, 5, 5);
+                big.setColor(Color.white);
+                big.fillOval(0, 0, 5, 5);
+            }
+
+            if (textures.get(i).texturetype == 2) {
+                big.setColor(Color.white);
+                for (int it = 0; it < 5; it++) {
+                    big.drawLine(0, it, it, 0);
+                    big.drawLine(5 - it, 5, 5, 5 - it);
+                }
+            }
+
+            Rectangle r = new Rectangle(0, 0, 5, 5);
+            g2d.setPaint(new TexturePaint(bi, r));
+
+            Area wholearea = new Area(rect);
+
+            for (int j = 0; j < converted.size(); j++) {
+                Area a = new Area(converted.get(j).s);
+
+                if (textures.get(i).code.charAt(j) == '1') {
+                    wholearea.intersect(a);
+                } else {
+                    wholearea.subtract(a);
+                }
+            }
+            g2d.fill(wholearea);
         }
 
     }
