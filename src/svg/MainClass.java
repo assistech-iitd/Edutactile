@@ -597,6 +597,11 @@ public class MainClass extends javax.swing.JFrame {
         panel.flinetype = 1;
         panel.repaint();
     }
+    
+     private void fundotActionPerformed(java.awt.event.ActionEvent evt) {
+        panel.flinetype = 2;
+        panel.repaint();
+    }
 
     // </editor-fold>
     
@@ -661,7 +666,7 @@ public class MainClass extends javax.swing.JFrame {
     JTextField funbx;
     JButton fungo;
     JLabel funthickness, funlinetype;
-    private javax.swing.JRadioButton funthin, funmedium, funthick, funnormal, fundashed;
+    private javax.swing.JRadioButton funthin, funmedium, funthick, funnormal, fundashed, fundot;
     JPanel funsettings;
 
 // </editor-fold>
@@ -729,6 +734,7 @@ public class MainClass extends javax.swing.JFrame {
         funlinetype = new javax.swing.JLabel();
         funnormal = new javax.swing.JRadioButton();
         fundashed = new javax.swing.JRadioButton();
+        fundot= new javax.swing.JRadioButton();
 
         // </editor-fold>
         
@@ -1352,10 +1358,10 @@ public class MainClass extends javax.swing.JFrame {
         Font bigFont = funbx.getFont().deriveFont(Font.PLAIN, 20f);
         funbx.setFont(bigFont);
 
-        fungo.setText("=");
-        fungo.setMaximumSize(new java.awt.Dimension(45, 23));
-        fungo.setMinimumSize(new java.awt.Dimension(45, 23));
-        fungo.setPreferredSize(new java.awt.Dimension(45, 23));
+        fungo.setText("Draw");
+        fungo.setMaximumSize(new java.awt.Dimension(70, 23));
+        fungo.setMinimumSize(new java.awt.Dimension(70, 23));
+        fungo.setPreferredSize(new java.awt.Dimension(70, 23));
         fungo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FunActionPerformed(evt);
@@ -1376,6 +1382,7 @@ public class MainClass extends javax.swing.JFrame {
 
         group2.add(funnormal);
         group2.add(fundashed);
+        group2.add(fundot);
         funnormal.setSelected(true);
 
         funthickness.setText("Thickness");
@@ -1416,6 +1423,13 @@ public class MainClass extends javax.swing.JFrame {
                 fundashedActionPerformed(evt);
             }
         });
+        
+        fundot.setText("Dotted");
+        fundot.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fundotActionPerformed(evt);
+            }
+        });
         // </editor-fold>
 
         // <editor-fold defaultstate="collapsed" desc="Settings panel">
@@ -1432,6 +1446,7 @@ public class MainClass extends javax.swing.JFrame {
                                 .addComponent(funthick))
                         .addGap(26, 26, 26)
                         .addGroup(funsettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(fundot)
                                 .addComponent(fundashed)
                                 .addComponent(funnormal)
                                 .addComponent(funlinetype))
@@ -1453,7 +1468,8 @@ public class MainClass extends javax.swing.JFrame {
                                 .addComponent(fundashed))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(funsettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(funthick))
+                                .addComponent(funthick)
+                                .addComponent(fundot))
                         .addContainerGap(277, Short.MAX_VALUE)));
         // </editor-fold>
 
