@@ -710,6 +710,7 @@ public class MainClass extends javax.swing.JFrame {
         txtbutton = new javax.swing.JButton();
         open = new javax.swing.JButton();
         txtbx = new NoTabJTextArea();
+        txtbx.getAccessibleContext().setAccessibleDescription("Enter desciption here");
         thickness = new javax.swing.JComboBox();
 
         // </editor-fold>
@@ -718,7 +719,9 @@ public class MainClass extends javax.swing.JFrame {
         funsettings = new javax.swing.JPanel();
 
         fungo = new javax.swing.JButton();
+        fungo.getAccessibleContext().setAccessibleDescription("Draw the graph");
         funbx = new javax.swing.JTextField();
+        funbx.getAccessibleContext().setAccessibleDescription("Enter function here");
         funthickness = new javax.swing.JLabel();
         funthin = new javax.swing.JRadioButton();
         funmedium = new javax.swing.JRadioButton();

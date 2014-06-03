@@ -1,8 +1,5 @@
 package svg;
 
-import com.graphbuilder.math.Expression;
-import com.graphbuilder.math.FuncMap;
-import com.graphbuilder.math.VarMap;
 import java.awt.BasicStroke;
 import java.awt.Font;
 import java.awt.Graphics;
