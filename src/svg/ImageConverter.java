@@ -926,12 +926,15 @@ public class ImageConverter implements Printable {
             Area wholearea = new Area(rect);
 
             for (int j = 0; j < converted.size(); j++) {
-                Area a = new Area(converted.get(j).s);
 
-                if (textures.get(i).code.charAt(j) == '1') {
-                    wholearea.intersect(a);
+                if (textures.get(i).code.charAt(j) == '2') {
                 } else {
-                    wholearea.subtract(a);
+                    Area a = new Area(converted.get(j).s);
+                    if (textures.get(i).code.charAt(j) == '1') {
+                        wholearea.intersect(a);
+                    } else {
+                        wholearea.subtract(a);
+                    }
                 }
             }
             g2d.fill(wholearea);
