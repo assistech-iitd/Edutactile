@@ -914,10 +914,6 @@ public class ImageConverter implements Printable {
 
             if (textures.get(i).texturetype == 2) {
                 big.setColor(Color.white);
-                //for (int it = 0; it < 5; it++) {
-                   // big.drawLine(0, it, it, 0);
-                 //   big.drawLine(5 - it, 5, 5, 5 - it);
-                //}
                 big.drawLine(0,0,10,10);
             }
 

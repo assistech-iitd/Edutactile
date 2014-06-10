@@ -92,7 +92,7 @@ public class MathFunction implements Printable {
         g2d.drawString("Y", (float) wmid - 10, (float) h1 + 290 - 100);
         g2d.drawString("Y'", (float) wmid - 10, (float) h1 + 830 - 100);
 
-        if (panel.fun != null) {
+        if (panel.fun!=null) {
 
             switch (panel.flinethickness) {
                 case 0:
@@ -105,13 +105,14 @@ public class MathFunction implements Printable {
                     g2d.setStroke(new BasicStroke(3));
                     break;
             }
+            for(int j=0;j<panel.fun.size();j++){
 
             if (panel.flinetype == 0) {
                 for (double m = -250; m < 250; m = m + 1) {
                     panel.vm.setValue("x", 0.04 * m);
-                    double a = 25 * panel.fun.eval(panel.vm, panel.fm);
+                    double a = 25 * panel.fun.get(j).eval(panel.vm, panel.fm);
                     panel.vm.setValue("x", 0.04 * (m + 1));
-                    double b = 25 * panel.fun.eval(panel.vm, panel.fm);
+                    double b = 25 * panel.fun.get(j).eval(panel.vm, panel.fm);
 
                     if ((a <= 250) && (b <= 250) && (a >= -250) && (b >= -250)) {
                         g2d.draw(new Line2D.Double(wmid + m, h1 + 550 - 100 - a, wmid + m + 1, h1 + 550 - 100 - b));
@@ -126,9 +127,9 @@ public class MathFunction implements Printable {
             if (panel.flinetype == 1) {
                 for (double m = -250; m < 250; m = m + 16) {
                     panel.vm.setValue("x", 0.04 * m);
-                    double a = 25 * panel.fun.eval(panel.vm, panel.fm);
+                    double a = 25 * panel.fun.get(j).eval(panel.vm, panel.fm);
                     panel.vm.setValue("x", 0.04 * (m + 1));
-                    double b = 25 * panel.fun.eval(panel.vm, panel.fm);
+                    double b = 25 * panel.fun.get(j).eval(panel.vm, panel.fm);
 
                     if ((a <= 250) && (b <= 250) && (a >= -250) && (b >= -250)) {
                         g2d.draw(new Line2D.Double(wmid + m, h1 + 550 - 100 - a, wmid + m + 4, h1 + 550 - 100 - b));
@@ -144,9 +145,9 @@ public class MathFunction implements Printable {
             if (panel.flinetype == 2) {
                 for (double m = -250; m < 250; m = m + 6) {
                     panel.vm.setValue("x", 0.04 * m);
-                    double a = 25 * panel.fun.eval(panel.vm, panel.fm);
+                    double a = 25 * panel.fun.get(j).eval(panel.vm, panel.fm);
                     panel.vm.setValue("x", 0.04 * (m + 1));
-                    double b = 25 * panel.fun.eval(panel.vm, panel.fm);
+                    double b = 25 * panel.fun.get(j).eval(panel.vm, panel.fm);
 
                     if ((a <= 250) && (b <= 250) && (a >= -250) && (b >= -250)) {
                         g2d.draw(new Line2D.Double(wmid + m, h1 + 550 - 100 - a, wmid + m + 1, h1 + 550 - 100 - b));
@@ -158,6 +159,8 @@ public class MathFunction implements Printable {
 
                 }
             }
+            }
+            
 
         }
     }

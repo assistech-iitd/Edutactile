@@ -28,12 +28,13 @@ public class IconPanel extends JPanel {
     ArrayList<Shape> converted = new ArrayList<>();
     ArrayList<Texture> textures = new ArrayList<>();
     String txt = "", r1nam = "", r2nam = "", r3nam = "", r4nam = "", p1nam = "", p2nam = "", p3nam = "", p4nam = "", fnam = "", c1nam = "", c2nam = "", c3nam = "", c4nam = "", pressure = "", temp = "", chemical = "";
-    Expression fun = null;
     VarMap vm = new VarMap(false);
     FuncMap fm = new FuncMap();
+    ArrayList<Expression> fun = new ArrayList<>();
     int fontsize,linethickness;
     int flinethickness = 0;
     int flinetype = 0;
+    int texturetype = 0;
     Image image = null;
 
     public void zero() {
