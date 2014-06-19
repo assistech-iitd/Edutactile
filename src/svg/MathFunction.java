@@ -11,6 +11,7 @@ import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 
+
 public class MathFunction implements Printable {
 
     IconPanel panel;
@@ -21,6 +22,7 @@ public class MathFunction implements Printable {
 
     public void draw(Graphics2D g2d, int mode) {
 
+        
         double h1, h2, w1, w2, wmid, ratio, newwidth;
 
         ratio = ((double) panel.getHeight()) / 297;
@@ -163,6 +165,7 @@ public class MathFunction implements Printable {
             
 
         }
+        
     }
 
     public int print(Graphics g, PageFormat pf, int page) throws PrinterException {

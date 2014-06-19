@@ -31,6 +31,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import net.beadsproject.beads.core.AudioContext;
+import net.beadsproject.beads.data.Buffer;
+import net.beadsproject.beads.ugens.Envelope;
+import net.beadsproject.beads.ugens.Gain;
+import net.beadsproject.beads.ugens.WavePlayer;
+import audio.AudioPlayer;
 
 class MyCustomFilter extends javax.swing.filechooser.FileFilter {
 
@@ -63,7 +69,7 @@ public class MainClass extends javax.swing.JFrame {
         int linethickness = Integer.parseInt(input2[1]);
 
         initComponents();
-        myInitComponents(fontsize, linethickness);
+        myInitComponents(fontsize, linethickness);  
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -209,7 +215,7 @@ public class MainClass extends javax.swing.JFrame {
         txtbx.setText("");
         funbx.setText("");
         panel.value = 1;
-        this.setTitle("MrinalMTP");
+        this.setTitle("Edutactile");
         panel.repaint();
         diagchoice();
     }//GEN-LAST:event_diagActionPerformed
@@ -229,7 +235,7 @@ public class MainClass extends javax.swing.JFrame {
         txtbx.setText("");
         funbx.setText("");
         panel.value = 2;
-        this.setTitle("MrinalMTP");
+        this.setTitle("Edutactile");
         panel.repaint();
         chemchoice();
     }//GEN-LAST:event_chemActionPerformed
@@ -249,6 +255,7 @@ public class MainClass extends javax.swing.JFrame {
         txtbx.setText("");
         funbx.setText("");
         panel.value = 3;
+        this.setTitle("Edutactile");
         panel.repaint();
         funchoice();
     }//GEN-LAST:event_functionActionPerformed
@@ -303,7 +310,7 @@ public class MainClass extends javax.swing.JFrame {
             File file = fileChooser.getSelectedFile();
             panel.converted.clear();
             panel.setFile(file, file.getName());
-            this.setTitle(file.getName() + " - MrinalMTP");
+            this.setTitle(file.getName() + " - Edutactile");
             panel.repaint();
         } else {
             System.out.println("File access cancelled by user.");
@@ -593,6 +600,12 @@ public class MainClass extends javax.swing.JFrame {
         panel.fun = fun;
         this.setTitle("Edutactile");
         panel.repaint();
+        
+        Thread audioPlayer = new Thread(new AudioPlayer());
+        audioPlayer.start();
+                  
+        txtbx.setText("This is a (y = " + funbx.getText() + ") graph" );    
+       
 
     }
 
@@ -737,8 +750,9 @@ public class MainClass extends javax.swing.JFrame {
         box1 = new JComboBox();
         box2 = new JComboBox();
         txtbutton = new JButton();
+        txtbutton.getAccessibleContext().setAccessibleDescription("Print the entered desciption on the page ");
         txtbx = new NoTabJTextArea();
-        txtbx.getAccessibleContext().setAccessibleDescription("Enter desciption here");
+        txtbx.getAccessibleContext().setAccessibleDescription("Edit default description here");
         texturelabel = new JLabel();
 
         // </editor-fold>
@@ -1013,9 +1027,9 @@ public class MainClass extends javax.swing.JFrame {
             }
         });
         r4.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                r4ActionPerformed(evt);
+         @Override
+       public void actionPerformed(java.awt.event.ActionEvent evt) {
+              r4ActionPerformed(evt);
             }
         });
         c1.addActionListener(new java.awt.event.ActionListener() {
@@ -1109,7 +1123,7 @@ public class MainClass extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(reactantpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(rpanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(r4, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                               .addComponent(r4, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(85, 85, 85)));
         reactantpanelLayout.setVerticalGroup(
                 reactantpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
