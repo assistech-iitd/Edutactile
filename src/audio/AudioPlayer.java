@@ -6,8 +6,6 @@
 
 package audio;
 
-import com.sun.corba.se.impl.orbutil.concurrent.Sync;
-import java.io.Serializable;
 import net.beadsproject.beads.core.AudioContext;
 import net.beadsproject.beads.data.Buffer;
 import net.beadsproject.beads.ugens.Envelope;

@@ -31,11 +31,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-import net.beadsproject.beads.core.AudioContext;
-import net.beadsproject.beads.data.Buffer;
-import net.beadsproject.beads.ugens.Envelope;
-import net.beadsproject.beads.ugens.Gain;
-import net.beadsproject.beads.ugens.WavePlayer;
 import audio.AudioPlayer;
 
 class MyCustomFilter extends javax.swing.filechooser.FileFilter {
