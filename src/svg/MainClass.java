@@ -1685,7 +1685,7 @@ public class MainClass extends javax.swing.JFrame {
                                         .addComponent(txtbutton)
                                         .addGap(0, 80, Short.MAX_VALUE))
                                 .addComponent(txtbx, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, (height - taskBarHeight) - 1037, Short.MAX_VALUE)));
+                        .addGap(0, (height - taskBarHeight), Short.MAX_VALUE)));
 
         // </editor-fold>
     }
